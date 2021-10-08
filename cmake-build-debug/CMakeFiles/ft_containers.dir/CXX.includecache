@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/aabet/projects/ft_containers/ft_containers/iterators.hpp
+iostream
+-
+
+/Users/aabet/projects/ft_containers/ft_containers/main.cpp
+iostream
+-
+vector
+-
+iterator
+-
+map
+-
+set
+-
+iterators.hpp
+/Users/aabet/projects/ft_containers/ft_containers/iterators.hpp
+
