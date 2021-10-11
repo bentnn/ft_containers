@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "iterators.hpp"
+
 namespace ft
 {
 	template<class T, class Allocator = std::allocator<T> >
@@ -17,6 +19,8 @@ namespace ft
 		typedef const value_type& const_reference;
 		typedef typename Allocator::pointer pointer;
 		typedef typename Allocator::const_pointer const_pointer;
+		typedef ft::RanIt<value_type> iterator;
+		typedef ft::RanIt<value_type const> const_iterator;
 
 	private:
 		pointer		_array;			// array of T
@@ -68,6 +72,14 @@ namespace ft
 
 		const_reference operator[] (size_type n) const {
 			return *(this->_array + n);
+		}
+
+		iterator begin() {
+			return iterator(_array);
+		}
+
+		const_iterator begin() const{
+			return const_iterator(_array);
 		}
 	};	
 }

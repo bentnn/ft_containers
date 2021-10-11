@@ -11,9 +11,18 @@
 #include "vector.hpp"
 
 int main() {
-	ft::vector<int> v(3);
-	v[0] = 2;
-	std::cout << v[0] << std::endl;
+	std::vector<int> v;
+	std::vector<int>::iterator it = v.begin();
+	it += 10;
+	std::cout << NULL << std::endl;
+//	ft::vector<int> v(3);
+//	v[1] = 1;
+//	v[2] = 2;
+//	ft::vector<int>::const_iterator it = v.begin();
+//	it++;
+//	std::cout << *it << std::endl;
+
+//	std::cout << v[0] << std::endl;
 //	ft::stack<int> s;
 //	s.push(2);
 //	s.push(32);
