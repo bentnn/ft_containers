@@ -21,6 +21,7 @@ namespace ft {
 
 	public:
 		explicit stack(const Container& cont = Container()): _container(cont) {}
+
 		stack(const stack& other): _container(other->_container) {}
 
 		stack& operator=( const stack& other ) {

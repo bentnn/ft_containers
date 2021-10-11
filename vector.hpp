@@ -5,7 +5,7 @@
 
 namespace ft
 {
-	template<class T, class Alocator = std::allocator<T>>
+	template<class T, class Allocator = std::allocator<T> >
 	class vector {
 	public:
 		// def
@@ -26,30 +26,49 @@ namespace ft
 
 	public:
 		// constructors
-		vector(): _array(0), _size(0), _capacity(0),
-				_allocator(allocator_type()) {}
-
-		explicit vector(const Allocator& alloc): _array(0), _size(0),
+		explicit vector(const Allocator& alloc = allocator_type()): _array(0), _size(0),
 				_capacity(0), _allocator(alloc) {}
 
-		explicit vector(size_type n): _size(n), _capacity(n),
-				_allocator(allocator_type()) {
-			_array = _allocator.allocate(n);
+		explicit vector(size_type n, const T& value = T(),
+						 const Allocator& alloc = Allocator()): _size(n), _capacity(n), _allocator(alloc) {
+			this->_array = this->_allocator.allocate(n);
 			for (size_type i = 0; i < n; i++)
-				_allocator.construct(_vec + i, T());
+				this->_allocator.construct(this->_array + i, value);
 		}
 
-		explicit vector(size_type count, const T& value = T(),
-						 const Allocator& alloc = Allocator());
+		template<class InputIt>
+		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator()): _allocator(alloc) {
 
-		template< class InputIt >
-		vector( InputIt first, InputIt last, const Allocator& alloc = Allocator() );
+		}
 
 		vector( const vector& other );
 
 		// destructor
-		~vector();
+		~vector() {
+			for (size_type i = 0; i < _size; i++)
+				_allocator.destroy(_array + i);
+			if (_capacity)
+				_allocator.deallocate(_array, _capacity);
+		}
 
+
+		vector& operator= (const vector& x) {
+			this->_capacity = x._capacity;
+			this->_size = x._size;
+			this->_allocator = x._allocator;
+			this->_array = this->_allocator.allocate(this->_capacity);
+			for (size_type i = 0; i < this->_size; i++)
+				this->_array[i] = this->_allocator.construct(this->_array + i, x[i]);
+			return *this;
+		}
+
+		reference operator[] (size_type n) {
+			return *(this->_array + n);
+		}
+
+		const_reference operator[] (size_type n) const {
+			return *(this->_array + n);
+		}
 	};	
 }
 

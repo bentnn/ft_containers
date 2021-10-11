@@ -8,16 +8,20 @@
 
 #include "iterators.hpp"
 #include "stack.hpp"
+#include "vector.hpp"
 
 int main() {
-	ft::stack<int> s;
-	s.push(2);
-	s.push(32);
-	s.push(1);
-	std::cout << s.top() << std::endl;
-	std::cout << s.size() << std::endl;
-	s.pop();
-	std::cout << s.size() << std::endl;
+	ft::vector<int> v(3);
+	v[0] = 2;
+	std::cout << v[0] << std::endl;
+//	ft::stack<int> s;
+//	s.push(2);
+//	s.push(32);
+//	s.push(1);
+//	std::cout << s.top() << std::endl;
+//	std::cout << s.size() << std::endl;
+//	s.pop();
+//	std::cout << s.size() << std::endl;
 //	std::stack<int> a;
 //	std::stack<int> b;
 //
