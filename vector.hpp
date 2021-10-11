@@ -5,7 +5,7 @@
 
 namespace ft
 {
-	template<class T class Alocator = std::allocator<T>>
+	template<class T, class Alocator = std::allocator<T>>
 	class vector {
 	public:
 		// def

@@ -15,6 +15,8 @@ iostream
 -
 vector
 -
+stack
+-
 iterator
 -
 map
@@ -23,4 +25,12 @@ set
 -
 iterators.hpp
 /Users/aabet/projects/ft_containers/ft_containers/iterators.hpp
+stack.hpp
+/Users/aabet/projects/ft_containers/ft_containers/stack.hpp
+
+/Users/aabet/projects/ft_containers/ft_containers/stack.hpp
+iostream
+-
+vector
+-
 
