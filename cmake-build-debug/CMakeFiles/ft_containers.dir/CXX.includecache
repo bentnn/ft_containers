@@ -9,6 +9,8 @@
 /Users/aabet/projects/ft_containers/ft_containers/iterators.hpp
 iostream
 -
+vector.hpp
+/Users/aabet/projects/ft_containers/ft_containers/vector.hpp
 
 /Users/aabet/projects/ft_containers/ft_containers/main.cpp
 iostream
@@ -23,8 +25,6 @@ map
 -
 set
 -
-iterators.hpp
-/Users/aabet/projects/ft_containers/ft_containers/iterators.hpp
 stack.hpp
 /Users/aabet/projects/ft_containers/ft_containers/stack.hpp
 vector.hpp

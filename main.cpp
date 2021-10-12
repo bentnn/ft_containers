@@ -6,15 +6,30 @@
 #include <map>
 #include <set>
 
-#include "iterators.hpp"
+//#include "iterators.hpp"
 #include "stack.hpp"
 #include "vector.hpp"
 
+struct test {
+	int a;
+};
+
 int main() {
-	std::vector<int> v;
-	std::vector<int>::iterator it = v.begin();
-	it += 10;
-	std::cout << NULL << std::endl;
+	std::vector<int> v(4, 1);
+	v[3] = 11;
+	std::vector<int>::iterator it(v.begin());
+	std::vector<int>::const_iterator it2 (v.end());
+
+	std::cout << (it.base() < it2.base());
+
+//	ft::vector<int>::const_iterator it  = v.begin();
+//	std::cout << it[2] << std::endl;
+
+//	}
+//	catch (std::exception e) {
+//		std::cout << e.what() << std::endl;
+//	}
+	//std::cout << v2[0] << std::endl;
 //	ft::vector<int> v(3);
 //	v[1] = 1;
 //	v[2] = 2;

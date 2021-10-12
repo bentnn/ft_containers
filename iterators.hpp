@@ -2,10 +2,11 @@
 #define FT_CONTAINERS_ITERATORS_HPP
 
 #include <iostream>
+#include "vector.hpp"
 
 namespace ft
 {
-	//template<typename T>class const_iterator;
+	template<typename T>class ConstRanIt;
 	template<typename T>
 	class RanIt {
 	public:
@@ -14,29 +15,27 @@ namespace ft
 		typedef T& reference;
 		typedef ptrdiff_t difference_type;
 		typedef std::random_access_iterator_tag iterator_category;
+		template <class _Tp, class _Alloc> friend class  vector;
 	private:
 		pointer _ptr;
+
+		RanIt(pointer a)  {
+			_ptr = a;
+		}
 	public:
 		// constructors
 		RanIt() {
 			_ptr = 0;
 		}
 
-		RanIt(pointer a)  {
-			_ptr = a;
-		}
-
-		RanIt(reference a) {
-			_ptr = *a;
-		}
-
-		RanIt(const RanIt& other) {
+		RanIt(const RanIt<value_type>& other) {
 			this->_ptr = other._ptr;
 		}
 
 		// operators
-		RanIt& operator=(const RanIt& other) {
+		RanIt& operator=(const RanIt<value_type>& other) {
 			this->_ptr = other._ptr;
+			return *this;
 		}
 
 		RanIt& operator++() {
@@ -61,36 +60,84 @@ namespace ft
 			return temp;
 		}
 
-		reference operator*() {
+		virtual reference operator*() {
 			return *_ptr;
 		}
 
-		pointer operator->() {
+		virtual pointer operator->() {
 			return _ptr;
 		}
 
-		bool operator==(const RanIt &other) const {
+		pointer base() const {
+			return _ptr;
+		}
+
+		virtual reference operator[](int val) {
+			return (*(_ptr + val));
+		}
+
+		bool operator==(const RanIt<value_type> &other) const {
 			return this->_ptr == other.ptr;
 		}
 
-		bool operator!=(const RanIt &other) const {
-			return this->_ptr != other.ptr;
+		bool operator==(const ConstRanIt<value_type> &other) const {
+			return this->_ptr == other.base();
 		}
 
-		bool operator<(const RanIt &other) const {
-			return this->_ptr < other.ptr;
+		bool operator!=(const RanIt<value_type> &other) const {
+			return this->_ptr != other.base();
 		}
 
-		bool operator>(const RanIt &other) const {
-			return this->_ptr > other.ptr;
+		bool operator!=(const ConstRanIt<value_type> &other) const {
+			return this->_ptr != other.base();
 		}
 
-		bool operator<=(const RanIt &other) const {
-			return this->_ptr <= other.ptr;
+		bool operator<(const RanIt<value_type> &other) const {
+			return this->_ptr < other.base();
 		}
 
-		bool operator>=(const RanIt &other) const {
-			return this->_ptr >= other.ptr;
+		bool operator<(const ConstRanIt<value_type> &other) const {
+			return this->_ptr < other.base();
+		}
+
+		bool operator>(const RanIt<value_type> &other) const {
+			return this->_ptr > other.base();
+		}
+
+		bool operator>(const ConstRanIt<value_type> &other) const {
+			return this->_ptr > other.base();
+		}
+
+		bool operator<=(const RanIt<value_type> &other) const {
+			return this->_ptr <= other.base();
+		}
+
+		bool operator<=(const ConstRanIt<value_type> &other) const {
+			return this->_ptr <= other.base();
+		}
+
+		bool operator>=(const RanIt<value_type> &other) const {
+			return this->_ptr >= other.base();
+		}
+
+		bool operator>=(const ConstRanIt<value_type> &other) const {
+			return this->_ptr >= other.base();
+		}
+
+		difference_type operator-(const RanIt<value_type> &other) {
+			return this->ptr - other.base();
+		}
+
+		difference_type operator-(const ConstRanIt<value_type> &other) {
+			return this->ptr - other.base();
+		}
+
+		difference_type operator+(const RanIt<value_type> &other) {
+			return this->ptr + other.base();
+		}
+
+		difference_type operator+(const ConstRanIt<value_type> &other) {
+			return this->ptr + other.base();
 		}
 
 		RanIt operator+(const difference_type &a) {
@@ -110,13 +157,167 @@ namespace ft
 			_ptr -= a;
 			return *this;
 		}
+	};
 
-		difference_type operator-(const RanIt &other) {
-			return this->ptr - other.ptr;
+	template<typename T>class RanIt;
+	template<typename T>
+	class ConstRanIt {
+	public:
+		typedef T value_type;
+		typedef const T* pointer;
+		typedef const T& reference;
+		typedef ptrdiff_t difference_type;
+		typedef std::random_access_iterator_tag iterator_category;
+		template <class _Tp, class _Alloc> friend class  vector;
+	private:
+		pointer _ptr;
+
+		ConstRanIt(pointer a)  {
+			_ptr = a;
+		}
+	public:
+		// constructors
+		ConstRanIt() {
+			_ptr = 0;
 		}
 
-		difference_type operator+(const RanIt &other) {
-			return this->ptr + other.ptr;
+		ConstRanIt(const ConstRanIt<value_type>& other) {
+			this->_ptr = other._ptr;
+		}
+
+		ConstRanIt(const RanIt<value_type> & other) {
+			this->_ptr = other.base();
+		}
+
+		// operators
+		ConstRanIt& operator=(const ConstRanIt<value_type>& other) {
+			this->_ptr = other._ptr;
+			return *this;
+		}
+
+		ConstRanIt& operator=(const RanIt<value_type>& other) {
+			this->_ptr = other.base();
+			return *this;
+		}
+
+		ConstRanIt& operator++() {
+			_ptr++;
+			return *this;
+		}
+
+		ConstRanIt& operator--() {
+			_ptr--;
+			return *this;
+		}
+
+		ConstRanIt operator++(int) {
+			ConstRanIt<value_type> temp = *this;
+			_ptr++;
+			return temp;
+		}
+
+		ConstRanIt operator--(int) {
+			ConstRanIt<value_type> temp = *this;
+			_ptr++;
+			return temp;
+		}
+
+		virtual reference operator*() {
+			return *_ptr;
+		}
+
+		virtual pointer operator->() {
+			return _ptr;
+		}
+
+		pointer base() const {
+			return _ptr;
+		}
+
+		virtual reference operator[](int val) {
+			return (*(_ptr + val));
+		}
+
+		bool operator==(const RanIt<value_type> &other) const {
+			return this->_ptr == other.ptr;
+		}
+
+		bool operator==(const ConstRanIt<value_type> &other) const {
+			return this->_ptr == other.base();
+		}
+
+		bool operator!=(const RanIt<value_type> &other) const {
+			return this->_ptr != other.base();
+		}
+
+		bool operator!=(const ConstRanIt<value_type> &other) const {
+			return this->_ptr != other.base();
+		}
+
+		bool operator<(const RanIt<value_type> &other) const {
+			return this->_ptr < other.base();
+		}
+
+		bool operator<(const ConstRanIt<value_type> &other) const {
+			return this->_ptr < other.base();
+		}
+
+		bool operator>(const RanIt<value_type> &other) const {
+			return this->_ptr > other.base();
+		}
+
+		bool operator>(const ConstRanIt<value_type> &other) const {
+			return this->_ptr > other.base();
+		}
+
+		bool operator<=(const RanIt<value_type> &other) const {
+			return this->_ptr <= other.base();
+		}
+
+		bool operator<=(const ConstRanIt<value_type> &other) const {
+			return this->_ptr <= other.base();
+		}
+
+		bool operator>=(const RanIt<value_type> &other) const {
+			return this->_ptr >= other.base();
+		}
+
+		bool operator>=(const ConstRanIt<value_type> &other) const {
+			return this->_ptr >= other.base();
+		}
+
+		difference_type operator-(const RanIt<value_type> &other) {
+			return this->ptr - other.base();
+		}
+
+		difference_type operator-(const ConstRanIt<value_type> &other) {
+			return this->ptr - other.base();
+		}
+
+		difference_type operator+(const RanIt<value_type> &other) {
+			return this->ptr + other.base();
+		}
+
+		difference_type operator+(const ConstRanIt<value_type> &other) {
+			return this->ptr + other.base();
+		}
+
+		ConstRanIt operator+(const difference_type &a) {
+			return _ptr + a;
+		}
+
+		ConstRanIt operator-(const difference_type &a) {
+			return _ptr - a;
+		}
+
+		ConstRanIt & operator+=(const difference_type &a) {
+			_ptr += a;
+			return *this;
+		}
+
+		ConstRanIt & operator-=(const difference_type &a) {
+			_ptr -= a;
+			return *this;
 		}
 	};
 }

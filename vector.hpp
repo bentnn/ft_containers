@@ -2,11 +2,12 @@
 #define VECTOR_HPP
 
 #include <iostream>
-
 #include "iterators.hpp"
 
 namespace ft
 {
+	template<typename T>class ConstRanIt;
+	template<typename T>class RanIt;
 	template<class T, class Allocator = std::allocator<T> >
 	class vector {
 	public:
@@ -20,7 +21,7 @@ namespace ft
 		typedef typename Allocator::pointer pointer;
 		typedef typename Allocator::const_pointer const_pointer;
 		typedef ft::RanIt<value_type> iterator;
-		typedef ft::RanIt<value_type const> const_iterator;
+		typedef ft::ConstRanIt<value_type> const_iterator;
 
 	private:
 		pointer		_array;			// array of T
@@ -40,10 +41,10 @@ namespace ft
 				this->_allocator.construct(this->_array + i, value);
 		}
 
-		template<class InputIt>
-		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator()): _allocator(alloc) {
-
-		}
+//		template<class InputIt>
+//		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator()): _allocator(alloc) {
+//
+//		}
 
 		vector( const vector& other );
 
@@ -78,8 +79,8 @@ namespace ft
 			return iterator(_array);
 		}
 
-		const_iterator begin() const{
-			return const_iterator(_array);
+		iterator end() {
+			return iterator(_array + _size);
 		}
 	};	
 }
