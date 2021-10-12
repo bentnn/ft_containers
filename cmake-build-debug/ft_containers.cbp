@@ -89,6 +89,9 @@
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/stack.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
+		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/utils.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/vector.hpp">
 			<Option target="ft_containers"/>
 		</Unit>

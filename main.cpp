@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <stack>
-#include <iterator>
+//#include <iterator>
 #include <map>
 #include <set>
 
@@ -15,12 +15,13 @@ struct test {
 };
 
 int main() {
-	std::vector<int> v(4, 1);
-	v[3] = 11;
-	std::vector<int>::iterator it(v.begin());
-	std::vector<int>::const_iterator it2 (v.end());
 
-	std::cout << (it.base() < it2.base());
+	std::vector<int> v('5', 'd');
+	for (int i = 0; i < v.size(); i++)
+		std::cout << v[i] << std::endl;
+//	std::vector<int>::iterator it(v.begin());
+//	std::vector<int>::const_iterator it2 (v.end());
+//	std::cout << (it.base() < it2.base());
 
 //	ft::vector<int>::const_iterator it  = v.begin();
 //	std::cout << it[2] << std::endl;
