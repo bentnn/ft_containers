@@ -8,17 +8,40 @@
 
 //#include "iterators.hpp"
 #include "stack.hpp"
-#include "vector.hpp"
+#include "vector/vector.hpp"
 
-struct test {
-	int a;
+class A {
+private:
+	int n;
+public:
+	explicit A (int n): n(n) {}
 };
+
 
 int main() {
 
-	std::vector<int> v('5', 'd');
+	std::vector<int> v;
 	for (int i = 0; i < v.size(); i++)
-		std::cout << v[i] << std::endl;
+		v[i] = i;
+	try {
+		v.pop_back();
+//		for (int i = 0; i < v.size(); i++)
+//			std::cout << v[i] << std::endl;
+		std::cout << v.size() << std::endl;
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+	//v.resize(3);
+	//std::cout << v.front() << std::endl;
+//	try {
+//		v.reserve(1111);
+//	} catch (std::exception &e) {
+//		std::cout << e.what() << std::endl;
+//	}
+
+//	std::vector<int, test> v(3, 3, a);
+//	for (int i = 0; i < v.size(); i++)
+//		std::cout << v[i] << std::endl;
 //	std::vector<int>::iterator it(v.begin());
 //	std::vector<int>::const_iterator it2 (v.end());
 //	std::cout << (it.base() < it2.base());

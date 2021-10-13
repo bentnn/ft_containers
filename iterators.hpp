@@ -2,7 +2,7 @@
 #define FT_CONTAINERS_ITERATORS_HPP
 
 #include <iostream>
-#include "vector.hpp"
+#include "vector/vector.hpp"
 
 namespace ft
 {
@@ -60,11 +60,11 @@ namespace ft
 			return temp;
 		}
 
-		virtual reference operator*() {
+		reference operator*() {
 			return *_ptr;
 		}
 
-		virtual pointer operator->() {
+		pointer operator->() {
 			return _ptr;
 		}
 
@@ -72,7 +72,7 @@ namespace ft
 			return _ptr;
 		}
 
-		virtual reference operator[](int val) {
+		reference operator[](int val) {
 			return (*(_ptr + val));
 		}
 
@@ -222,11 +222,11 @@ namespace ft
 			return temp;
 		}
 
-		virtual reference operator*() {
+		reference operator*() {
 			return *_ptr;
 		}
 
-		virtual pointer operator->() {
+		pointer operator->() {
 			return _ptr;
 		}
 
@@ -234,7 +234,7 @@ namespace ft
 			return _ptr;
 		}
 
-		virtual reference operator[](int val) {
+		reference operator[](int val) {
 			return (*(_ptr + val));
 		}
 

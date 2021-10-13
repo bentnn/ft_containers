@@ -2,7 +2,7 @@
 #define VECTOR_HPP
 
 #include <iostream>
-#include "iterators.hpp"
+#include "../iterators.hpp"
 
 namespace ft
 {
@@ -46,7 +46,9 @@ namespace ft
 //
 //		}
 
-		vector( const vector& other );
+		vector( const vector& other ) {
+			*this = other;
+		}
 
 		// destructor
 		~vector() {
@@ -82,6 +84,110 @@ namespace ft
 		iterator end() {
 			return iterator(_array + _size);
 		}
+
+		size_type size() const {
+			return _size;
+		}
+
+		size_type capacity() const {
+			return _capacity;
+		}
+
+		bool empty() const {
+			return (_size == 0);
+		}
+
+		void reserve(size_type new_cap) {
+			if (new_cap <= _capacity)
+				return;
+			pointer new_arr = _allocator.allocate(new_cap);
+			try {
+				std::uninitialized_copy(_array, _array + _size, new_arr);
+			} catch (std::exception &e) {
+				_allocator.deallocate(new_arr, new_cap);
+				throw;
+			}
+			for (size_type i = 0; i < _size; i++)
+				_allocator.destroy(_array + i);
+			if (_capacity)
+				_allocator.deallocate(_array, _capacity);
+			_capacity = new_cap;
+			_array = new_arr;
+		}
+
+		void resize(size_type count, value_type value = T()) {
+			if (count < _size) {
+				for (size_type i = count; i < _size; i++)
+					_allocator.destroy(_array + i);
+				_size = count;
+			}
+			else if (count > _size) {
+				if (_capacity < count)
+					this->reserve(_capacity * 2 > count ? _capacity * 2 : count);
+				for (size_type i = _size; i < count; i++) {
+					_allocator.construct(this->_array + i, value);
+					_size++;
+				}
+			}
+		}
+
+		reference at(size_type pos) {
+			if (pos >= _size)
+				throw std::out_of_range("vector: pos is out of range");
+			return *(_array + pos);
+		}
+
+		const_reference at(size_type pos) const {
+			if (pos >= _size)
+				throw std::out_of_range("vector: pos is out of range");
+			return *(_array + pos);
+		}
+
+		reference front() {
+			return *_array;
+		}
+
+		const_reference front() const {
+			return *_array;
+		}
+
+		reference back() {
+			return *(_array + _size - 1);
+		}
+
+		const_reference back() const {
+			return *(_array + _size - 1);
+		}
+
+		allocator_type get_allocator() const {
+			return _allocator;
+		}
+
+		size_type max_size() const {
+			return _allocator.max_size();
+		}
+
+		void clear() {
+			for (size_type i = 0; i < _size; i++)
+				_allocator.destroy(_array + i);
+			_size = 0;
+		}
+
+//		void pop_back() {
+//
+//		}
+
+//		iterator erase(iterator pos) {
+//
+//		}
+
+//		iterator insert(iterator pos, const T& value) {
+//			if ()
+//			if (_size == _capacity)
+//				reserve(_capacity * 2);
+//			_allocator.construct(this->_array + _size, value);
+//			_size++;
+//		}
 	};	
 }
 
