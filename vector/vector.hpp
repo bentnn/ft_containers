@@ -29,6 +29,24 @@ namespace ft
 		size_type _capacity;		// how much allocated memory vector has
 		allocator_type _allocator;	// allocator for allocating and deallocating memory
 
+		template<class InputIt>
+		void uninitialized_copy_from_end(InputIt first, InputIt last, InputIt dist) {
+			dist += (last - first);
+			last--;
+			while (first < last && dist.base() != NULL)
+			{
+				_allocator.construct(dist.base(), *last);
+				last--;
+				dist--;
+			}
+			while (first < last)
+			{
+				*dist = *last;
+				last--;
+				dist--;
+			}
+		}
+
 	public:
 		// constructors
 		explicit vector(const Allocator& alloc = allocator_type()): _array(0), _size(0),
@@ -133,13 +151,13 @@ namespace ft
 
 		reference at(size_type pos) {
 			if (pos >= _size)
-				throw std::out_of_range("vector: pos is out of range");
+				throw std::out_of_range("vector");
 			return *(_array + pos);
 		}
 
 		const_reference at(size_type pos) const {
 			if (pos >= _size)
-				throw std::out_of_range("vector: pos is out of range");
+				throw std::out_of_range("vector");
 			return *(_array + pos);
 		}
 
@@ -177,9 +195,49 @@ namespace ft
 //
 //		}
 
-//		iterator erase(iterator pos) {
-//
-//		}
+		iterator erase(iterator pos) {
+			difference_type d = std::distance(begin(), pos);
+			std::copy(pos + 1, end(), pos);
+			_size--;
+			_allocator.destroy(_array + _size - 1);
+			return d == _size ? end() : iterator(_array + d);
+		}
+
+		iterator erase(iterator first, iterator last) {
+//			difference_type d = std::distance(first, last);
+			difference_type start = std::distance(begin(), first);
+			difference_type need_to_copy = std::distance(last, end());
+			bool last_is_end = (last == end());
+			while (first != last) {
+				_allocator.destroy(first.base());
+				first++;
+			}
+			std::uninitialized_copy(last.base(), end().base(), _array + start);
+			for (size_type i = start + need_to_copy; i < _size; i++)
+				_allocator.destroy(_array + i);
+//			iterator res = last ==
+			_size = start + need_to_copy;
+			return last_is_end ? end() : iterator(_array + start);
+		}
+
+		void insert(iterator pos, size_type count, const T& value) {
+			if (count == 0)
+				return;
+			else if (max_size() - _size < count || pos < begin())
+				throw std::length_error("vector");
+			if ((_size + count <= _capacity && pos <= end()) || (pos > end() && pos - begin() + count <= _capacity))
+			{
+				uninitialized_copy_from_end(pos, end(), end() + count);
+				iterator tmp_end = pos + count;
+				_size = pos <= end() ? _size + count : pos - begin() + count;
+				while (pos != tmp_end)
+				{
+					*pos = value;
+					pos++;
+				}
+			}
+		}
+
 
 //		iterator insert(iterator pos, const T& value) {
 //			if ()

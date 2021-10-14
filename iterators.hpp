@@ -77,7 +77,7 @@ namespace ft
 		}
 
 		bool operator==(const RanIt<value_type> &other) const {
-			return this->_ptr == other.ptr;
+			return this->_ptr == other.base();
 		}
 
 		bool operator==(const ConstRanIt<value_type> &other) const {
@@ -125,19 +125,19 @@ namespace ft
 		}
 
 		difference_type operator-(const RanIt<value_type> &other) {
-			return this->ptr - other.base();
+			return this->_ptr - other.base();
 		}
 
 		difference_type operator-(const ConstRanIt<value_type> &other) {
-			return this->ptr - other.base();
+			return this->_ptr - other.base();
 		}
 
 		difference_type operator+(const RanIt<value_type> &other) {
-			return this->ptr + other.base();
+			return this->_ptr + other.base();
 		}
 
 		difference_type operator+(const ConstRanIt<value_type> &other) {
-			return this->ptr + other.base();
+			return this->_ptr + other.base();
 		}
 
 		RanIt operator+(const difference_type &a) {
@@ -287,19 +287,19 @@ namespace ft
 		}
 
 		difference_type operator-(const RanIt<value_type> &other) {
-			return this->ptr - other.base();
+			return this->_ptr - other.base();
 		}
 
 		difference_type operator-(const ConstRanIt<value_type> &other) {
-			return this->ptr - other.base();
+			return this->_ptr - other.base();
 		}
 
 		difference_type operator+(const RanIt<value_type> &other) {
-			return this->ptr + other.base();
+			return this->_ptr + other.base();
 		}
 
 		difference_type operator+(const ConstRanIt<value_type> &other) {
-			return this->ptr + other.base();
+			return this->_ptr + other.base();
 		}
 
 		ConstRanIt operator+(const difference_type &a) {

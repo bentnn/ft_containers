@@ -92,7 +92,7 @@
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/utils.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/vector.hpp">
+		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/vector/vector.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/CMakeLists.txt">

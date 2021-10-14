@@ -18,18 +18,42 @@ public:
 };
 
 
+
+
 int main() {
 
-	std::vector<int> v;
-	for (int i = 0; i < v.size(); i++)
-		v[i] = i;
+	std::vector<int> stdv(5);
+	ft::vector<int> v(5);
+	for (int i = 0; i < v.size(); i++) {
+		v[i] = i + 1;
+		stdv[i] = i + 1;
+	}
+	size_t l = -1;
+//	std::cout << l  << "\n" << stdv.max_size()<< std::endl;
+	//assert(*v.erase(v.begin()) == *stdv.erase(stdv.begin()));
 	try {
-		v.pop_back();
-//		for (int i = 0; i < v.size(); i++)
-//			std::cout << v[i] << std::endl;
-		std::cout << v.size() << std::endl;
+//		stdv.insert(stdv.end(), stdv.max_size() - 5, 3);
+		//std::vector<int>::iterator it = stdv.erase(stdv.begin(), stdv.end() + 1);
+//		stdv.insert(stdv.end() + 2, 2, 1);
+//		stdv.insert(stdv.end() - 2, 1, 1);
+//		stdv[5] = 2;
+//		stdv[6] = 3;
+		v.reserve(15);
+		v.insert(v.end() + 4, 1, 11);
+//		ft::vector<int>::iterator it = v.erase(v.begin() , v.begin());
+//		std::cout << (it == v.end()) << std::endl;
+//		std::cout << *it << std::endl;
+//		std::cout << v.size() << std::endl;
+//		v.pop_back();
+		v[5] = 2;
+		for (int i = 0; i < v.size(); i++)
+			std::cout << v[i] << std::endl;
+
+//		std::cout << (it == stdv.end()) << std::endl;
+//		std::cout << *it << std::endl;
+//		std::cout << stdv.size() << std::endl;
 	} catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
+		std::cout << "error: " << e.what() << std::endl;
 	}
 	//v.resize(3);
 	//std::cout << v.front() << std::endl;
