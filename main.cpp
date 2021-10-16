@@ -28,7 +28,7 @@ int main() {
 		v[i] = i + 1;
 		stdv[i] = i + 1;
 	}
-	size_t l = -1;
+	//size_t l = -1;
 //	std::cout << l  << "\n" << stdv.max_size()<< std::endl;
 	//assert(*v.erase(v.begin()) == *stdv.erase(stdv.begin()));
 	try {
@@ -38,15 +38,20 @@ int main() {
 //		stdv.insert(stdv.end() - 2, 1, 1);
 //		stdv[5] = 2;
 //		stdv[6] = 3;
-		v.reserve(15);
-		v.insert(v.end() + 4, 1, 11);
+		//v.reserve(15);
+//		std::cout << v.size() << std::endl;
+		//v.insert(v.begin(), 1, 11);
+		//v.erase(v.begin() + 1, v.end() - 1);
+		//std::cout << v.size() << std::endl;
 //		ft::vector<int>::iterator it = v.erase(v.begin() , v.begin());
 //		std::cout << (it == v.end()) << std::endl;
 //		std::cout << *it << std::endl;
 //		std::cout << v.size() << std::endl;
 //		v.pop_back();
-		v[5] = 2;
-		for (int i = 0; i < v.size(); i++)
+		v.insert(v.end(), 1, 11);
+		//v[5] = 2;
+		//std::cout << v.size() << std::endl;
+		for (size_t i = 0; i < v.size(); i++)
 			std::cout << v[i] << std::endl;
 
 //		std::cout << (it == stdv.end()) << std::endl;

@@ -1,4 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /Users/aabet/projects/ft_containers/ft_containers
+C:\Users\Kirill\AppData\Local\JetBrains\CLion2021.2\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/Kirill/Desktop/ft_containers
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/aabet/projects/ft_containers/ft_containers/cmake-build-debug
+-- Build files have been written to: /cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug
