@@ -28,7 +28,7 @@ namespace ft {
 
 	template<typename T>
 	struct is_integral {
-		static const bool value = is_integral_type< ft::remove_const<T>::type >::value;
+		static const bool value = is_integral_type< typename ft::remove_const<T>::type >::value;
 	};
 }
 

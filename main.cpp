@@ -22,16 +22,18 @@ public:
 
 int main() {
 
-	std::vector<int> stdv(5);
-	ft::vector<int> v(2);
+	std::vector<int> v(5);
+
 	for (int i = 0; i < v.size(); i++) {
 		v[i] = i + 1;
-		stdv[i] = i + 1;
+		//stdv[i] = i + 1;
 	}
+	ft::vector<int> vec(v.begin(), v.end());
 	//size_t l = -1;
 //	std::cout << l  << "\n" << stdv.max_size()<< std::endl;
 	//assert(*v.erase(v.begin()) == *stdv.erase(stdv.begin()));
 	try {
+		vec.insert(vec.end(), v.begin(), v.begin() - 1);
 //		stdv.insert(stdv.end(), stdv.max_size() - 5, 3);
 		//std::vector<int>::iterator it = stdv.erase(stdv.begin(), stdv.end() + 1);
 //		stdv.insert(stdv.end() + 2, 2, 1);
@@ -48,11 +50,11 @@ int main() {
 //		std::cout << *it << std::endl;
 //		std::cout << v.size() << std::endl;
 //		v.pop_back();
-		v.insert(v.end() - 1,11);
+		//v.insert(v.end() - 1,11);
 		//v[5] = 2;
 		//std::cout << v.size() << std::endl;
-		for (size_t i = 0; i < v.size(); i++)
-			std::cout << v[i] << std::endl;
+		for (size_t i = 0; i < vec.size(); i++)
+			std::cout << vec[i] << std::endl;
 
 //		std::cout << (it == stdv.end()) << std::endl;
 //		std::cout << *it << std::endl;

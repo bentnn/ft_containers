@@ -57,8 +57,15 @@ namespace ft
 		}
 
 		template<class InputIt>
-		vector(typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first, InputIt last, const Allocator& alloc = Allocator()): _allocator(alloc) {
-
+		vector(typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first, InputIt last,
+			   const Allocator& alloc = Allocator()): _allocator(alloc) {
+			if (first > last)
+				throw std::length_error("vector");
+			_size = last - first;
+			_capacity = _size;
+			_array = _allocator.allocate(_capacity);
+			for (size_type i = 0; i < _size; i++)
+				_allocator.construct(_array + i, *(first + i));
 		}
 
 		vector( const vector& other ) {
@@ -249,7 +256,7 @@ namespace ft
 
 		iterator insert(iterator pos, const T& value) {
 			if (pos < begin() || pos > end())
-				throw std::length_error("vector");
+				throw std::logic_error("vector");
 			difference_type start = pos - begin();
 			if (_size + 1 > _capacity)
 				reserve(_capacity * 2);
@@ -259,6 +266,26 @@ namespace ft
 				_allocator.destroy(pos.base());
 			_allocator.construct(pos.base(), value);
 			_size++;
+		}
+
+		template<class InputIt>
+		void insert( iterator pos, typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first, InputIt last ) {
+			if (pos < begin() || pos > end() || first > last)
+				throw std::logic_error("vector");
+			difference_type start = pos - begin();
+			difference_type count = last - first;
+			if (_size + count > _capacity)
+				reserve(_capacity * 2 >= _size + count ? _capacity * 2 : _size + count);
+			pos = begin() + start;
+			uninitialized_copy_from_end(pos, end(), pos + count);
+			while (first < last) {
+				if (pos.base())
+					_allocator.destroy(pos.base());
+				_allocator.construct(pos.base(), *first);
+				pos++;
+				first++;
+			}
+			_size += count;
 		}
 
 	};	
