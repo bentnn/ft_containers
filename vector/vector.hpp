@@ -191,6 +191,10 @@ namespace ft
 			return _allocator;
 		}
 
+		pointer data() {
+			return _array;
+		}
+
 		size_type max_size() const {
 			return _allocator.max_size();
 		}
@@ -201,9 +205,17 @@ namespace ft
 			_size = 0;
 		}
 
-//		void pop_back() {
-//
-//		}
+		void pop_back() {
+			_allocator.destroy(_array + _size - 1);
+			_size--;
+		}
+
+		void push_back(const T& value) {
+			if (_size == _capacity)
+				reserve(_capacity == 0 ? 1 : _capacity * 2);
+			_allocator.construct(_array + _size, value);
+			_size++;
+		}
 
 		iterator erase(iterator pos) {
 			difference_type d = std::distance(begin(), pos);
@@ -259,7 +271,7 @@ namespace ft
 				throw std::logic_error("vector");
 			difference_type start = pos - begin();
 			if (_size + 1 > _capacity)
-				reserve(_capacity * 2);
+				reserve(_capacity == 0 ? 1 : _capacity * 2);
 			pos = begin() + start;
 			uninitialized_copy_from_end(pos, end(), pos + 1);
 			if (pos.base())
@@ -269,7 +281,9 @@ namespace ft
 		}
 
 		template<class InputIt>
-		void insert( iterator pos, typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first, InputIt last ) {
+		void insert(iterator pos,
+					typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first,
+					InputIt last) {
 			if (pos < begin() || pos > end() || first > last)
 				throw std::logic_error("vector");
 			difference_type start = pos - begin();
@@ -286,6 +300,46 @@ namespace ft
 				first++;
 			}
 			_size += count;
+		}
+
+		void swap(vector& other) {
+			pointer tmp = this->_array;
+			_array = other._array;
+			other._array = tmp;
+		}
+
+		void assign(size_type count, const T& value) {
+			clear();
+			if (count > capacity()) {
+				_allocator.deallocate(_array, _capacity);
+				_array = _allocator.allocate(count);
+				_capacity = count;
+			}
+			for (size_type i = 0; i < count; i++)
+				_allocator.construct(_array + i, value);
+			_size = count;
+		}
+
+		template< class InputIt >
+		void assign(typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first,
+					InputIt last) {
+			if (first > last)
+				throw std::logic_error("vector");
+			difference_type count = last - first;
+			clear();
+			if (count > capacity()) {
+				_allocator.deallocate(_array, _capacity);
+				_array = _allocator.allocate(count);
+				_capacity = count;
+			}
+			iterator pos = begin();
+			while (first < last)
+			{
+				_allocator.construct(pos.base(), *first);
+				pos++;
+				first++;
+			}
+			_size = count;
 		}
 
 	};	
