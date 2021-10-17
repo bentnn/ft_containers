@@ -29,17 +29,18 @@ namespace ft
 		size_type _capacity;		// how much allocated memory vector has
 		allocator_type _allocator;	// allocator for allocating and deallocating memory
 
-		template<class InputIt>
-		void uninitialized_copy_from_end(InputIt first, InputIt last, InputIt dist) {
-			dist += (last - first);
+//		template<class InputIt>
+		void uninitialized_copy_from_end(iterator first, iterator last, iterator dist) {
+			dist += last - first - 1;
 			last--;
 			while (last >= first) {
-				//std::cout << *last << " " << *first << std::endl;
+				//std::cout << *last << " " << (dist - begin()) << std::endl;
 				_allocator.destroy(dist.base());
 				_allocator.construct(dist.base(), *last);
 				last--;
 				dist--;
 			}
+			//std::cout << std::endl;
 //			while (first < last && dist.base() != NULL)
 //			{
 //				_allocator.construct(dist.base(), *last);
@@ -244,55 +245,33 @@ namespace ft
 				return;
 			else if (max_size() - _size < count || pos < begin() || pos > end())
 				throw std::length_error("vector");
+			difference_type start = pos - begin();
 			if (_size + count > _capacity)
 				reserve(_capacity * 2 >= _size + count ? _capacity * 2 : _size + count);
+			pos = begin() + start;
 			uninitialized_copy_from_end(pos, end(), pos + count);
 			for (size_type i = 0; i < count; i++) {
-				if (!(pos + i).base())
+				if ((pos + i).base())
 					_allocator.destroy((pos + i).base());
 				_allocator.construct((pos + i).base(), value);
 			}
 			_size += count;
-//			if (_size + count <= _capacity) {
-//				uninitialized_copy_from_end(pos, end(), pos + count);
-//				for (size_type i = 0; i < count; i++) {
-//					if (!(pos + i).base())
-//						_allocator.destroy((pos + i).base());
-//					_allocator.construct((pos + i).base(), value);
-//				}
-//				_size += count;
-//			}
-//			else {
-//				reserve(_capacity * 2 >= _size + count ? _capacity * 2 : _size + count);
-//				uninitialized_copy_from_end(pos, end(), pos + count);
-//				for (size_type i = 0; i < count; i++) {
-//					if (!(pos + i).base())
-//						_allocator.destroy((pos + i).base());
-//					_allocator.construct((pos + i).base(), value);
-//				}
-//				_size += count;
-//			}
-//			if ((_size + count <= _capacity && pos <= end()) || (pos > end() && pos - begin() + count <= _capacity))
-//			{
-//				uninitialized_copy_from_end(pos, end(), end() + count);
-//				iterator tmp_end = pos + count;
-//				_size = pos <= end() ? _size + count : pos - begin() + count;
-//				while (pos != tmp_end)
-//				{
-//					*pos = value;
-//					pos++;
-//				}
-//			}
 		}
 
+		iterator insert(iterator pos, const T& value) {
+			if (pos < begin() || pos > end())
+				throw std::length_error("vector");
+			difference_type start = pos - begin();
+			if (_size + 1 > _capacity)
+				reserve(_capacity * 2);
+			pos = begin() + start;
+			uninitialized_copy_from_end(pos, end(), pos + 1);
+			if (pos.base())
+				_allocator.destroy(pos.base());
+			_allocator.construct(pos.base(), value);
+			_size++;
+		}
 
-//		iterator insert(iterator pos, const T& value) {
-//			if ()
-//			if (_size == _capacity)
-//				reserve(_capacity * 2);
-//			_allocator.construct(this->_array + _size, value);
-//			_size++;
-//		}
 	};	
 }
 

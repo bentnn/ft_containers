@@ -48,7 +48,7 @@ int main() {
 //		std::cout << *it << std::endl;
 //		std::cout << v.size() << std::endl;
 //		v.pop_back();
-		v.insert(v.end(), 1, 11);
+		v.insert(v.end() - 1,11);
 		//v[5] = 2;
 		//std::cout << v.size() << std::endl;
 		for (size_t i = 0; i < v.size(); i++)

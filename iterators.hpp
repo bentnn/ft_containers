@@ -56,7 +56,7 @@ namespace ft
 
 		RanIt operator--(int) {
 			RanIt<value_type> temp = *this;
-			_ptr++;
+			_ptr--;
 			return temp;
 		}
 
@@ -218,7 +218,7 @@ namespace ft
 
 		ConstRanIt operator--(int) {
 			ConstRanIt<value_type> temp = *this;
-			_ptr++;
+			_ptr--;
 			return temp;
 		}
 

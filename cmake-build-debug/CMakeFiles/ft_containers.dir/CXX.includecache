@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/iterators.hpp
+/Users/aabet/projects/ft_containers/ft_containers/iterators.hpp
 iostream
 -
 vector/vector.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/vector/vector.hpp
+/Users/aabet/projects/ft_containers/ft_containers/vector/vector.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/main.cpp
+/Users/aabet/projects/ft_containers/ft_containers/main.cpp
 iostream
 -
 vector
@@ -24,19 +24,19 @@ map
 set
 -
 stack.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/stack.hpp
+/Users/aabet/projects/ft_containers/ft_containers/stack.hpp
 vector/vector.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/vector/vector.hpp
+/Users/aabet/projects/ft_containers/ft_containers/vector/vector.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/stack.hpp
+/Users/aabet/projects/ft_containers/ft_containers/stack.hpp
 iostream
 -
 vector
 -
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/vector/vector.hpp
+/Users/aabet/projects/ft_containers/ft_containers/vector/vector.hpp
 iostream
 -
 ../iterators.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/iterators.hpp
+/Users/aabet/projects/ft_containers/ft_containers/iterators.hpp
 
