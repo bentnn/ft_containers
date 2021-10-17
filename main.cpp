@@ -7,7 +7,7 @@
 #include <set>
 
 //#include "iterators.hpp"
-#include "stack.hpp"
+#include "stack/stack.hpp"
 #include "vector/vector.hpp"
 
 class A {
@@ -23,7 +23,7 @@ public:
 int main() {
 
 	std::vector<int> stdv(5);
-	ft::vector<int> v(5);
+	ft::vector<int> v(2);
 	for (int i = 0; i < v.size(); i++) {
 		v[i] = i + 1;
 		stdv[i] = i + 1;
@@ -44,7 +44,7 @@ int main() {
 		//v.erase(v.begin() + 1, v.end() - 1);
 		//std::cout << v.size() << std::endl;
 //		ft::vector<int>::iterator it = v.erase(v.begin() , v.begin());
-//		std::cout << (it == v.end()) << std::endl;
+//		std::cout << (it == v.end()) << std::endl;-
 //		std::cout << *it << std::endl;
 //		std::cout << v.size() << std::endl;
 //		v.pop_back();

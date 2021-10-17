@@ -2,7 +2,9 @@
 #define VECTOR_HPP
 
 #include <iostream>
-#include "../iterators.hpp"
+#include "../iterators/iterators.hpp"
+#include "../utils/enable_if.hpp"
+#include "../utils/is_integral.hpp"
 
 namespace ft
 {
@@ -40,19 +42,6 @@ namespace ft
 				last--;
 				dist--;
 			}
-			//std::cout << std::endl;
-//			while (first < last && dist.base() != NULL)
-//			{
-//				_allocator.construct(dist.base(), *last);
-//				last--;
-//				dist--;
-//			}
-//			while (first < last)
-//			{
-//				*dist = *last;
-//				last--;
-//				dist--;
-//			}
 		}
 
 	public:
@@ -67,10 +56,10 @@ namespace ft
 				this->_allocator.construct(this->_array + i, value);
 		}
 
-//		template<class InputIt>
-//		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator()): _allocator(alloc) {
-//
-//		}
+		template<class InputIt>
+		vector(typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first, InputIt last, const Allocator& alloc = Allocator()): _allocator(alloc) {
+
+		}
 
 		vector( const vector& other ) {
 			*this = other;
