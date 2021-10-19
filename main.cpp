@@ -108,7 +108,8 @@ void compare_assert(A stdv1, A stdv2, B v1, B v2, std::string name) {
 }
 
 
-void test_vec_compares() {
+
+void test_vec_comparison() {
 	std::vector<int> stdv1;
 	std::vector<int> stdv2;
 	ft::vector<int> v1;
@@ -133,7 +134,7 @@ void test_vec_compares() {
 
 
 int main() {
-	test_vec_compares();
+	test_vec_comparison();
 //	ft::vector<int> v(5);
 //	ft::vector<int> v2(5);
 //	for (int i = 0; i < v.size(); i++) {
