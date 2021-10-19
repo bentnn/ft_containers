@@ -7,26 +7,26 @@
 #include <set>
 
 //#include "iterators.hpp"
-#include "stack/stack.hpp"
-#include "vector/vector.hpp"
+#include "../vector/vector.hpp"
+#include "stack_testing.cpp"
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
 #include <chrono>
 
-class A {
-private:
-	int n;
-public:
-	explicit A (int n): n(n) {}
-};
+//class A {
+//private:
+//	int n;
+//public:
+//	explicit A (int n): n(n) {}
+//};
 
-template<class T, class Allocator = std::allocator<T> >
-void output_vector(const ft::vector<T, Allocator> &v) {
-	for (size_t i = 0; i < v.size(); i++)
-		std::cout << v[i] << " ";
-	std::cout << std::endl;
-}
+//template<class T, class Allocator = std::allocator<T> >
+//void output_vector(const ft::vector<T, Allocator> &v) {
+//	for (size_t i = 0; i < v.size(); i++)
+//		std::cout << v[i] << " ";
+//	std::cout << std::endl;
+//}
 
 void who_won(std::string name_of_test, std::chrono::duration<double> my_dur, std::chrono::duration<double> stl_dur) {
 	std::cout << name_of_test << "!!!!!!!!!!!" << std::endl;
@@ -99,15 +99,6 @@ void test_reserve() {
 }
 
 
-template<class A, class B>
-void compare_assert(A stdv1, A stdv2, B v1, B v2, std::string name) {
-	assert((stdv1 == stdv2) == (v1 == v2) && (stdv1 != stdv2) == (v1 != v2));
-	assert((stdv1 > stdv2) == (v1 > v2) && (stdv1 < stdv2) == (v1 < v2));
-	assert((stdv1 >= stdv2) == (v1 >= v2) && (stdv1 <= stdv2) == (v1 <= v2));
-	std::cout << "'" << name << "'is ok\n";
-}
-
-
 
 void test_vec_comparison() {
 	std::vector<int> stdv1;
@@ -134,7 +125,7 @@ void test_vec_comparison() {
 
 
 int main() {
-	test_vec_comparison();
+	stack_testing();
 //	ft::vector<int> v(5);
 //	ft::vector<int> v2(5);
 //	for (int i = 0; i < v.size(); i++) {

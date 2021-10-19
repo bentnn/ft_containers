@@ -80,13 +80,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/iterators/iterators.hpp">
-			<Option target="ft_containers"/>
-		</Unit>
-		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/main.cpp">
+		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/iterators/vector_iterators.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/stack/stack.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/testing/main.cpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/utils/utils.hpp">

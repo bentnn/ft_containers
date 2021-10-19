@@ -2,15 +2,16 @@
 #define VECTOR_HPP
 
 #include <iostream>
-#include "../iterators/iterators.hpp"
+#include "../iterators/vector_iterators.hpp"
+#include "../iterators/reverse_iterator.hpp"
 #include "../utils/enable_if.hpp"
 #include "../utils/is_integral.hpp"
 
 namespace ft
 {
-	template<typename T>class ConstRanIt;
-	template<typename T>class RanIt;
-	template<class T, class Allocator = std::allocator<T> >
+	template <typename T>class ConstRanIt;
+	template <typename T>class RanIt;
+	template <class T, class Allocator = std::allocator<T> >
 	class vector {
 	public:
 		// def
@@ -24,6 +25,9 @@ namespace ft
 		typedef typename Allocator::const_pointer const_pointer;
 		typedef ft::RanIt<value_type> iterator;
 		typedef ft::ConstRanIt<value_type> const_iterator;
+		typedef ft::reverse_iterator<iterator> reverse_iterator;
+		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
+
 
 	private:
 		pointer		_array;			// array of T
@@ -46,11 +50,11 @@ namespace ft
 
 	public:
 		// constructors
-		explicit vector(const Allocator& alloc = allocator_type()): _array(0), _size(0),
+		explicit vector(const allocator_type& alloc = allocator_type()): _array(0), _size(0),
 				_capacity(0), _allocator(alloc) {}
 
 		explicit vector(size_type n, const T& value = T(),
-						 const Allocator& alloc = Allocator()): _size(n), _capacity(n), _allocator(alloc) {
+						 const allocator_type& alloc = allocator_type()): _size(n), _capacity(n), _allocator(alloc) {
 			this->_array = this->_allocator.allocate(n);
 			for (size_type i = 0; i < n; i++)
 				this->_allocator.construct(this->_array + i, value);
@@ -58,7 +62,7 @@ namespace ft
 
 		template<class InputIt>
 		vector(typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first, InputIt last,
-			   const Allocator& alloc = Allocator()): _allocator(alloc) {
+			   const allocator_type& alloc = allocator_type()): _allocator(alloc) {
 			if (first > last)
 				throw std::length_error("vector");
 			_size = last - first;
@@ -69,7 +73,12 @@ namespace ft
 		}
 
 		vector( const vector& other ) {
-			*this = other;
+			this->_capacity = other._capacity;
+			this->_size = other._size;
+			this->_allocator = other._allocator;
+			this->_array = this->_allocator.allocate(this->_capacity);
+			for (size_type i = 0; i < this->_size; i++)
+				this->_allocator.construct(this->_array + i, other[i]);
 		}
 
 		// destructor
@@ -82,8 +91,8 @@ namespace ft
 
 
 		vector& operator= (const vector& x) {
-			if (_capacity != 0)
-				_allocator.deallocate(_array, _capacity);
+			if (this->_capacity != 0)
+				this->_allocator.deallocate(this->_array, this->_capacity);
 			this->_capacity = x._capacity;
 			this->_size = x._size;
 			this->_allocator = x._allocator;
@@ -115,6 +124,22 @@ namespace ft
 
 		const_iterator end() const {
 			return const_iterator(_array + _size);
+		}
+
+		reverse_iterator rbegin() {
+			return reverse_iterator(end());
+		}
+
+		const_reverse_iterator rbegin() const {
+			return const_reverse_iterator(end());
+		}
+
+		reverse_iterator rend() {
+			return reverse_iterator(begin());
+		}
+
+		const_reverse_iterator rend() const {
+			return const_reverse_iterator(begin());
 		}
 
 		size_type size() const {
@@ -341,7 +366,7 @@ namespace ft
 				throw std::logic_error("vector");
 			difference_type count = last - first;
 			clear();
-			if (count > capacity()) {
+			if (count > static_cast<difference_type>(capacity())) {
 				_allocator.deallocate(_array, _capacity);
 				_array = _allocator.allocate(count);
 				_capacity = count;
@@ -355,30 +380,6 @@ namespace ft
 			}
 			_size = count;
 		}
-
-		template< class A, class Alloc>
-		friend bool operator==(const vector<A, Alloc> &lhs,
-						 const vector<A, Alloc> &rhs);
-
-		template< class A, class Alloc>
-		friend bool operator!=(const vector<A, Alloc> &lhs,
-								const vector<A, Alloc> &rhs);
-
-		template< class A, class Alloc>
-		friend bool operator<(const vector<A, Alloc> &lhs,
-								const vector<A, Alloc> &rhs);
-
-		template< class A, class Alloc>
-		friend bool operator>(const vector<A, Alloc> &lhs,
-							  const vector<A, Alloc> &rhs);
-
-		template< class A, class Alloc>
-		friend bool operator<=(const vector<A, Alloc> &lhs,
-							  const vector<A, Alloc> &rhs);
-
-		template< class A, class Alloc>
-		friend bool operator>=(const vector<A, Alloc> &lhs,
-							   const vector<A, Alloc> &rhs);
 	};
 
 	template< class A, class Alloc>
@@ -420,6 +421,11 @@ namespace ft
 	bool operator>=(const ft::vector<A, Alloc> &lhs,
 					const ft::vector<A, Alloc> &rhs) {
 		return !(lhs < rhs);
+	}
+
+	template< class T, class Alloc >
+	void swap( std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs ) {
+		lhs.swap(rhs);
 	}
 }
 

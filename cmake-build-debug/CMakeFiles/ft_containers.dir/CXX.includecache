@@ -6,13 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/Users/aabet/projects/ft_containers/ft_containers/iterators/iterators.hpp
+/Users/aabet/projects/ft_containers/ft_containers/iterators/reverse_iterator.hpp
+
+/Users/aabet/projects/ft_containers/ft_containers/iterators/vector_iterators.hpp
 iostream
 -
 ../vector/vector.hpp
 /Users/aabet/projects/ft_containers/ft_containers/vector/vector.hpp
 
-/Users/aabet/projects/ft_containers/ft_containers/main.cpp
+/Users/aabet/projects/ft_containers/ft_containers/stack/stack.hpp
+../vector/vector.hpp
+/Users/aabet/projects/ft_containers/ft_containers/vector/vector.hpp
+iostream
+-
+vector
+-
+
+/Users/aabet/projects/ft_containers/ft_containers/testing/main.cpp
 iostream
 -
 vector
@@ -23,10 +33,10 @@ map
 -
 set
 -
-stack/stack.hpp
-/Users/aabet/projects/ft_containers/ft_containers/stack/stack.hpp
-vector/vector.hpp
+../vector/vector.hpp
 /Users/aabet/projects/ft_containers/ft_containers/vector/vector.hpp
+stack_testing.cpp
+/Users/aabet/projects/ft_containers/ft_containers/testing/stack_testing.cpp
 stdio.h
 -
 time.h
@@ -36,8 +46,10 @@ unistd.h
 chrono
 -
 
+/Users/aabet/projects/ft_containers/ft_containers/testing/stack_testing.cpp
+../stack/stack.hpp
 /Users/aabet/projects/ft_containers/ft_containers/stack/stack.hpp
-iostream
+stack
 -
 vector
 -
@@ -53,8 +65,10 @@ remove_const.hpp
 /Users/aabet/projects/ft_containers/ft_containers/vector/vector.hpp
 iostream
 -
-../iterators/iterators.hpp
-/Users/aabet/projects/ft_containers/ft_containers/iterators/iterators.hpp
+../iterators/vector_iterators.hpp
+/Users/aabet/projects/ft_containers/ft_containers/iterators/vector_iterators.hpp
+../iterators/reverse_iterator.hpp
+/Users/aabet/projects/ft_containers/ft_containers/iterators/reverse_iterator.hpp
 ../utils/enable_if.hpp
 /Users/aabet/projects/ft_containers/ft_containers/utils/enable_if.hpp
 ../utils/is_integral.hpp

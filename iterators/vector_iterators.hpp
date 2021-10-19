@@ -1,5 +1,5 @@
-#ifndef FT_CONTAINERS_ITERATORS_HPP
-#define FT_CONTAINERS_ITERATORS_HPP
+#ifndef VECTOR_ITERATORS_HPP
+#define VECTOR_ITERATORS_HPP
 
 #include <iostream>
 #include "../vector/vector.hpp"
@@ -141,11 +141,11 @@ namespace ft
 		}
 
 		RanIt operator+(const difference_type &a) {
-			return _ptr + a;
+			return RanIt(_ptr + a);
 		}
 
 		RanIt operator-(const difference_type &a) {
-			return _ptr - a;
+			return RanIt(_ptr - a);
 		}
 
 		RanIt & operator+=(const difference_type &a) {
@@ -303,11 +303,11 @@ namespace ft
 		}
 
 		ConstRanIt operator+(const difference_type &a) {
-			return _ptr + a;
+			return ConstRanIt(_ptr + a);
 		}
 
 		ConstRanIt operator-(const difference_type &a) {
-			return _ptr - a;
+			return ConstRanIt(_ptr - a);
 		}
 
 		ConstRanIt & operator+=(const difference_type &a) {
