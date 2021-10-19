@@ -99,8 +99,41 @@ void test_reserve() {
 }
 
 
+template<class A, class B>
+void compare_assert(A stdv1, A stdv2, B v1, B v2, std::string name) {
+	assert((stdv1 == stdv2) == (v1 == v2) && (stdv1 != stdv2) == (v1 != v2));
+	assert((stdv1 > stdv2) == (v1 > v2) && (stdv1 < stdv2) == (v1 < v2));
+	assert((stdv1 >= stdv2) == (v1 >= v2) && (stdv1 <= stdv2) == (v1 <= v2));
+	std::cout << "'" << name << "'is ok\n";
+}
+
+
+void test_vec_compares() {
+	std::vector<int> stdv1;
+	std::vector<int> stdv2;
+	ft::vector<int> v1;
+	ft::vector<int> v2;
+
+	compare_assert(stdv1, stdv2, v1, v2, "all is empty");
+
+	stdv1 = std::vector<int>(3, 4);
+	stdv2 = std::vector<int>(stdv1.begin(), stdv1.end());
+	v1 = ft::vector<int>(stdv1.begin(), stdv1.end());
+	v2 = ft::vector<int>(stdv1.begin(), stdv1.end());
+
+	compare_assert(stdv1, stdv2, v1, v2, "all is not empty but is equal");
+
+	stdv2.insert(stdv2.end(), stdv1.begin(), stdv1.end());
+	v2.assign(stdv2.begin(), stdv2.end());
+
+	compare_assert(stdv1, stdv2, v1, v2, "all is not empty and is not equal");
+
+	std::cout << "Comparison is ok\n";
+}
+
+
 int main() {
-	test_reserve();
+	test_vec_compares();
 //	ft::vector<int> v(5);
 //	ft::vector<int> v2(5);
 //	for (int i = 0; i < v.size(); i++) {

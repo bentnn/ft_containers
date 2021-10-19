@@ -82,12 +82,14 @@ namespace ft
 
 
 		vector& operator= (const vector& x) {
+			if (_capacity != 0)
+				_allocator.deallocate(_array, _capacity);
 			this->_capacity = x._capacity;
 			this->_size = x._size;
 			this->_allocator = x._allocator;
 			this->_array = this->_allocator.allocate(this->_capacity);
 			for (size_type i = 0; i < this->_size; i++)
-				this->_array[i] = this->_allocator.construct(this->_array + i, x[i]);
+				this->_allocator.construct(this->_array + i, x[i]);
 			return *this;
 		}
 
@@ -103,8 +105,16 @@ namespace ft
 			return iterator(_array);
 		}
 
+		const_iterator begin() const {
+			return const_iterator(_array);
+		}
+
 		iterator end() {
 			return iterator(_array + _size);
+		}
+
+		const_iterator end() const {
+			return const_iterator(_array + _size);
 		}
 
 		size_type size() const {
@@ -192,6 +202,10 @@ namespace ft
 		}
 
 		pointer data() {
+			return _array;
+		}
+
+		const_pointer data() const {
 			return _array;
 		}
 
@@ -342,7 +356,71 @@ namespace ft
 			_size = count;
 		}
 
-	};	
+		template< class A, class Alloc>
+		friend bool operator==(const vector<A, Alloc> &lhs,
+						 const vector<A, Alloc> &rhs);
+
+		template< class A, class Alloc>
+		friend bool operator!=(const vector<A, Alloc> &lhs,
+								const vector<A, Alloc> &rhs);
+
+		template< class A, class Alloc>
+		friend bool operator<(const vector<A, Alloc> &lhs,
+								const vector<A, Alloc> &rhs);
+
+		template< class A, class Alloc>
+		friend bool operator>(const vector<A, Alloc> &lhs,
+							  const vector<A, Alloc> &rhs);
+
+		template< class A, class Alloc>
+		friend bool operator<=(const vector<A, Alloc> &lhs,
+							  const vector<A, Alloc> &rhs);
+
+		template< class A, class Alloc>
+		friend bool operator>=(const vector<A, Alloc> &lhs,
+							   const vector<A, Alloc> &rhs);
+	};
+
+	template< class A, class Alloc>
+	bool operator==(const ft::vector<A, Alloc> &lhs,
+					 const ft::vector<A, Alloc> &rhs) {
+		if (lhs.size() != rhs.size())
+			return false;
+		for (size_t i = 0; i < rhs.size(); i++)
+			if (lhs[i] != rhs[i])
+				return false;
+		return true;
+	}
+
+	template< class A, class Alloc>
+	bool operator!=(const ft::vector<A, Alloc> &lhs,
+					const ft::vector<A, Alloc> &rhs) {
+		return !(lhs == rhs);
+	}
+
+	template< class A, class Alloc>
+	bool operator<(const ft::vector<A, Alloc> &lhs,
+					const ft::vector<A, Alloc> &rhs) {
+		return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	}
+
+	template< class A, class Alloc>
+	bool operator>(const ft::vector<A, Alloc> &lhs,
+				   const ft::vector<A, Alloc> &rhs) {
+		return rhs < lhs;
+	}
+
+	template< class A, class Alloc>
+	bool operator<=(const ft::vector<A, Alloc> &lhs,
+				   const ft::vector<A, Alloc> &rhs) {
+		return !(lhs > rhs);
+	}
+
+	template< class A, class Alloc>
+	bool operator>=(const ft::vector<A, Alloc> &lhs,
+					const ft::vector<A, Alloc> &rhs) {
+		return !(lhs < rhs);
+	}
 }
 
 
