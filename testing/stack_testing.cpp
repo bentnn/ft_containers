@@ -99,5 +99,5 @@ void stack_testing() {
 
 	compare_assert(stdst, stdst2, st, st2, "Operator '='");
 	write_gren_str("All is ok!!!!");
-	std::cout << " at least i think so...\n";
+	std::cout << "at least i think so...\n";
 }
