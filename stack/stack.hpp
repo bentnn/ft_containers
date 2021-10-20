@@ -70,7 +70,7 @@ namespace ft {
 		friend bool operator>( const stack<A,Cont>& lhs, const stack<A,Cont>& rhs );
 
 		template< class A, class Cont >
-		friend bool operator>=( const stack<T,Cont>& lhs, const stack<T,Cont>& rhs );
+		friend bool operator>=( const stack<A,Cont>& lhs, const stack<A,Cont>& rhs );
 	};
 
 	template< class A, class Cont >

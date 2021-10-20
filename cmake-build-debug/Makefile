@@ -153,6 +153,30 @@ testing/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/testing/main.cpp.s
 .PHONY : testing/main.cpp.s
 
+testing/stack_testing.o: testing/stack_testing.cpp.o
+.PHONY : testing/stack_testing.o
+
+# target to build an object file
+testing/stack_testing.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o
+.PHONY : testing/stack_testing.cpp.o
+
+testing/stack_testing.i: testing/stack_testing.cpp.i
+.PHONY : testing/stack_testing.i
+
+# target to preprocess a source file
+testing/stack_testing.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.i
+.PHONY : testing/stack_testing.cpp.i
+
+testing/stack_testing.s: testing/stack_testing.cpp.s
+.PHONY : testing/stack_testing.s
+
+# target to generate assembly for a file
+testing/stack_testing.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft_containers.dir/build.make CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.s
+.PHONY : testing/stack_testing.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +189,9 @@ help:
 	@echo "... testing/main.o"
 	@echo "... testing/main.i"
 	@echo "... testing/main.s"
+	@echo "... testing/stack_testing.o"
+	@echo "... testing/stack_testing.i"
+	@echo "... testing/stack_testing.s"
 .PHONY : help
 
 

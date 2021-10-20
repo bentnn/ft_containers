@@ -22,37 +22,23 @@ iostream
 vector
 -
 
-/Users/aabet/projects/ft_containers/ft_containers/testing/main.cpp
+/Users/aabet/projects/ft_containers/ft_containers/testing/stack_testing.cpp
+testing.hpp
+/Users/aabet/projects/ft_containers/ft_containers/testing/testing.hpp
+
+/Users/aabet/projects/ft_containers/ft_containers/testing/testing.hpp
 iostream
 -
 vector
 -
 stack
 -
-map
--
-set
--
-../vector/vector.hpp
-/Users/aabet/projects/ft_containers/ft_containers/vector/vector.hpp
-stack_testing.cpp
-/Users/aabet/projects/ft_containers/ft_containers/testing/stack_testing.cpp
-stdio.h
--
-time.h
--
-unistd.h
--
 chrono
 -
-
-/Users/aabet/projects/ft_containers/ft_containers/testing/stack_testing.cpp
+cstdlib
+-
 ../stack/stack.hpp
 /Users/aabet/projects/ft_containers/ft_containers/stack/stack.hpp
-stack
--
-vector
--
 
 /Users/aabet/projects/ft_containers/ft_containers/utils/enable_if.hpp
 
