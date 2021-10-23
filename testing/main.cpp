@@ -111,7 +111,9 @@ void test_reserve() {
 
 
 int main() {
-	stack_testing();
+	std::pair<int, int> pa = std::make_pair(2, 2);
+	std::pair<int, int> pa2 = std::make_pair(2, 33);
+	std::cout << (pa < pa2) << std::endl;
 //	ft::vector<int> v(5);
 //	ft::vector<int> v2(5);
 //	for (int i = 0; i < v.size(); i++) {

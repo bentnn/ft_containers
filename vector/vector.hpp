@@ -6,6 +6,7 @@
 #include "../iterators/reverse_iterator.hpp"
 #include "../utils/enable_if.hpp"
 #include "../utils/is_integral.hpp"
+#include "../utils/lexicographical_compare.hpp"
 
 namespace ft
 {
@@ -402,7 +403,7 @@ namespace ft
 	template< class A, class Alloc>
 	bool operator<(const ft::vector<A, Alloc> &lhs,
 					const ft::vector<A, Alloc> &rhs) {
-		return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}
 
 	template< class A, class Alloc>
