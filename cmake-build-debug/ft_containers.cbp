@@ -83,7 +83,13 @@
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/iterators/vector_iterators.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
+		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/map/RBTree.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/map/map.h">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/map/node.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/map/pair.hpp">
