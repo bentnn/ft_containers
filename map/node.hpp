@@ -19,7 +19,7 @@ public:
 										right(0),
 									  	left(0) {}
 
-	node& operator=( const node& other ) {
+	node& operator=(const node& other) {
 		this->is_black = other.is_black;
 		this->content = other.content;
 		this->father = other.father;

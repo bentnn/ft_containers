@@ -2,7 +2,7 @@
 #define MAP_H
 
 #include <iostream>
-#include "pair.hpp"
+#include "RBTree.hpp"
 
 namespace ft {
 	template<
@@ -25,9 +25,39 @@ namespace ft {
 				typedef const value_type& const_reference;
 				typedef Allocator::pointer pointer;
 				typedef Allocator::const_pointer const_pointer;
+				typedef typename Compare::template rebind<value_type>::other node_compare;
+
+				typedef RBTree<value_type, node_compare, allocator_type> tree_type;
+//				typedef typename Allocator::template rebind<tree_type>::other tree_allocator;
 
 			private:
-				allocator_type _allocator;
+				allocator_type _alloc;
+//				tree_allocator _tree_alloc;
+				tree_type _tree;
+				key_compare _cmp;
+
+			public:
+				// constructors and destructors
+
+				explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
+					_alloc(alloc), _tree(tree_type(comp, alloc)), _cmp(comp) {}
+
+//				template< class InputIt >
+//				map(InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator());
+
+//				map( const map& other );
+
+				// getters
+
+				allocator_type get_allocator() const {
+					return _tree.get_allocator();
+				}
+
+				size_type size() const {
+					return _tree.size();
+				}
+
+
 
 			};
 }
