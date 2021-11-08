@@ -17,7 +17,7 @@ namespace ft {
 		iterator_type _it;
 
 	public:
-		reverse_iterator(): _it(0) {}
+		reverse_iterator(): _it() {}
 
 		explicit reverse_iterator(iterator_type x): _it(x) {}
 
@@ -47,7 +47,7 @@ namespace ft {
 		}
 
 		reference operator[]( difference_type n ) const {
-			return _it[n];
+			return _it.base()[-n-1];
 		}
 
 

@@ -35,7 +35,7 @@ private:
 
 	void change_child(node_pointer old_child, node_pointer new_child) {
 		if (old_child->father) {
-			if (old_child->father->right = old_child)
+			if (old_child->father->right == old_child)
 				old_child->father->right = new_child;
 			else
 				old_child->father->left = new_child;

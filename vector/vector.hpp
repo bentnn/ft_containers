@@ -7,6 +7,7 @@
 #include "../utils/enable_if.hpp"
 #include "../utils/is_integral.hpp"
 #include "../utils/lexicographical_compare.hpp"
+#include <cstring>
 
 namespace ft
 {
@@ -38,11 +39,11 @@ namespace ft
 
 //		template<class InputIt>
 		void uninitialized_copy_from_end(iterator first, iterator last, iterator dist) {
-			dist += last - first - 1;
 			last--;
+			dist += last - first;
+
 			while (last >= first) {
-				//std::cout << *last << " " << (dist - begin()) << std::endl;
-				_allocator.destroy(dist.base());
+				//_allocator.destroy(dist.base());
 				_allocator.construct(dist.base(), *last);
 				last--;
 				dist--;
@@ -294,30 +295,59 @@ namespace ft
 			else if (max_size() - _size < count || pos < begin() || pos > end())
 				throw std::length_error("vector");
 			difference_type start = pos - begin();
-			if (_size + count > _capacity)
-				reserve(_capacity * 2 >= _size + count ? _capacity * 2 : _size + count);
-			pos = begin() + start;
-			uninitialized_copy_from_end(pos, end(), pos + count);
-			for (size_type i = 0; i < count; i++) {
-				if ((pos + i).base())
-					_allocator.destroy((pos + i).base());
-				_allocator.construct((pos + i).base(), value);
+			if (_size + count > _capacity) {
+				size_type new_cap = _capacity * 2 >= _size + count ? _capacity * 2 : _size + count;
+				pointer new_arr = _allocator.allocate(new_cap);
+				std::uninitialized_copy(begin(), pos, iterator(new_arr));
+				for (size_type i = 0; i < count; i++)
+					_allocator.construct(new_arr + start + i, value);
+				std::uninitialized_copy(pos, end(), iterator(new_arr + start + count));
+				for (size_type i = 0; i < _size; i++)
+					_allocator.destroy(_array + i);
+				_allocator.deallocate(_array, _capacity);
+				_size += count;
+				_capacity = new_cap;
+				_array = new_arr;
 			}
-			_size += count;
+			else {
+				for (size_type i = _size; i > start; i--) {
+					_allocator.destroy(_array + i + count - 1);
+					_allocator.construct(_array + i + count - 1, *(_array + i - 1));
+				}
+				for (size_type i = 0; i < count; i++) {
+					_allocator.destroy(_array + i + count);
+					_allocator.construct(_array + start + i, value);
+				}
+				_size += count;
+			}
 		}
 
 		iterator insert(iterator pos, const T& value) {
 			if (pos < begin() || pos > end())
 				throw std::logic_error("vector");
 			difference_type start = pos - begin();
-			if (_size + 1 > _capacity)
-				reserve(_capacity == 0 ? 1 : _capacity * 2);
-			pos = begin() + start;
-			uninitialized_copy_from_end(pos, end(), pos + 1);
-			if (pos.base())
+			if (_size == _capacity) {
+				_capacity = _capacity * 2 + (_capacity == 0);
+				pointer new_arr = _allocator.allocate(_capacity);
+				std::uninitialized_copy(begin(), pos, iterator(new_arr));
+				_allocator.construct(new_arr + start, value);
+				std::uninitialized_copy(pos, end(), iterator(new_arr + start + 1));
+				for (size_t i = 0; i < _size; i++)
+					_allocator.destroy(_array + i);
+				_allocator.deallocate(_array, _size);
+				_size++;
+				_array = new_arr;
+			}
+			else {
+				for (size_type i = _size; i > start; i--) {
+					_allocator.destroy(_array + i);
+					_allocator.construct(_array + i, *(_array + i - 1));
+				}
 				_allocator.destroy(pos.base());
-			_allocator.construct(pos.base(), value);
-			_size++;
+				_allocator.construct(pos.base(), value);
+				_size++;
+			}
+			return begin() + start;
 		}
 
 		template<class InputIt>
@@ -343,9 +373,17 @@ namespace ft
 		}
 
 		void swap(vector& other) {
-			pointer tmp = this->_array;
-			_array = other._array;
-			other._array = tmp;
+//			pointer tmp = this->_array;
+//			this->_array = other._array;
+//			other._array = tmp;
+//			size_t tmp = this->_size;
+//			this->_size = other.size();
+//			other._size = tmp;
+//			tmp = this->_capacity;
+//			this->_capacity = other._capacity;
+//			other._capacity = tmp;
+//			allocator_type tmp_alloc = this->_allocator;
+			std::swap(other, *this);
 		}
 
 		void assign(size_type count, const T& value) {

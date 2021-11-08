@@ -44,19 +44,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /cygdrive/c/Users/Kirill/AppData/Local/JetBrains/CLion2021.2/cygwin_cmake/bin/cmake.exe
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /cygdrive/c/Users/Kirill/AppData/Local/JetBrains/CLion2021.2/cygwin_cmake/bin/cmake.exe -E rm -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /cygdrive/c/Users/Kirill/Desktop/ft_containers
+CMAKE_SOURCE_DIR = /Users/aabet/projects/ft_containers/ft_containers
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/aabet/projects/ft_containers/ft_containers/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ft_containers.dir/depend.make
@@ -68,47 +68,62 @@ include CMakeFiles/ft_containers.dir/flags.make
 
 CMakeFiles/ft_containers.dir/testing/main.cpp.o: CMakeFiles/ft_containers.dir/flags.make
 CMakeFiles/ft_containers.dir/testing/main.cpp.o: ../testing/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ft_containers.dir/testing/main.cpp.o"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ft_containers.dir/testing/main.cpp.o -c /cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/aabet/projects/ft_containers/ft_containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ft_containers.dir/testing/main.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ft_containers.dir/testing/main.cpp.o -c /Users/aabet/projects/ft_containers/ft_containers/testing/main.cpp
 
 CMakeFiles/ft_containers.dir/testing/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ft_containers.dir/testing/main.cpp.i"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/main.cpp > CMakeFiles/ft_containers.dir/testing/main.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aabet/projects/ft_containers/ft_containers/testing/main.cpp > CMakeFiles/ft_containers.dir/testing/main.cpp.i
 
 CMakeFiles/ft_containers.dir/testing/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ft_containers.dir/testing/main.cpp.s"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/main.cpp -o CMakeFiles/ft_containers.dir/testing/main.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aabet/projects/ft_containers/ft_containers/testing/main.cpp -o CMakeFiles/ft_containers.dir/testing/main.cpp.s
 
 CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o: CMakeFiles/ft_containers.dir/flags.make
 CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o: ../testing/stack_testing.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o -c /cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/stack_testing.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/aabet/projects/ft_containers/ft_containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o -c /Users/aabet/projects/ft_containers/ft_containers/testing/stack_testing.cpp
 
 CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.i"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/stack_testing.cpp > CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aabet/projects/ft_containers/ft_containers/testing/stack_testing.cpp > CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.i
 
 CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.s"
-	/usr/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/stack_testing.cpp -o CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aabet/projects/ft_containers/ft_containers/testing/stack_testing.cpp -o CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.s
+
+CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.o: CMakeFiles/ft_containers.dir/flags.make
+CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.o: ../testing/vector_testing.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/aabet/projects/ft_containers/ft_containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.o -c /Users/aabet/projects/ft_containers/ft_containers/testing/vector_testing.cpp
+
+CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/aabet/projects/ft_containers/ft_containers/testing/vector_testing.cpp > CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.i
+
+CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/aabet/projects/ft_containers/ft_containers/testing/vector_testing.cpp -o CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.s
 
 # Object files for target ft_containers
 ft_containers_OBJECTS = \
 "CMakeFiles/ft_containers.dir/testing/main.cpp.o" \
-"CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o"
+"CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o" \
+"CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.o"
 
 # External object files for target ft_containers
 ft_containers_EXTERNAL_OBJECTS =
 
-ft_containers.exe: CMakeFiles/ft_containers.dir/testing/main.cpp.o
-ft_containers.exe: CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o
-ft_containers.exe: CMakeFiles/ft_containers.dir/build.make
-ft_containers.exe: CMakeFiles/ft_containers.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ft_containers.exe"
+ft_containers: CMakeFiles/ft_containers.dir/testing/main.cpp.o
+ft_containers: CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o
+ft_containers: CMakeFiles/ft_containers.dir/testing/vector_testing.cpp.o
+ft_containers: CMakeFiles/ft_containers.dir/build.make
+ft_containers: CMakeFiles/ft_containers.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/aabet/projects/ft_containers/ft_containers/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable ft_containers"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ft_containers.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/ft_containers.dir/build: ft_containers.exe
+CMakeFiles/ft_containers.dir/build: ft_containers
 .PHONY : CMakeFiles/ft_containers.dir/build
 
 CMakeFiles/ft_containers.dir/clean:
@@ -116,6 +131,6 @@ CMakeFiles/ft_containers.dir/clean:
 .PHONY : CMakeFiles/ft_containers.dir/clean
 
 CMakeFiles/ft_containers.dir/depend:
-	cd /cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cygdrive/c/Users/Kirill/Desktop/ft_containers /cygdrive/c/Users/Kirill/Desktop/ft_containers /cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug /cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug /cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/CMakeFiles/ft_containers.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/aabet/projects/ft_containers/ft_containers/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/aabet/projects/ft_containers/ft_containers /Users/aabet/projects/ft_containers/ft_containers /Users/aabet/projects/ft_containers/ft_containers/cmake-build-debug /Users/aabet/projects/ft_containers/ft_containers/cmake-build-debug /Users/aabet/projects/ft_containers/ft_containers/cmake-build-debug/CMakeFiles/ft_containers.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ft_containers.dir/depend
 

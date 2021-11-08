@@ -14,17 +14,6 @@
 //	std::cout << std::endl;
 //}
 
-//void who_won(std::string name_of_test, std::chrono::duration<double> my_dur, std::chrono::duration<double> stl_dur) {
-//	std::cout << name_of_test << "!!!!!!!!!!!" << std::endl;
-//	std::cout << std::fixed << "stl vector: " << stl_dur.count() << std::endl;
-//	std::cout << std::fixed << "your vector: " << my_dur.count() << std::endl;
-//	double res = my_dur / stl_dur;
-//	std::cout << std::fixed << "your_res = " << res << " stl_res, ";
-//	if (res <= 1)
-//		std::cout << "you won :-)\n";
-//	else
-//		std::cout << "stl won :-(\n";
-//}
 //
 //void test_push_back() {
 //	std::vector<int> v1;
@@ -85,8 +74,34 @@
 //}
 
 
-int main() {
+class OnHeap{
+	public:
+		OnHeap(){
+			values = new int[4];
+		}
 
+		OnHeap & operator=(OnHeap const & src) {
+			delete[] values;
+			values = new int[4];
+			return (*this);
+		}
+		OnHeap(OnHeap const & src){
+			values = new int[4];
+		}
+		~OnHeap(){
+			delete [] values;
+		}
+
+	private:
+		int *values;
+};
+
+int main() {
+	vector_insert_test();
+//	ft::vector<OnHeap> onheap;
+//	for (int i = 0; i < 10; i++){
+//		onheap.insert(onheap.begin(), OnHeap());
+//	}
 }
 
 
