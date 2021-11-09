@@ -97,7 +97,20 @@ class OnHeap{
 };
 
 int main() {
-	vector_insert_test();
+//	RBTree<int> tree;
+//	int *cont = new int(2);
+//	tree.insert(cont);
+//	cont = new int(3);
+//	tree.insert(cont);
+//	cont = new int(4);
+//	tree.insert(cont);
+	std::map<int, int> m;
+	for (int i = 0; i < 5; i++)
+		m[i] = i;
+	std::map<int, int>::iterator it = m.end();
+	for (it; ; it--)
+		std::cout << (*it).first << std::endl;
+//	vector_insert_test();
 //	ft::vector<OnHeap> onheap;
 //	for (int i = 0; i < 10; i++){
 //		onheap.insert(onheap.begin(), OnHeap());
