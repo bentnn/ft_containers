@@ -358,18 +358,31 @@ namespace ft
 				throw std::logic_error("vector");
 			difference_type start = pos - begin();
 			difference_type count = last - first;
-			if (_size + count > _capacity)
-				reserve(_capacity * 2 >= _size + count ? _capacity * 2 : _size + count);
-			pos = begin() + start;
-			uninitialized_copy_from_end(pos, end(), pos + count);
-			while (first < last) {
-				if (pos.base())
-					_allocator.destroy(pos.base());
-				_allocator.construct(pos.base(), *first);
-				pos++;
-				first++;
+			if (_size + count > _capacity) {
+				size_type new_cap = _capacity * 2 >= _size + count ? _capacity * 2 : _size + count;
+				pointer new_arr = _allocator.allocate(new_cap);
+				std::uninitialized_copy(begin(), pos, iterator(new_arr));
+				for (size_type i = 0; i < count; i++, first++)
+					_allocator.construct(new_arr + start + i, *first);
+				std::uninitialized_copy(pos, end(), iterator(new_arr + start + count));
+				for (size_type i = 0; i < _size; i++)
+					_allocator.destroy(_array + i);
+				_allocator.deallocate(_array, _capacity);
+				_size += count;
+				_capacity = new_cap;
+				_array = new_arr;
 			}
-			_size += count;
+			else {
+				for (size_type i = _size; i > start; i--) {
+					_allocator.destroy(_array + i + count - 1);
+					_allocator.construct(_array + i + count - 1, *(_array + i - 1));
+				}
+				for (size_type i = 0; i < count; i++, first++) {
+					_allocator.destroy(_array + i + count);
+					_allocator.construct(_array + start + i, *first);
+				}
+				_size += count;
+			}
 		}
 
 		void swap(vector& other) {

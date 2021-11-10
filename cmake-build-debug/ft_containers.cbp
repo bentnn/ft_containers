@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/iterators/tree_iterator.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/iterators/vector_iterators.hpp">
 			<Option target="ft_containers"/>
 		</Unit>

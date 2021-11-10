@@ -183,6 +183,7 @@ public:
 	~RBTree() {
 		clear_node(_root);
 		_node_alloc.deallocate(_nil, 1);
+		_node_alloc.deallocate(_header, 1);
 	}
 
 	// getters
