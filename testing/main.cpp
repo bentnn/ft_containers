@@ -108,8 +108,7 @@ int main() {
 	for (int i = 0; i < 5; i++)
 		m[i] = i;
 	std::map<int, int>::iterator it = m.end();
-	for (it; ; it--)
-		std::cout << (*it).first << std::endl;
+	it.
 //	vector_insert_test();
 //	ft::vector<OnHeap> onheap;
 //	for (int i = 0; i < 10; i++){

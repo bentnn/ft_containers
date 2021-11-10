@@ -22,6 +22,19 @@ private:
 	key_compare _cmp;
 	size_type _size;
 	node_pointer _nil;
+	node_pointer _header;
+
+	void tree_min(node_pointer n) {
+		while (n->left != _nil)
+			n = n->left;
+		return n;
+	}
+
+	void tree_max(node_pointer n) {
+		while (n->right != _nil)
+			n = n->right;
+		return n;
+	}
 
 	void clear_node(node_pointer node) {
 		if (node && node != _nil) {
@@ -45,6 +58,16 @@ private:
 			_root = new_child;
 			new_child->father = NULL;
 		}
+	}
+
+	void transplant(node_pointer where, node_pointer what) {
+		if (where == _root)
+			_root = what;
+		else if (where == where->father->left)
+			where->father->left = what;
+		else
+			where->father->right = what;
+		what->father = where->father;
 	}
 
 	void right_rotate(node_pointer top) {
@@ -138,12 +161,16 @@ public:
 		_nil = _node_alloc.allocate(1);
 		_node_alloc.construct(_nil, node<Content>());
 		_nil->is_black = true;
+		_header = _node_alloc.allocate(1);
+		_node_alloc.construct(_header, node<Content>());
 	}
 
 	RBTree() : _root(0), _con_alloc(allocator_type()), _node_alloc(node_allocator()), _cmp(key_compare()), _size(0) {
 		_nil = _node_alloc.allocate(1);
 		_node_alloc.construct(_nil, node<Content>());
 		_nil->is_black = true;
+		_header = _node_alloc.allocate(1);
+		_node_alloc.construct(_header, node<Content>());
 	}
 
 //	RBTree(const allocator_type& alloc = allocator_type()):
@@ -176,6 +203,10 @@ public:
 		insert_into_tree(new_node);
 		insert_fuxup(new_node);
 		_size++;
+	}
+
+	void erase(content_type &value) {
+
 	}
 };
 
