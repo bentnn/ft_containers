@@ -2,6 +2,9 @@
 #define RBTREE_HPP
 
 #include "node.hpp"
+#include "../iterators/tree_iterator.hpp"
+
+template<typename T> class TreeIter;
 
 template< class Content, class Compare = std::less<Content>, class Allocator = std::allocator<Content> >
 class RBTree {
@@ -14,6 +17,8 @@ public:
 	typedef Compare key_compare;
 	typedef size_t size_type;
 	typedef ptrdiff_t difference_type;
+	typedef TreeIter<Content> iterator;
+//	template <Content> friend class  class TreeIter;
 
 private:
 	node_pointer _root;
@@ -24,13 +29,17 @@ private:
 	node_pointer _nil;
 	node_pointer _header;
 
-	void tree_min(node_pointer n) {
+	bool is_nil(node_pointer node) {
+		return node == _nil || node == _header;
+	}
+
+	node_pointer tree_min(node_pointer n) {
 		while (n->left != _nil)
 			n = n->left;
 		return n;
 	}
 
-	void tree_max(node_pointer n) {
+	node_pointer tree_max(node_pointer n) {
 		while (n->right != _nil)
 			n = n->right;
 		return n;
@@ -88,12 +97,12 @@ private:
 
 	node_pointer insert_to_node(node_pointer root, node_pointer new_node) {
 		if (_cmp(*new_node->content, *root->content)) {
-			if (root->left != _nil)
+			if (!is_nil(root->left))
 				return insert_to_node(root->left, new_node);
 			root->left = new_node;
 		}
 		else {
-			if (root->right != _nil)
+			if (!is_nil(root->right))
 				return insert_to_node(root->right, new_node);
 			root->right = new_node;
 		}
@@ -169,6 +178,7 @@ public:
 		_nil = _node_alloc.allocate(1);
 		_node_alloc.construct(_nil, node<Content>());
 		_nil->is_black = true;
+		_nil->is_nil = true;
 		_header = _node_alloc.allocate(1);
 		_node_alloc.construct(_header, node<Content>());
 	}
@@ -204,10 +214,17 @@ public:
 		insert_into_tree(new_node);
 		insert_fuxup(new_node);
 		_size++;
+		new_node = tree_max(_root);
+		new_node->right = _header;
+		_header->father = new_node;
 	}
 
 	void erase(content_type &value) {
 
+	}
+
+	iterator begin() {
+		return (iterator(tree_min(_root)));
 	}
 };
 

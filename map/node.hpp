@@ -8,12 +8,14 @@ template< class Content >
 struct node {
 public:
 	bool is_black;
+	bool is_nil;
 	Content *content;
 	node *father;
 	node *right;
 	node *left;
 
 	explicit node(Content *val = 0):	is_black(false),
+										is_nil(false),
 										content(val),
 										father(0),
 										right(0),
