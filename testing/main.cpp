@@ -105,10 +105,10 @@ int main() {
 	cont = new int(4);
 	tree.insert(cont);
 	RBTree<int>::iterator it(tree.begin());
-//	while (1) {
-//		std::cout << *it << std::endl;
-//		++it;
-//	}
+	while (*it != *tree.end()) {
+		std::cout << *it << std::endl;
+		++it;
+	}
 
 //	std::map<int, int> m;
 //	for (int i = 0; i < 5; i++)

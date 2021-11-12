@@ -46,7 +46,7 @@ private:
 	}
 
 	void clear_node(node_pointer node) {
-		if (node && node != _nil) {
+		if (node && !is_nil(node)) {
 			clear_node(node->right);
 			clear_node(node->left);
 			_con_alloc.destroy(node->content);
@@ -166,12 +166,15 @@ public:
 	// constructors and destructors
 
 	RBTree(const Compare& comp, const allocator_type& a = allocator_type()):
-	_root(0), _con_alloc(a), _node_alloc(node_allocator()), _cmp(comp), _size(0){
+			_root(0), _con_alloc(a), _node_alloc(node_allocator()), _cmp(comp), _size(0){
 		_nil = _node_alloc.allocate(1);
 		_node_alloc.construct(_nil, node<Content>());
 		_nil->is_black = true;
+		_nil->is_nil = true;
 		_header = _node_alloc.allocate(1);
 		_node_alloc.construct(_header, node<Content>());
+		_header->content = _con_alloc.allocate(1);
+		_con_alloc.construct(_header->content, Content());
 	}
 
 	RBTree() : _root(0), _con_alloc(allocator_type()), _node_alloc(node_allocator()), _cmp(key_compare()), _size(0) {
@@ -181,6 +184,8 @@ public:
 		_nil->is_nil = true;
 		_header = _node_alloc.allocate(1);
 		_node_alloc.construct(_header, node<Content>());
+		_header->content = _con_alloc.allocate(1);
+		_con_alloc.construct(_header->content, Content());
 	}
 
 //	RBTree(const allocator_type& alloc = allocator_type()):
@@ -193,6 +198,8 @@ public:
 	~RBTree() {
 		clear_node(_root);
 		_node_alloc.deallocate(_nil, 1);
+		_con_alloc.destroy(_header->content);
+		_con_alloc.deallocate(_header->content, 1);
 		_node_alloc.deallocate(_header, 1);
 	}
 
@@ -225,6 +232,10 @@ public:
 
 	iterator begin() {
 		return (iterator(tree_min(_root)));
+	}
+
+	iterator end() {
+		return (iterator(_header));
 	}
 };
 

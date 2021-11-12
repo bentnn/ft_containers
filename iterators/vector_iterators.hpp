@@ -124,27 +124,27 @@ namespace ft
 			return this->_ptr >= other.base();
 		}
 
-		difference_type operator-(const RanIt<value_type> &other) {
+		difference_type operator-(const RanIt<value_type> &other) const {
 			return this->_ptr - other.base();
 		}
 
-		difference_type operator-(const ConstRanIt<value_type> &other) {
+		difference_type operator-(const ConstRanIt<value_type> &other) const {
 			return this->_ptr - other.base();
 		}
 
-		difference_type operator+(const RanIt<value_type> &other) {
+		difference_type operator+(const RanIt<value_type> &other) const {
 			return this->_ptr + other.base();
 		}
 
-		difference_type operator+(const ConstRanIt<value_type> &other) {
+		difference_type operator+(const ConstRanIt<value_type> &other) const {
 			return this->_ptr + other.base();
 		}
 
-		RanIt operator+(const difference_type &a) {
+		RanIt operator+(const difference_type &a) const {
 			return RanIt(_ptr + a);
 		}
 
-		RanIt operator-(const difference_type &a) {
+		RanIt operator-(const difference_type &a) const {
 			return RanIt(_ptr - a);
 		}
 
@@ -159,7 +159,18 @@ namespace ft
 		}
 	};
 
-	template<typename T>class RanIt;
+	template<typename L>
+	RanIt<L> operator +(const typename RanIt<L>::difference_type & a, const RanIt<L> & iter){
+		return	(iter + a);
+	}
+
+	template<typename L>
+	RanIt<L> operator -(const typename RanIt<L>::difference_type & a, const RanIt<L> & iter) {
+		return (iter - a);
+	}
+
+
+		template<typename T>class RanIt;
 	template<typename T>
 	class ConstRanIt {
 	public:
@@ -286,27 +297,27 @@ namespace ft
 			return this->_ptr >= other.base();
 		}
 
-		difference_type operator-(const RanIt<value_type> &other) {
+		difference_type operator-(const RanIt<value_type> &other) const {
 			return this->_ptr - other.base();
 		}
 
-		difference_type operator-(const ConstRanIt<value_type> &other) {
+		difference_type operator-(const ConstRanIt<value_type> &other) const {
 			return this->_ptr - other.base();
 		}
 
-		difference_type operator+(const RanIt<value_type> &other) {
+		difference_type operator+(const RanIt<value_type> &other) const {
 			return this->_ptr + other.base();
 		}
 
-		difference_type operator+(const ConstRanIt<value_type> &other) {
+		difference_type operator+(const ConstRanIt<value_type> &other) const {
 			return this->_ptr + other.base();
 		}
 
-		ConstRanIt operator+(const difference_type &a) {
+		ConstRanIt operator+(const difference_type &a) const {
 			return ConstRanIt(_ptr + a);
 		}
 
-		ConstRanIt operator-(const difference_type &a) {
+		ConstRanIt operator-(const difference_type &a) const {
 			return ConstRanIt(_ptr - a);
 		}
 
@@ -320,6 +331,16 @@ namespace ft
 			return *this;
 		}
 	};
+
+	template<typename L>
+	ConstRanIt<L> operator +(const typename ConstRanIt<L>::difference_type & a, const ConstRanIt<L> & iter){
+		return	(iter + a);
+	}
+
+	template<typename L>
+	ConstRanIt<L> operator -(const typename ConstRanIt<L>::difference_type & a, const ConstRanIt<L> & iter) {
+		return (iter - a);
+	}
 }
 
 

@@ -29,6 +29,7 @@ public:
 		this->left = other.left;
 		return *this;
 	}
+	virtual ~node(){}
 };
 
 
