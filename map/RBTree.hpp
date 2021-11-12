@@ -2,6 +2,7 @@
 #define RBTREE_HPP
 
 #include "node.hpp"
+#include "../map/pair.hpp"
 #include "../iterators/tree_iterator.hpp"
 
 template<typename T> class TreeIter;
@@ -162,6 +163,10 @@ private:
 		_root->is_black = true;
 	}
 
+	iterator find(const value_type &value) {
+
+	}
+
 public:
 	// constructors and destructors
 
@@ -213,7 +218,7 @@ public:
 		return _size;
 	}
 
-	void insert(content_type *value) {
+	ft::pair<iterator, bool> insert(content_type *value) {
 		node_pointer new_node = _node_alloc.allocate(1);
 		_node_alloc.construct(new_node, node<content_type>(value));
 		new_node->left = _nil;

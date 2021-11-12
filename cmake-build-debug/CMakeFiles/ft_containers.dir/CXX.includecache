@@ -42,8 +42,6 @@ vector
 testing.hpp
 /Users/aabet/projects/ft_containers/ft_containers/testing/testing.hpp
 
-/Users/aabet/projects/ft_containers/ft_containers/testing/stack_testing.cpp
-
 /Users/aabet/projects/ft_containers/ft_containers/testing/testing.hpp
 iostream
 -
@@ -59,8 +57,6 @@ cstdlib
 /Users/aabet/projects/ft_containers/ft_containers/stack/stack.hpp
 ../map/RBTree.hpp
 /Users/aabet/projects/ft_containers/ft_containers/map/RBTree.hpp
-
-/Users/aabet/projects/ft_containers/ft_containers/testing/vector_testing.cpp
 
 /Users/aabet/projects/ft_containers/ft_containers/utils/enable_if.hpp
 
