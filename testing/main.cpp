@@ -97,19 +97,24 @@ class OnHeap{
 };
 
 int main() {
-	std::map<int, int> m;
-	for (int i = 0; i < 3; i++)
-		m[i] = i;
-	m.insert(m.begin(), std::pair<int, int>(10, 10));
-	for (std::map<int, int>::iterator it = m.begin(); it != m.end(); it++)
-		std::cout << it->first << std::endl;
-//	RBTree<int> tree;
-//	int *cont = new int(2);
-//	tree.insert(cont);
-//	cont = new int(3);
-//	tree.insert(cont);
-//	cont = new int(4);
-//	tree.insert(cont);
+//	std::map<int, int> m;
+//	for (int i = 0; i < 3; i++)
+//		m[i] = i;
+//	std::cout << m.insert(std::pair<int, int>(1,2)).second;
+//	std::cout << m[1];
+//	m.insert(m.begin(), std::pair<int, int>(10, 10));
+//	for (std::map<int, int>::iterator it = m.begin(); it != m.end(); it++)
+//		std::cout << it->first << std::endl;
+	RBTree<int> tree;
+	int *cont = new int(2);
+	tree.insert(cont);
+	cont = new int(3);
+	tree.insert(cont);
+	cont = new int(4);
+	tree.insert(cont);
+	RBTree<int> tree2;
+	tree2 = tree;
+	tree2.size();
 //	RBTree<int>::iterator it = tree.begin();
 //	while (it != tree.end()) {
 //		std::cout << *it << std::endl;

@@ -112,7 +112,7 @@ private:
 	}
 
 	node_pointer insert_into_tree(node_pointer new_node) {
-		if (!_root)
+		if (_root == _header)
 			_root = new_node;
 		else
 			insert_to_node(_root, new_node);
@@ -163,8 +163,59 @@ private:
 		_root->is_black = true;
 	}
 
-	iterator find(const value_type &value) {
+	void create_nil_and_header() {
+		_nil = _node_alloc.allocate(1);
+		_node_alloc.construct(_nil, node<Content>());
+		_nil->is_black = true;
+		_nil->is_nil = true;
+		_header = _node_alloc.allocate(1);
+		_node_alloc.construct(_header, node<Content>());
+		_header->content = _con_alloc.allocate(1);
+		_con_alloc.construct(_header->content, Content());
+		_header->is_black = true;
+	}
 
+	node_pointer copy_node(node_pointer other) {
+		node_pointer new_node = _node_alloc.allocate(1);
+		_node_alloc.construct(new_node, node<Content>());
+		new_node->is_black = other->is_black;
+		new_node->is_nil = other->is_nil;
+		if (other->content) {
+			new_node->content = _con_alloc.allocate(1);
+			_con_alloc.construct(new_node->content, *other->content);
+		}
+		return new_node;
+	}
+
+	node_pointer search(const content_type &value, node_pointer node) {
+		if (!node || is_nil(node))
+			return NULL;
+		if (_cmp(value, *node->content))
+			return search(value, node->left);
+		if (_cmp(*node->content, value))
+			return search(value, node->right);
+		return node;
+	}
+
+	void copy_child(node_pointer my_node, node_pointer other) {
+		if (other->left->is_nil)
+			my_node->left = _nil;
+		else {
+			my_node->left = copy_node(other->left);
+			my_node->left->father = my_node;
+			copy_child(my_node->left, other->left);
+		}
+		if (other->right->is_nil)
+			my_node->right = _nil;
+		else if (other->right->right == NULL) {
+			my_node->right = _header;
+			_header->father = my_node;
+		}
+		else {
+			my_node->right = copy_node(other->right);
+			my_node->right->father = my_node;
+			copy_child(my_node->right, other->right);
+		}
 	}
 
 public:
@@ -172,25 +223,13 @@ public:
 
 	RBTree(const Compare& comp, const allocator_type& a = allocator_type()):
 			_root(0), _con_alloc(a), _node_alloc(node_allocator()), _cmp(comp), _size(0){
-		_nil = _node_alloc.allocate(1);
-		_node_alloc.construct(_nil, node<Content>());
-		_nil->is_black = true;
-		_nil->is_nil = true;
-		_header = _node_alloc.allocate(1);
-		_node_alloc.construct(_header, node<Content>());
-		_header->content = _con_alloc.allocate(1);
-		_con_alloc.construct(_header->content, Content());
+		create_nil_and_header();
+		_root = _header;
 	}
 
 	RBTree() : _root(0), _con_alloc(allocator_type()), _node_alloc(node_allocator()), _cmp(key_compare()), _size(0) {
-		_nil = _node_alloc.allocate(1);
-		_node_alloc.construct(_nil, node<Content>());
-		_nil->is_black = true;
-		_nil->is_nil = true;
-		_header = _node_alloc.allocate(1);
-		_node_alloc.construct(_header, node<Content>());
-		_header->content = _con_alloc.allocate(1);
-		_con_alloc.construct(_header->content, Content());
+		create_nil_and_header();
+		_root = _header;
 	}
 
 //	RBTree(const allocator_type& alloc = allocator_type()):
@@ -199,13 +238,33 @@ public:
 //					_node_alloc(node_allocator()),
 //					_cmp(key_compare()) {}
 
+	RBTree( const RBTree& other ) {
+		*this = other;
+	}
 
 	~RBTree() {
 		clear_node(_root);
-		_node_alloc.deallocate(_nil, 1);
 		_con_alloc.destroy(_header->content);
 		_con_alloc.deallocate(_header->content, 1);
+		_node_alloc.deallocate(_nil, 1);
 		_node_alloc.deallocate(_header, 1);
+	}
+
+	RBTree& operator=( const RBTree& other ) {
+		this->_node_alloc = other._node_alloc;
+		this->_con_alloc = other._con_alloc;
+		this->_cmp = other._cmp;
+		clear_node(_root);
+		if (this->_nil == NULL)
+			create_nil_and_header();
+		if (other._size == 0)
+			this->_root = this->_header;
+		else {
+			this->_root = copy_node(other._root);
+			copy_child(this->_root, other._root);
+		}
+		this->_size = other._size;
+		return *this;
 	}
 
 	// getters
@@ -218,17 +277,27 @@ public:
 		return _size;
 	}
 
+
+	bool empty() const {
+		return _size == 0;
+	}
+
 	ft::pair<iterator, bool> insert(content_type *value) {
+		node_pointer find_res = search(*value, _root);
+		if (find_res)
+			return ft::pair<iterator, bool>(iterator(find_res), false);
 		node_pointer new_node = _node_alloc.allocate(1);
 		_node_alloc.construct(new_node, node<content_type>(value));
 		new_node->left = _nil;
 		new_node->right = _nil;
 		insert_into_tree(new_node);
+		ft::pair<iterator, bool> res(iterator(new_node), true);
 		insert_fuxup(new_node);
 		_size++;
 		new_node = tree_max(_root);
 		new_node->right = _header;
 		_header->father = new_node;
+		return res;
 	}
 
 	void erase(content_type &value) {
@@ -241,6 +310,27 @@ public:
 
 	iterator end() {
 		return (iterator(_header));
+	}
+
+	iterator find(const content_type& value) {
+		node_pointer find_res = search(value, _root);
+		return (find_res == NULL ? end() : iterator(find_res));
+	}
+
+	void clear() {
+		clear_node(_root);
+		_root = _header;
+		_size = 0;
+	}
+
+	void swap(RBTree &other) {
+		std::swap(this->_root, other._root);
+		std::swap(this->_nil, other._nil);
+		std::swap(this->_header, other._header);
+		std::swap(this->_size, other._size);
+		std::swap(this->_node_alloc, other._node_alloc);
+		std::swap(this->_con_alloc, other._con_alloc);
+		std::swap(this->_cmp, other._cmp);
 	}
 };
 
