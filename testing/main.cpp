@@ -75,25 +75,25 @@
 
 
 class OnHeap{
-	public:
-		OnHeap(){
-			values = new int[4];
-		}
+public:
+	OnHeap(){
+		values = new int[4];
+	}
 
-		OnHeap & operator=(OnHeap const & src) {
-			delete[] values;
-			values = new int[4];
-			return (*this);
-		}
-		OnHeap(OnHeap const & src){
-			values = new int[4];
-		}
-		~OnHeap(){
-			delete [] values;
-		}
+	OnHeap & operator=(OnHeap const & src) {
+		delete[] values;
+		values = new int[4];
+		return (*this);
+	}
+	OnHeap(OnHeap const & src){
+		values = new int[4];
+	}
+	~OnHeap(){
+		delete [] values;
+	}
 
-	private:
-		int *values;
+private:
+	int *values;
 };
 
 int main() {
@@ -106,15 +106,25 @@ int main() {
 //	for (std::map<int, int>::iterator it = m.begin(); it != m.end(); it++)
 //		std::cout << it->first << std::endl;
 	RBTree<int> tree;
-	int *cont = new int(2);
-	tree.insert(cont);
-	cont = new int(3);
-	tree.insert(cont);
-	cont = new int(4);
-	tree.insert(cont);
-	RBTree<int> tree2;
-	tree2 = tree;
-	tree2.size();
+	for (int i=0; i < 50; i++)
+		tree.insert(new int(i));
+	for (int i=0; i < 50; i++)
+		tree.erase(tree.begin());
+
+//	int *cont = new int(2);
+//	tree.insert(cont);
+//	cont = new int(3);
+//	tree.insert(cont);
+//	cont = new int(4);
+//	tree.insert(cont);
+//	RBTree<int>::iterator it = tree.begin();
+//	++it;
+//	tree.erase(it);
+//	it = tree.begin();
+//	++it;
+//	tree.erase(it);
+	//tree.erase(tree.begin());
+//	std::cout << tree.size();
 //	RBTree<int>::iterator it = tree.begin();
 //	while (it != tree.end()) {
 //		std::cout << *it << std::endl;

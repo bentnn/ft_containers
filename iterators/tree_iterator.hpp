@@ -15,6 +15,8 @@ public:
 	typedef T&								reference;
 	typedef T*								pointer;
 
+	template <class _Cont, class _Comp, class _Alloc> friend class  RBTree;
+
 	typedef node<T>* node_pointer;
 
 private:
@@ -34,6 +36,9 @@ private:
 		return n;
 	}
 
+	node_pointer node() {
+		return _node;
+	}
 
 public:
 	TreeIter() {}

@@ -41,32 +41,22 @@ private:
 	}
 
 	node_pointer tree_max(node_pointer n) {
-		while (n->right != _nil)
+		while (!is_nil(n->right))
 			n = n->right;
 		return n;
+	}
+
+	void free_node(node_pointer node) {
+		_con_alloc.destroy(node->content);
+		_con_alloc.deallocate(node->content, 1);
+		_node_alloc.deallocate(node, 1);
 	}
 
 	void clear_node(node_pointer node) {
 		if (node && !is_nil(node)) {
 			clear_node(node->right);
 			clear_node(node->left);
-			_con_alloc.destroy(node->content);
-			_con_alloc.deallocate(node->content, 1);
-			_node_alloc.deallocate(node, 1);
-		}
-	}
-
-	void change_child(node_pointer old_child, node_pointer new_child) {
-		if (old_child->father) {
-			if (old_child->father->right == old_child)
-				old_child->father->right = new_child;
-			else
-				old_child->father->left = new_child;
-			new_child->father = old_child->father;
-		}
-		else {
-			_root = new_child;
-			new_child->father = NULL;
+			free_node(node);
 		}
 	}
 
@@ -81,19 +71,45 @@ private:
 	}
 
 	void right_rotate(node_pointer top) {
-		node_pointer left_right_child = top->left->right;
-		top->left->right = top;
-		change_child(top, top->left);
-		top->father = top->left;
-		top->left = left_right_child;
+		node_pointer y = top->left;
+		top->left = y->right;
+		if (!is_nil(y->right))
+			y->right->father = top;
+		y->father = top->father;
+		if (top->father == NULL)
+			_root = y;
+		else if (top == top->father->left)
+			top->father->left = y;
+		else
+			top->father->right = y;
+		y->right = top;
+		top->father = y;
+//		node_pointer left_right_child = top->left->right;
+//		top->left->right = top;
+//		change_child(top, top->left);
+//		top->father = top->left;
+//		top->left = left_right_child;
 	}
 
 	void left_rotate(node_pointer top) {
-		node_pointer right_left_child = top->right->left;
-		top->right->left = top;
-		change_child(top, top->right);
-		top->father = top->right;
-		top->right = right_left_child;
+		node_pointer y = top->right;
+		top->right = y->left;
+		if (!is_nil(y->left))
+			y->left->father = top;
+		y->father = top->father;
+		if (top->father == NULL)
+			_root = y;
+		else if (top == top->father->left)
+			top->father->left = y;
+		else
+			top->father->right = y;
+		y->left = top;
+		top->father = y;
+//		node_pointer right_left_child = top->right->left;
+//		top->right->left = top;
+//		change_child(top, top->right);
+//		top->father = top->right;
+//		top->right = right_left_child;
 	}
 
 	node_pointer insert_to_node(node_pointer root, node_pointer new_node) {
@@ -121,7 +137,7 @@ private:
 
 	void insert_fuxup(node_pointer cur_node) {
 		if (cur_node != _root && cur_node->father != _root) {
-			while (!cur_node->father->is_black) {
+			while (cur_node != _root && !cur_node->father->is_black) {
 				if (cur_node->father == cur_node->father->father->left) {
 					node_pointer uncle = cur_node->father->father->right;
 					if (!uncle->is_black) {
@@ -161,6 +177,67 @@ private:
 			}
 		}
 		_root->is_black = true;
+	}
+
+	void erase_fixup(node_pointer x) {
+		node_pointer w; //uncle
+		while (x != _root && x->is_black) {
+			if (x == x->father->left) {
+				w = x->father->right;
+				if (!w->is_black) { // 1 case
+					w->is_black = true;
+					x->father->is_black = false;
+					left_rotate(x->father);
+				}
+				if (!is_nil(w) && w->left->is_black && w->right->is_black) { // 2 case
+					w->is_black = false;
+					x = x->father;
+				}
+				else {
+					if (!is_nil(w) && w->right->is_black) { // 3 case
+						w->left->is_black = true;
+						w->is_black = false;
+						right_rotate(w);
+						w = x->father->right;
+					}
+					// 4 case
+					w->is_black = x->father->is_black;
+					x->father->is_black = true;
+					if (!is_nil(w))
+						w->right->is_black = true;
+					left_rotate(x->father);
+					x = _root;
+				}
+			}
+			else {
+				w = x->father->left;
+				if (!w->is_black) { // 1 case
+					w->is_black = true;
+					x->father->is_black = false;
+					right_rotate(x->father);
+				}
+				if (!is_nil(w) && w->right->is_black && w->left->is_black) { // 2 case
+					w->is_black = false;
+					x = x->father;
+				}
+				else {
+					if (!is_nil(w) && w->left->is_black) { // 3 case
+						w->right->is_black = true;
+						w->is_black = false;
+						left_rotate(w);
+						w = x->father->left;
+					}
+					// 4 case
+					w->is_black = x->father->is_black;
+					x->father->is_black = true;
+					if (!is_nil(w))
+						w->left->is_black = true;
+					right_rotate(x->father);
+					x = _root;
+				}
+			}
+		}
+		x->is_black = true;
 	}
 
 	void create_nil_and_header() {
@@ -300,8 +377,47 @@ public:
 		return res;
 	}
 
-	void erase(content_type &value) {
-
+	void erase(iterator pos) {
+		node_pointer y = pos.node(), x, for_free = y;
+		bool y_original_is_black = y->is_black;
+		if (is_nil(y->left)) {
+			x = y->right;
+			transplant(y, y->right);
+		}
+		else if (is_nil(y->right)) {
+			x = y->left;
+			transplant(y, y->left);
+		}
+		else {
+			node_pointer z = y;
+			y = tree_min(z->right);
+			y_original_is_black = y->is_black;
+			x = y->right;
+			if (y->father != z) {
+				transplant(y, y->right);
+				y->right = z->right;
+				y->right->father = y;
+			}
+			transplant(z, y);
+			y->left = z->left;
+			y->left->father = y;
+			y->is_black = z->is_black;
+		}
+		free_node(for_free);
+		if (y_original_is_black)
+			erase_fixup(x);
+		_size--;
+		_nil->father = NULL;
+		if (_size == 0)
+			_root = _header;
+		else {
+			if (_size != 1)
+				x = tree_max(_root);
+			else
+				x = _root;
+			x->right = _header;
+			_header->father = x;
+		}
 	}
 
 	iterator begin() {

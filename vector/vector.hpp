@@ -74,13 +74,8 @@ namespace ft
 				_allocator.construct(_array + i, *(first + i));
 		}
 
-		vector( const vector& other ) {
-			this->_capacity = other._capacity;
-			this->_size = other._size;
-			this->_allocator = other._allocator;
-			this->_array = this->_allocator.allocate(this->_capacity);
-			for (size_type i = 0; i < this->_size; i++)
-				this->_allocator.construct(this->_array + i, other[i]);
+		vector(const vector& other): _capacity(0) {
+			*this = other;
 		}
 
 		// destructor
@@ -91,10 +86,12 @@ namespace ft
 				_allocator.deallocate(_array, _capacity);
 		}
 
-
 		vector& operator= (const vector& x) {
-			if (this->_capacity != 0)
+			if (this->_capacity != 0) {
+				for (size_type i = 0; i < _size; i++)
+					_allocator.destroy(_array + i);
 				this->_allocator.deallocate(this->_array, this->_capacity);
+			}
 			this->_capacity = x._capacity;
 			this->_size = x._size;
 			this->_allocator = x._allocator;
@@ -315,7 +312,7 @@ namespace ft
 					_allocator.construct(_array + i + count - 1, *(_array + i - 1));
 				}
 				for (size_type i = 0; i < count; i++) {
-					_allocator.destroy(_array + i + count);
+					_allocator.destroy(_array + i + start);
 					_allocator.construct(_array + start + i, value);
 				}
 				_size += count;
