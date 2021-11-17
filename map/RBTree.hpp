@@ -11,21 +11,21 @@ template< class Content, class Compare = std::less<Content>, class Allocator = s
 class RBTree {
 public:
 	typedef Allocator allocator_type;
-	typedef Content content_type;
+	typedef Content value_type;
 	typedef typename Allocator::template rebind<node<Content> >::other node_allocator;
 	typedef typename node_allocator::pointer node_pointer;
-	typedef typename Allocator::const_pointer node_const_pointer;
-	typedef Compare key_compare;
+	typedef typename allocator_type::pointer con_pointer;
+	typedef typename allocator_type::const_pointer const_con_pointer;
+	typedef Compare value_compare;
 	typedef size_t size_type;
 	typedef ptrdiff_t difference_type;
 	typedef TreeIter<Content> iterator;
-//	template <Content> friend class  class TreeIter;
 
 private:
 	node_pointer _root;
 	allocator_type _con_alloc;
 	node_allocator _node_alloc;
-	key_compare _cmp;
+	value_compare _cmp;
 	size_type _size;
 	node_pointer _nil;
 	node_pointer _header;
@@ -70,6 +70,12 @@ private:
 		what->father = where->father;
 	}
 
+	con_pointer create_content(const value_type &value) {
+		con_pointer new_con = _con_alloc.allocate(1);
+		_con_alloc.construct(new_con, value);
+		return new_con;
+	}
+
 	void right_rotate(node_pointer top) {
 		node_pointer y = top->left;
 		top->left = y->right;
@@ -84,11 +90,6 @@ private:
 			top->father->right = y;
 		y->right = top;
 		top->father = y;
-//		node_pointer left_right_child = top->left->right;
-//		top->left->right = top;
-//		change_child(top, top->left);
-//		top->father = top->left;
-//		top->left = left_right_child;
 	}
 
 	void left_rotate(node_pointer top) {
@@ -105,11 +106,6 @@ private:
 			top->father->right = y;
 		y->left = top;
 		top->father = y;
-//		node_pointer right_left_child = top->right->left;
-//		top->right->left = top;
-//		change_child(top, top->right);
-//		top->father = top->right;
-//		top->right = right_left_child;
 	}
 
 	node_pointer insert_to_node(node_pointer root, node_pointer new_node) {
@@ -180,7 +176,7 @@ private:
 	}
 
 	void erase_fixup(node_pointer x) {
-		node_pointer w; //uncle
+		node_pointer w; //brother
 		while (x != _root && x->is_black) {
 			if (x == x->father->left) {
 				w = x->father->right;
@@ -188,13 +184,14 @@ private:
 					w->is_black = true;
 					x->father->is_black = false;
 					left_rotate(x->father);
+					w = x->father->right;
 				}
-				if (!is_nil(w) && w->left->is_black && w->right->is_black) { // 2 case
+				if (w->left->is_black && w->right->is_black) { // 2 case
 					w->is_black = false;
 					x = x->father;
 				}
 				else {
-					if (!is_nil(w) && w->right->is_black) { // 3 case
+					if (w->right->is_black) { // 3 case
 						w->left->is_black = true;
 						w->is_black = false;
 						right_rotate(w);
@@ -203,8 +200,7 @@ private:
 					// 4 case
 					w->is_black = x->father->is_black;
 					x->father->is_black = true;
-					if (!is_nil(w))
-						w->right->is_black = true;
+					w->right->is_black = true;
 					left_rotate(x->father);
 					x = _root;
 				}
@@ -215,13 +211,14 @@ private:
 					w->is_black = true;
 					x->father->is_black = false;
 					right_rotate(x->father);
+					w = x->father->left;
 				}
-				if (!is_nil(w) && w->right->is_black && w->left->is_black) { // 2 case
+				if (w->right->is_black && w->left->is_black) { // 2 case
 					w->is_black = false;
 					x = x->father;
 				}
 				else {
-					if (!is_nil(w) && w->left->is_black) { // 3 case
+					if (w->left->is_black) { // 3 case
 						w->right->is_black = true;
 						w->is_black = false;
 						left_rotate(w);
@@ -230,8 +227,7 @@ private:
 					// 4 case
 					w->is_black = x->father->is_black;
 					x->father->is_black = true;
-					if (!is_nil(w))
-						w->left->is_black = true;
+					w->left->is_black = true;
 					right_rotate(x->father);
 					x = _root;
 				}
@@ -264,7 +260,7 @@ private:
 		return new_node;
 	}
 
-	node_pointer search(const content_type &value, node_pointer node) {
+	node_pointer search(const value_type &value, node_pointer node) {
 		if (!node || is_nil(node))
 			return NULL;
 		if (_cmp(value, *node->content))
@@ -304,7 +300,7 @@ public:
 		_root = _header;
 	}
 
-	RBTree() : _root(0), _con_alloc(allocator_type()), _node_alloc(node_allocator()), _cmp(key_compare()), _size(0) {
+	RBTree() : _root(0), _con_alloc(allocator_type()), _node_alloc(node_allocator()), _cmp(value_compare()), _size(0) {
 		create_nil_and_header();
 		_root = _header;
 	}
@@ -313,9 +309,9 @@ public:
 //					_root(0),
 //					_con_alloc(alloc),
 //					_node_alloc(node_allocator()),
-//					_cmp(key_compare()) {}
+//					_cmp(value_compare()) {}
 
-	RBTree( const RBTree& other ) {
+	RBTree( const RBTree& other ): _cmp(other._cmp) {
 		*this = other;
 	}
 
@@ -354,17 +350,20 @@ public:
 		return _size;
 	}
 
+	size_type max_size() const {
+		return _con_alloc.max_size();
+	}
 
 	bool empty() const {
 		return _size == 0;
 	}
 
-	ft::pair<iterator, bool> insert(content_type *value) {
-		node_pointer find_res = search(*value, _root);
+	ft::pair<iterator, bool> insert(const value_type &value) {
+		node_pointer find_res = search(value, _root);
 		if (find_res)
 			return ft::pair<iterator, bool>(iterator(find_res), false);
 		node_pointer new_node = _node_alloc.allocate(1);
-		_node_alloc.construct(new_node, node<content_type>(value));
+		_node_alloc.construct(new_node, node<value_type>(create_content(value)));
 		new_node->left = _nil;
 		new_node->right = _nil;
 		insert_into_tree(new_node);
@@ -428,7 +427,7 @@ public:
 		return (iterator(_header));
 	}
 
-	iterator find(const content_type& value) {
+	iterator find(const value_type& value) {
 		node_pointer find_res = search(value, _root);
 		return (find_res == NULL ? end() : iterator(find_res));
 	}

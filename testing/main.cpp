@@ -76,25 +76,35 @@
 
 class OnHeap{
 public:
-	OnHeap(){
-		values = new int[4];
+	OnHeap(int n = 0){
+		values = new int(n);
 	}
 
 	OnHeap & operator=(OnHeap const & src) {
-		delete[] values;
-		values = new int[4];
+		delete values;
+		values = new int(*src.values);
 		return (*this);
 	}
 	OnHeap(OnHeap const & src){
-		values = new int[4];
+		values = new int(*src.values);
 	}
 	~OnHeap(){
-		delete [] values;
+		delete values;
+	}
+
+	int get_val() const {
+		return *values;
 	}
 
 private:
 	int *values;
 };
+
+bool operator<( const OnHeap& lhs, const OnHeap& rhs ) {
+	return lhs.get_val() < rhs.get_val();
+}
+
+
 
 int main() {
 //	std::map<int, int> m;
@@ -105,11 +115,17 @@ int main() {
 //	m.insert(m.begin(), std::pair<int, int>(10, 10));
 //	for (std::map<int, int>::iterator it = m.begin(); it != m.end(); it++)
 //		std::cout << it->first << std::endl;
-	RBTree<int> tree;
-	for (int i=0; i < 50; i++)
-		tree.insert(new int(i));
-	for (int i=0; i < 50; i++)
-		tree.erase(tree.begin());
+	ft::map<int, int> m;
+	for (int i=0; i < 2; i++)
+		m[i] = i;
+
+	for (int i=0; i < 2; i++) {
+		//std::cout << *m.begin() << std::endl;
+		m.erase(m.begin());
+	}
+	//std::cout << *(tree.find(941)) << std::endl;
+	std::cout << "end!" << std::endl;
+//}
 
 //	int *cont = new int(2);
 //	tree.insert(cont);

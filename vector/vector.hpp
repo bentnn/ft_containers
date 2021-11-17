@@ -86,7 +86,9 @@ namespace ft
 				_allocator.deallocate(_array, _capacity);
 		}
 
-		vector& operator= (const vector& x) {
+		vector& operator=(const vector& x) {
+			if (this == &x)
+				return *this;
 			if (this->_capacity != 0) {
 				for (size_type i = 0; i < _size; i++)
 					_allocator.destroy(_array + i);

@@ -6,6 +6,7 @@ CMakeFiles/ft_containers.dir/testing/main.cpp.o: \
  ../iterators/tree_iterator.hpp \
  ../iterators/vector_iterators.hpp \
  ../map/RBTree.hpp \
+ ../map/map.hpp \
  ../map/node.hpp \
  ../map/pair.hpp \
  ../stack/stack.hpp \

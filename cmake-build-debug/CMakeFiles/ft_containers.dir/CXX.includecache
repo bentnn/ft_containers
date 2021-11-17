@@ -26,6 +26,12 @@ node.hpp
 ../iterators/tree_iterator.hpp
 /Users/aabet/projects/ft_containers/ft_containers/iterators/tree_iterator.hpp
 
+/Users/aabet/projects/ft_containers/ft_containers/map/map.hpp
+iostream
+-
+RBTree.hpp
+/Users/aabet/projects/ft_containers/ft_containers/map/RBTree.hpp
+
 /Users/aabet/projects/ft_containers/ft_containers/map/node.hpp
 pair.hpp
 /Users/aabet/projects/ft_containers/ft_containers/map/pair.hpp
@@ -59,6 +65,8 @@ cstdlib
 /Users/aabet/projects/ft_containers/ft_containers/stack/stack.hpp
 ../map/RBTree.hpp
 /Users/aabet/projects/ft_containers/ft_containers/map/RBTree.hpp
+../map/map.hpp
+/Users/aabet/projects/ft_containers/ft_containers/map/map.hpp
 
 /Users/aabet/projects/ft_containers/ft_containers/utils/enable_if.hpp
 

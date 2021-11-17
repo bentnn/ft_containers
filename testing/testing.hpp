@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include "../stack/stack.hpp"
 #include "../map/RBTree.hpp"
+#include "../map/map.hpp"
 
 
 void test_stack_comparison();

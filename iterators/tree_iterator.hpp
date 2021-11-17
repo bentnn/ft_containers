@@ -59,7 +59,7 @@ public:
 	}
 
 	pointer operator->() const {
-		return _node->val;
+		return _node->content;
 	}
 
 	TreeIter& operator++() {
