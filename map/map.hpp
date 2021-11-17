@@ -61,6 +61,12 @@ namespace ft {
 
 //				map( const map& other );
 
+		// operators
+
+		mapped_type& operator[]( const key_type& key ) {
+			return _tree.insert(ft::make_pair(key, mapped_type())).first->second;
+		}
+
 		// getters
 
 		allocator_type get_allocator() const {
@@ -95,18 +101,22 @@ namespace ft {
 			_tree.clear();
 		}
 
+		T& at( const Key& key ) {
+
+		}
+
+		// insert
+
 		ft::pair<iterator, bool> insert( const value_type& value ) {
 			return _tree.insert(value);
 		}
+
+		// erase
 
 		void erase( iterator pos ) {
 			_tree.erase(pos);
 		}
 
-
-		mapped_type& operator[]( const key_type& key ) {
-				return _tree.insert(ft::make_pair(key, mapped_type())).first->second;
-			}
 	};
 }
 
