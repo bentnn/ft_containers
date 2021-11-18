@@ -14,7 +14,9 @@ CMakeFiles/ft_containers.dir/testing/main.cpp.o: \
  ../testing/testing.hpp \
  ../utils/enable_if.hpp \
  ../utils/is_integral.hpp \
+ ../utils/iterator_traits.hpp \
  ../utils/lexicographical_compare.hpp \
+ ../utils/make_const.hpp \
  ../utils/remove_const.hpp \
  ../vector/vector.hpp
 CMakeFiles/ft_containers.dir/testing/stack_testing.cpp.o: \

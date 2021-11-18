@@ -26,7 +26,7 @@ namespace ft
 		typedef typename Allocator::pointer pointer;
 		typedef typename Allocator::const_pointer const_pointer;
 		typedef ft::RanIt<value_type> iterator;
-		typedef ft::ConstRanIt<value_type> const_iterator;
+		typedef ft::RanIt<const value_type> const_iterator;
 		typedef ft::reverse_iterator<iterator> reverse_iterator;
 		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
@@ -115,17 +115,17 @@ namespace ft
 			return iterator(_array);
 		}
 
-		const_iterator begin() const {
-			return const_iterator(_array);
-		}
+//		const_iterator begin() const {
+//			return const_iterator(_array);
+//		}
 
 		iterator end() {
 			return iterator(_array + _size);
 		}
 
-		const_iterator end() const {
-			return const_iterator(_array + _size);
-		}
+//		const_iterator end() const {
+//			return const_iterator(_array + _size);
+//		}
 
 		reverse_iterator rbegin() {
 			return reverse_iterator(end());

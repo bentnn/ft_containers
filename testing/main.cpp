@@ -107,25 +107,24 @@ bool operator<( const OnHeap& lhs, const OnHeap& rhs ) {
 
 
 int main() {
-//	std::map<int, int> m;
-//	for (int i = 0; i < 3; i++)
-//		m[i] = i;
-//	std::cout << m.insert(std::pair<int, int>(1,2)).second;
-//	std::cout << m[1];
-//	m.insert(m.begin(), std::pair<int, int>(10, 10));
-//	for (std::map<int, int>::iterator it = m.begin(); it != m.end(); it++)
-//		std::cout << it->first << std::endl;
-	ft::map<int, int> m;
-	for (int i=0; i < 2; i++)
-		m[i] = i;
 
-	for (int i=0; i < 2; i++) {
-		//std::cout << *m.begin() << std::endl;
-		m.erase(m.begin());
-	}
-	//std::cout << *(tree.find(941)) << std::endl;
-	std::cout << "end!" << std::endl;
-//}
+//	ft::map<int, int> m;
+//	for (int i=0; i < 2; i++)
+//		m[i] = i;
+//	for (int i=0; i < 2; i++) {
+//		m.erase(m.begin());
+//	}
+//	std::cout << "end!" << std::endl;
+
+
+	ft::vector<int> v(5, 100);
+	ft::vector<int>::const_iterator it;
+	it = v.begin();
+	ft::vector<int>::const_iterator it2 = it;
+	ft::vector<int>::iterator it3 = v.begin();
+	for (it2; it2 < v.end(); it2++)
+		std::cout << (it2 == it3) << std::endl;
+
 
 //	int *cont = new int(2);
 //	tree.insert(cont);
