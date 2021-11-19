@@ -51,6 +51,10 @@ cstdlib
 /Users/aabet/projects/ft_containers/ft_containers/tree/RBTree.hpp
 ../utils/pair.hpp
 /Users/aabet/projects/ft_containers/ft_containers/utils/pair.hpp
+../utils/iterator_traits.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/iterator_traits.hpp
+../utils/remove_const.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/remove_const.hpp
 
 /Users/aabet/projects/ft_containers/ft_containers/utils/enable_if.hpp
 

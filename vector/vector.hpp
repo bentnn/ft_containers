@@ -202,17 +202,17 @@ namespace ft
 			return iterator(_array);
 		}
 
-//		const_iterator begin() const {
-//			return const_iterator(_array);
-//		}
+		const_iterator begin() const {
+			return const_iterator(_array);
+		}
 
 		iterator end() {
 			return iterator(_array + _size);
 		}
 
-//		const_iterator end() const {
-//			return const_iterator(_array + _size);
-//		}
+		const_iterator end() const {
+			return const_iterator(_array + _size);
+		}
 
 		reverse_iterator rbegin() {
 			return reverse_iterator(end());
@@ -522,8 +522,6 @@ namespace ft
 		template<typename A, typename B>
 		friend bool operator==(const vector::template RanIt<A> & lhs, const vector::template RanIt<B> & rhs){
 			return &(*lhs) == &(*rhs);
-
-
 		}
 
 		template<typename A, typename B>
@@ -615,7 +613,7 @@ namespace ft
 	}
 
 	template< class T, class Alloc >
-	void swap( std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs ) {
+	void swap(std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs) {
 		lhs.swap(rhs);
 	}
 

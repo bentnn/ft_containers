@@ -42,6 +42,7 @@ namespace ft {
 	public:
 		typedef RBTree<value_type, pair_compare, allocator_type> tree_type;
 		typedef typename tree_type::iterator iterator;
+		typedef typename tree_type::const_iterator const_iterator;
 //				typedef typename Allocator::template rebind<tree_type>::other tree_allocator;
 
 	private:
@@ -107,7 +108,26 @@ namespace ft {
 		}
 
 		T& at( const Key& key ) {
+			iterator res = _tree.find(ft::make_pair(key, mapped_type()));
+			if (res == _tree.end())
+				throw std::out_of_range("map::at:  key not found");
+			return res->second;
+		}
 
+		void swap(map& other) {
+			std::swap(*this, other);
+		}
+
+		iterator find( const Key& key ) {
+			return _tree.find(ft::make_pair(key, mapped_type()));
+		}
+
+		const_iterator find( const Key& key ) const {
+			return _tree.find(ft::make_pair(key, mapped_type()));
+		}
+
+		size_type count( const Key& key ) const {
+			return _tree.count(ft::make_pair(key, mapped_type()));
 		}
 
 		// insert
@@ -120,10 +140,20 @@ namespace ft {
 			return _tree.insert(hint, value);
 		}
 
+		template<class InputIt>
+		void insert(typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first,
+					InputIt last) {
+			_tree.insert(first, last);
+		}
+
 		// erase
 
 		void erase( iterator pos ) {
 			_tree.erase(pos);
+		}
+
+		size_type erase( const Key& key ) {
+			return _tree.erase(ft::make_pair(key, mapped_type()));
 		}
 
 	};

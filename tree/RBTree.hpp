@@ -2,6 +2,8 @@
 #define RBTREE_HPP
 
 #include "../utils/pair.hpp"
+#include "../utils/iterator_traits.hpp"
+#include "../utils/remove_const.hpp"
 
 template< class Content, class Compare = std::less<Content>, class Allocator = std::allocator<Content> >
 class RBTree {
@@ -40,11 +42,11 @@ private:
 	template<typename T>
 	class TreeIter {
 	public:
-		typedef ptrdiff_t difference_type;
 		typedef std::bidirectional_iterator_tag iterator_category;
-		typedef T								value_type;
-		typedef T&								reference;
-		typedef T*								pointer;
+		typedef typename ft::iterator_traits<T*>::value_type 		value_type;
+		typedef typename ft::iterator_traits<T*>::reference 		reference;
+		typedef typename ft::iterator_traits<T*>::pointer			pointer;
+		typedef typename ft::iterator_traits<T*>::difference_type	difference_type;
 
 //		template <class _Cont, class _Comp, class _Alloc> friend class  RBTree;
 
@@ -53,13 +55,13 @@ private:
 	private:
 		node_pointer _node;
 
-		node_pointer tree_min(node_pointer n) {
+		node_pointer tree_min(node_pointer n) const {
 			while (n->left != NULL && !n->left->is_nil)
 				n = n->left;
 			return n;
 		}
 
-		node_pointer tree_max(node_pointer n) {
+		node_pointer tree_max(node_pointer n) const {
 			while (!n->right->is_nil)
 				n = n->right;
 			return n;
@@ -70,9 +72,9 @@ private:
 
 		TreeIter(void *node): _node(static_cast<node_pointer>(node)) {}
 
-		TreeIter(const TreeIter<value_type> & other): _node(other.node()) {}
+		TreeIter(const TreeIter<typename ft::remove_const<value_type>::type > & other): _node(other.node()) {}
 
-		TreeIter& operator=(const TreeIter<value_type>& other) {
+		TreeIter& operator=(const TreeIter<typename ft::remove_const<value_type>::type>& other) {
 			this->_node = other._node;
 			return *this;
 		}
@@ -163,6 +165,7 @@ public:
 	typedef typename Allocator::template rebind<node<Content> >::other node_allocator;
 	typedef typename node_allocator::pointer node_pointer;
 	typedef TreeIter<Content> iterator;
+	typedef TreeIter<const Content> const_iterator;
 
 private:
 
@@ -174,7 +177,7 @@ private:
 	node_pointer _nil;
 	node_pointer _header;
 
-	bool is_nil(node_pointer node) {
+	bool is_nil(node_pointer node) const {
 		return node == _nil || node == _header;
 	}
 
@@ -404,7 +407,7 @@ private:
 		return new_node;
 	}
 
-	node_pointer search(const value_type &value, node_pointer node) {
+	node_pointer search(const value_type &value, node_pointer node) const {
 		if (!node || is_nil(node))
 			return NULL;
 		if (_cmp(value, *node->content))
@@ -559,12 +562,13 @@ public:
 		max_of_tree->right = _header;
 		_header->father = max_of_tree;
 		return iterator(new_node);
-//		if (_cmp(value, *position))
-//			return (insert(value)).first;
-//		node_pointer find_res = search(value, _root);
-//		if (find_res)
-//			return iterator(find_res);
+	}
 
+	template<class InputIt>
+	void insert(typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first,
+				InputIt last) {
+		for (; first != last; ++first)
+			insert(*first);
 	}
 
 	void erase(iterator pos) {
@@ -610,12 +614,27 @@ public:
 		}
 	}
 
+	size_type erase(const value_type& value) {
+		node_pointer find_res = search(value, _root);
+		if (find_res)
+			erase(iterator(find_res));
+		return (find_res != NULL);
+	}
+
 	iterator begin() {
 		return (iterator(_size == 0 ? _header : tree_min(_root)));
 	}
 
+	const_iterator begin() const {
+		return (const_iterator(_size == 0 ? _header : tree_min(_root)));
+	}
+
 	iterator end() {
 		return (iterator(_header));
+	}
+
+	const_iterator end() const {
+		return (const_iterator(_header));
 	}
 
 	iterator find(const value_type& value) {
@@ -623,9 +642,19 @@ public:
 		return (find_res == NULL ? end() : iterator(find_res));
 	}
 
+	const_iterator find(const value_type& value) const {
+		node_pointer find_res = search(value, _root);
+		return (find_res == NULL ? end() : const_iterator(find_res));
+	}
+
+	size_type count(const value_type& value) const {
+		return (find(value) != end());
+	}
+
 	void clear() {
 		clear_node(_root);
 		_root = _header;
+		_header->father = NULL;
 		_size = 0;
 	}
 

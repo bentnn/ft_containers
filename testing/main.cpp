@@ -111,16 +111,13 @@ int main() {
 //	for (int i=0; i < 5; i++) {
 //		tree.insert(tree.begin(), i);
 //	}
-	std::srand(std::time(nullptr));
+	std::srand(std::time(NULL));
 	ft::map<int, int> m;
 	for (int i=0; i < 5; i++) {
-//		m[std::rand() % 10000] = i;
-		m.insert(m.begin(), ft::pair<int, int> (i, i));
+		m[i] = i;
+//		m.insert(m.begin(), ft::pair<int, int> (i, i));
 	}
-	for (int i=5; i < 50; i++) {
-//		m[std::rand() % 10000] = i;
-		m.insert(++m.begin(), ft::pair<int, int> (std::rand() % 50, i));
-	}
+	std::cout << m.count(11) << " aaa" << std::endl;
 	for (ft::map<int, int>::iterator it = m.begin(); it != m.end(); ++it) {
 		std::cout << it->first << std::endl;
 	}
