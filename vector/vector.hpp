@@ -38,13 +38,9 @@ namespace ft
 
 		RanIt(pointer a) : _ptr(a) {}
 
-		virtual ~RanIt() {}
-
 		RanIt(const RanIt<typename ft::remove_const<value_type>::type > & src) : _ptr(&(*src)) {}
 
-//		pointer base(void) const{
-//			return _ptr;
-//		}
+		virtual ~RanIt() {}
 
 		RanIt<value_type> & operator=(RanIt<typename ft::remove_const<value_type>::type > const & src) {
 			_ptr = &(*src);
