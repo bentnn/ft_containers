@@ -107,26 +107,25 @@ bool operator<( const OnHeap& lhs, const OnHeap& rhs ) {
 
 
 int main() {
-	std::srand(std::time(nullptr));
-	ft::map<int, int> m;
-	for (int i=0; i < 1000; i++)
-		m[std::rand() % 10000] = i;
-	for (ft::map<int, int>::iterator it = m.begin(); it != m.end(); ++it) {
-		std::cout << it->first << std::endl;
-	}
-	for (int i=0; i < 2; i++) {
-		m.erase(m.begin());
-	}
-	std::cout << "end!" << std::endl;
+//	std::srand(std::time(nullptr));
+//	ft::map<int, int> m;
+//	for (int i=0; i < 1000; i++)
+//		m[std::rand() % 10000] = i;
+//	for (ft::map<int, int>::iterator it = m.begin(); it != m.end(); ++it) {
+//		std::cout << it->first << std::endl;
+//	}
+//	for (int i=0; i < 2; i++) {
+//		m.erase(m.begin());
+//	}
+//	std::cout << "end!" << std::endl;
 
-
-//	ft::vector<int> v(5, 100);
-//	ft::vector<int>::const_iterator it;
-//	it = v.begin();
-//	ft::vector<int>::const_iterator it2 = it;
-//	ft::vector<int>::iterator it3 = v.begin();
-//	for (it2; it2 < v.end(); it2++)
-//		std::cout << (it2 == it) << std::endl;
+	ft::vector<int> v(5, 100);
+	ft::vector<int>::const_iterator it;
+	it = v.begin();
+	ft::vector<int>::const_iterator it2 = it;
+	ft::vector<int>::iterator it3 = v.begin();
+	for (it2; it2 != v.end(); it2++)
+		std::cout << (it2 == it) << std::endl;
 
 
 //	int *cont = new int(2);

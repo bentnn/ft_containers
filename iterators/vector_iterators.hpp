@@ -33,42 +33,42 @@ namespace ft {
 
 		RanIt(const RanIt<typename ft::remove_const<T>::type > & src) : _ptr(src.base()) {}
 
-		pointer base(void) const{
-			return _ptr;
-		}
+//		pointer base(void) const{
+//			return _ptr;
+//		}
 
 		RanIt<T> & operator=(RanIt<typename ft::remove_const<T>::type > const & src) {
-			_ptr = src.base();
-			return (*this);
+			_ptr = &(*src);
+			return *this;
 		}
 
 		//OPERATORS
-		RanIt & operator++(){
+		RanIt & operator++() {
 			++_ptr;
 			return *this;
 		}
 
-		RanIt operator++(int){
+		RanIt operator++(int) {
 			RanIt tmp(*this);
 			++_ptr;
 			return tmp;
 		}
 
-		RanIt & operator--(){
+		RanIt & operator--() {
 			--_ptr;
 			return *this;
 		}
 
-		RanIt  operator--(int){
+		RanIt  operator--(int) {
 			RanIt tmp = *this;
 			--_ptr;
 			return tmp;
 		}
-		RanIt operator+(const difference_type & a) const{
+		RanIt operator+(const difference_type & a) const {
 			return _ptr + a;
 		}
 
-		RanIt operator-(const difference_type & a) const{
+		RanIt operator-(const difference_type & a) const {
 			return _ptr - a;
 		}
 
@@ -82,16 +82,16 @@ namespace ft {
 			return (*this);
 		}
 
-		pointer operator->() const{
-			return(_ptr);
+		pointer operator->() const {
+			return _ptr;
 		}
 
 		reference operator*() const {
-			return(*_ptr);
+			return *_ptr;
 		}
 
 		reference operator[](difference_type n) const {
-			return(*(_ptr + n));
+			return *(_ptr + n);
 		}
 	};
 

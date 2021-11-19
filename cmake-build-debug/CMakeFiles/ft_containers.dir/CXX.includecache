@@ -10,18 +10,6 @@
 ../utils/iterator_traits.hpp
 /Users/aabet/projects/ft_containers/ft_containers/utils/iterator_traits.hpp
 
-/Users/aabet/projects/ft_containers/ft_containers/iterators/vector_iterators.hpp
-iostream
--
-../vector/vector.hpp
-/Users/aabet/projects/ft_containers/ft_containers/vector/vector.hpp
-../utils/iterator_traits.hpp
-/Users/aabet/projects/ft_containers/ft_containers/utils/iterator_traits.hpp
-../utils/remove_const.hpp
-/Users/aabet/projects/ft_containers/ft_containers/utils/remove_const.hpp
-../utils/make_const.hpp
-/Users/aabet/projects/ft_containers/ft_containers/utils/make_const.hpp
-
 /Users/aabet/projects/ft_containers/ft_containers/map/map.hpp
 iostream
 -
@@ -74,8 +62,6 @@ remove_const.hpp
 
 /Users/aabet/projects/ft_containers/ft_containers/utils/lexicographical_compare.hpp
 
-/Users/aabet/projects/ft_containers/ft_containers/utils/make_const.hpp
-
 /Users/aabet/projects/ft_containers/ft_containers/utils/pair.hpp
 
 /Users/aabet/projects/ft_containers/ft_containers/utils/remove_const.hpp
@@ -83,12 +69,14 @@ remove_const.hpp
 /Users/aabet/projects/ft_containers/ft_containers/vector/vector.hpp
 iostream
 -
-../iterators/vector_iterators.hpp
-/Users/aabet/projects/ft_containers/ft_containers/iterators/vector_iterators.hpp
 ../iterators/reverse_iterator.hpp
 /Users/aabet/projects/ft_containers/ft_containers/iterators/reverse_iterator.hpp
 ../utils/enable_if.hpp
 /Users/aabet/projects/ft_containers/ft_containers/utils/enable_if.hpp
+../utils/iterator_traits.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/iterator_traits.hpp
+../utils/remove_const.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/remove_const.hpp
 ../utils/is_integral.hpp
 /Users/aabet/projects/ft_containers/ft_containers/utils/is_integral.hpp
 ../utils/lexicographical_compare.hpp
