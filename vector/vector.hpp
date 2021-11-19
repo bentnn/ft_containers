@@ -53,10 +53,10 @@ namespace ft
 	public:
 		// constructors
 		explicit vector(const allocator_type& alloc = allocator_type()): _array(0), _size(0),
-				_capacity(0), _allocator(alloc) {}
+																		 _capacity(0), _allocator(alloc) {}
 
 		explicit vector(size_type n, const T& value = T(),
-						 const allocator_type& alloc = allocator_type()): _size(n), _capacity(n), _allocator(alloc) {
+						const allocator_type& alloc = allocator_type()): _size(n), _capacity(n), _allocator(alloc) {
 			this->_array = this->_allocator.allocate(n);
 			for (size_type i = 0; i < n; i++)
 				this->_allocator.construct(this->_array + i, value);
@@ -435,7 +435,7 @@ namespace ft
 
 	template< class A, class Alloc>
 	bool operator==(const ft::vector<A, Alloc> &lhs,
-					 const ft::vector<A, Alloc> &rhs) {
+					const ft::vector<A, Alloc> &rhs) {
 		if (lhs.size() != rhs.size())
 			return false;
 		for (size_t i = 0; i < rhs.size(); i++)
@@ -452,7 +452,7 @@ namespace ft
 
 	template< class A, class Alloc>
 	bool operator<(const ft::vector<A, Alloc> &lhs,
-					const ft::vector<A, Alloc> &rhs) {
+				   const ft::vector<A, Alloc> &rhs) {
 		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	}
 
@@ -464,7 +464,7 @@ namespace ft
 
 	template< class A, class Alloc>
 	bool operator<=(const ft::vector<A, Alloc> &lhs,
-				   const ft::vector<A, Alloc> &rhs) {
+					const ft::vector<A, Alloc> &rhs) {
 		return !(lhs > rhs);
 	}
 

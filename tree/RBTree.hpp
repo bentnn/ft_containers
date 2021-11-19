@@ -1,27 +1,181 @@
 #ifndef RBTREE_HPP
 #define RBTREE_HPP
 
-#include "node.hpp"
-#include "../map/pair.hpp"
-#include "../iterators/tree_iterator.hpp"
-
-template<typename T> class TreeIter;
+#include "../utils/pair.hpp"
 
 template< class Content, class Compare = std::less<Content>, class Allocator = std::allocator<Content> >
 class RBTree {
+
+private:
+	template< class Cont >
+	struct node {
+	public:
+		bool is_black;
+		bool is_nil;
+		Cont *content;
+		node *father;
+		node *right;
+		node *left;
+
+		explicit node(Cont *val = 0): is_black(false),
+									  is_nil(false),
+									  content(val),
+									  father(0),
+									  right(0),
+									  left(0) {}
+
+		node& operator=(const node& other) {
+			this->is_black = other.is_black;
+			this->content = other.content;
+			this->father = other.father;
+			this->right = other.right;
+			this->left = other.left;
+			return *this;
+		}
+		virtual ~node(){}
+	};
+
+private:
+
+	template<typename T>
+	class TreeIter {
+	public:
+		typedef ptrdiff_t difference_type;
+		typedef std::bidirectional_iterator_tag iterator_category;
+		typedef T								value_type;
+		typedef T&								reference;
+		typedef T*								pointer;
+
+		template <class _Cont, class _Comp, class _Alloc> friend class  RBTree;
+
+		typedef node<T>* node_pointer;
+
+	private:
+		node_pointer _node;
+
+		TreeIter(void *node): _node(static_cast<node_pointer>(node)) {}
+
+		node_pointer tree_min(node_pointer n) {
+			while (n->left != NULL && !n->left->is_nil)
+				n = n->left;
+			return n;
+		}
+
+		node_pointer tree_max(node_pointer n) {
+			while (!n->right->is_nil)
+				n = n->right;
+			return n;
+		}
+
+		node_pointer node() {
+			return _node;
+		}
+
+	public:
+		TreeIter() {}
+
+		TreeIter(const TreeIter<value_type> & other) {
+			this->_node = other._node;
+		}
+
+		TreeIter& operator=(const TreeIter<value_type>& other) {
+			this->_node = other._node;
+			return *this;
+		}
+
+		reference operator*() const {
+			return *(_node->content);
+		}
+
+		pointer operator->() const {
+			return _node->content;
+		}
+
+		TreeIter& operator++() {
+			if (!_node->right->is_nil) {
+				_node = tree_min(_node->right);
+			}
+			else {
+				node_pointer y = _node->father;
+				while (y != NULL && _node == y->right) {
+					_node = y;
+					y = y->father;
+				}
+				_node = y;
+			}
+			return *this;
+		}
+
+		TreeIter operator++(int) {
+			TreeIter<value_type> temp = *this;
+			if (!_node->right->is_nil) {
+				_node = tree_min(_node->right);
+			}
+			else {
+				node_pointer y = _node->father;
+				while (y != NULL && _node == y->right) {
+					_node = y;
+					y = y->father;
+				}
+				_node = y;
+			}
+			return temp;
+		}
+
+		TreeIter& operator--() {
+			if (!_node->left->is_nil) {
+				_node = tree_max(_node->left);
+			}
+			else {
+				node_pointer y = _node->father;
+				while (y != NULL && _node == y->left) {
+					_node = y;
+					y = y->father;
+				}
+				_node = y;
+			}
+			return *this;
+		}
+
+		TreeIter operator--(int) {
+			TreeIter<value_type> temp = *this;
+			if (!_node->left->is_nil) {
+				_node = tree_max(_node->left);
+			}
+			else {
+				node_pointer y = _node->father;
+				while (y != NULL && _node == y->left) {
+					_node = y;
+					y = y->father;
+				}
+				_node = y;
+			}
+			return temp;
+		}
+
+		bool operator==(const TreeIter<value_type> &other) const {
+			return this->_node == other._node;
+		}
+
+		bool operator!=(const TreeIter<value_type> &other) const {
+			return this->_node != other._node;
+		}
+	};
+
 public:
 	typedef Allocator allocator_type;
 	typedef Content value_type;
-	typedef typename Allocator::template rebind<node<Content> >::other node_allocator;
-	typedef typename node_allocator::pointer node_pointer;
 	typedef typename allocator_type::pointer con_pointer;
 	typedef typename allocator_type::const_pointer const_con_pointer;
 	typedef Compare value_compare;
 	typedef size_t size_type;
 	typedef ptrdiff_t difference_type;
+	typedef typename Allocator::template rebind<node<Content> >::other node_allocator;
+	typedef typename node_allocator::pointer node_pointer;
 	typedef TreeIter<Content> iterator;
 
 private:
+
 	node_pointer _root;
 	allocator_type _con_alloc;
 	node_allocator _node_alloc;
@@ -294,7 +448,7 @@ private:
 public:
 	// constructors and destructors
 
-	RBTree(const Compare& comp, const allocator_type& a = allocator_type()):
+	RBTree(const value_compare& comp, const allocator_type& a = allocator_type()):
 			_root(0), _con_alloc(a), _node_alloc(node_allocator()), _cmp(comp), _size(0){
 		create_nil_and_header();
 		_root = _header;
@@ -303,6 +457,17 @@ public:
 	RBTree() : _root(0), _con_alloc(allocator_type()), _node_alloc(node_allocator()), _cmp(value_compare()), _size(0) {
 		create_nil_and_header();
 		_root = _header;
+	}
+
+	template<class InputIt>
+	RBTree(typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first, InputIt last,
+		   const value_compare& comp, const allocator_type& alloc = allocator_type()):	_con_alloc(alloc),
+		   																				_node_alloc(node_allocator()),
+																						_cmp(comp) {
+		create_nil_and_header();
+		_root = _header;
+		for (first; first != last; ++first)
+			insert(*first);
 	}
 
 //	RBTree(const allocator_type& alloc = allocator_type()):
@@ -420,7 +585,7 @@ public:
 	}
 
 	iterator begin() {
-		return (iterator(tree_min(_root)));
+		return (iterator(_size == 0 ? _header : tree_min(_root)));
 	}
 
 	iterator end() {

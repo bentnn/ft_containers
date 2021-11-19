@@ -20,10 +20,11 @@ namespace ft {
 
 		//maybe protected???
 	private:
-		typedef	typename ft::make_const<T> 	const_type;
 		pointer _ptr;
-		//CONSTRUCTORS
+
 	public:
+
+		// CONSTRUCTORS
 		RanIt() : _ptr() {}
 
 		RanIt(pointer a) : _ptr(a) {}
@@ -39,55 +40,6 @@ namespace ft {
 		RanIt<T> & operator=(RanIt<typename ft::remove_const<T>::type > const & src) {
 			_ptr = src.base();
 			return (*this);
-		}
-
-		//COMPARISON OPERATORS
-		bool operator==(RanIt<typename ft::remove_const<T>::type > const & rhs) const {
-			return _ptr == rhs.base();
-		}
-
-		bool operator==(RanIt<const_type > const & rhs) const {
-			return _ptr == rhs.base();
-		}
-
-		bool operator!=(const RanIt<typename ft::remove_const<T>::type > & rhs) const {
-			return _ptr != rhs.base();
-		}
-
-		bool operator!=(const RanIt<const_type > & rhs) const {
-			return _ptr != rhs.base();
-		}
-
-		bool operator>(const RanIt<typename ft::remove_const<T>::type > & rhs) const {
-			return _ptr > rhs.base();
-		}
-
-		bool operator>(const RanIt<const_type > & rhs) const {
-			return _ptr > rhs.base();
-		}
-
-		bool operator<(const RanIt<typename ft::remove_const<T>::type > & rhs) const {
-			return _ptr < rhs.base();
-		}
-
-		bool operator<(const RanIt<const_type > & rhs) const {
-			return _ptr < rhs.base();
-		}
-
-		bool operator<=(const RanIt<typename ft::remove_const<T>::type > & rhs) const{
-			return _ptr <= rhs.base();
-		}
-
-		bool operator<=(const RanIt<const_type > & rhs) const{
-			return _ptr <= rhs.base();
-		}
-
-		bool operator>=(const RanIt<typename ft::remove_const<T>::type > & rhs) const{
-			return _ptr >= rhs.base();
-		}
-
-		bool operator>=(const RanIt<const_type > & rhs) const{
-			return _ptr >= rhs.base();
 		}
 
 		//OPERATORS
@@ -120,40 +72,70 @@ namespace ft {
 			return _ptr - a;
 		}
 
-		difference_type operator-(const RanIt<typename ft::remove_const<T>::type > & b){
-			return(_ptr - b.base());
-		}
-
-		difference_type operator-(const RanIt<const_type > & b){
-			return(_ptr - b.base());
-		}
-
-		difference_type operator+(const RanIt<typename ft::remove_const<T>::type > & b){
-			return(_ptr + b.base());
-		}
-
-		difference_type operator+(const RanIt<const_type > & b){
-			return(_ptr + b.base());
-		}
-
-		RanIt & operator+=(const difference_type & a){
+		RanIt & operator+=(const difference_type & a) {
 			_ptr += a;
 			return (*this);
 		}
-		RanIt & operator-=(const difference_type & a){
+
+		RanIt & operator-=(const difference_type & a) {
 			_ptr -= a;
 			return (*this);
 		}
-		pointer operator->(){
+
+		pointer operator->() const{
 			return(_ptr);
 		}
-		value_type & operator*(){
+
+		reference operator*() const {
 			return(*_ptr);
 		}
-		reference operator[](difference_type n) const{
+
+		reference operator[](difference_type n) const {
 			return(*(_ptr + n));
 		}
 	};
+
+	template<typename A, typename B>
+	bool operator==(const RanIt<A>  & lhs, const RanIt<B>  & rhs) {
+		return &(*lhs) == &(*rhs);
+	}
+
+	template<typename A, typename B>
+	bool operator!=(const RanIt<A>  & lhs, const RanIt<B>  & rhs) {
+		return !(lhs == rhs);
+	}
+
+
+	template<typename A, typename B>
+	bool operator>(const RanIt<A>  & lhs, const RanIt<B>  & rhs) {
+		return &(*lhs) > &(*rhs);
+	}
+
+	template<typename A, typename B>
+	bool operator<(const RanIt<A>  & lhs, const RanIt<B>  & rhs) {
+		return &(*lhs) < &(*rhs);
+	}
+
+	template<typename A, typename B>
+	bool operator<=(const RanIt<A>  & lhs, const RanIt<B>  & rhs) {
+		return &(*lhs) <= &(*rhs);
+	}
+
+
+	template<typename A, typename B>
+	bool operator>=(const RanIt<A>  & lhs, const RanIt<B>  & rhs) {
+		return &(*lhs) >= &(*rhs);
+	}
+
+	template<typename A, typename B>
+	typename RanIt<A>::difference_type operator-(const RanIt<A>  & lhs, const RanIt<B>  & rhs){
+		return &(*lhs) - &(*rhs);
+	}
+
+	template<typename A, typename B>
+	typename RanIt<A>::difference_type operator+(const RanIt<A>  & lhs, const RanIt<B>  & rhs){
+		return &(*lhs) + &(*rhs);
+	}
 
 	template<typename L>
 	RanIt<L> operator +(const typename RanIt<L>::difference_type & a, const RanIt<L> & iter){

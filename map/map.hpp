@@ -2,7 +2,7 @@
 #define MAP_HPP
 
 #include <iostream>
-#include "RBTree.hpp"
+#include "../tree/RBTree.hpp"
 #include "../iterators/reverse_iterator.hpp"
 
 namespace ft {
@@ -56,10 +56,15 @@ namespace ft {
 		explicit map(const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
 			_alloc(alloc), _tree(tree_type(comp, alloc)), _cmp(comp) {}
 
-//				template< class InputIt >
-//				map(InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator());
+		template< class InputIt >
+		map(InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator()):
+																								_alloc(alloc),
+																								_tree(first, last, comp, _alloc),
+																								_cmp(comp) {}
 
-//				map( const map& other );
+//		map(const map& other): _alloc(other.) {
+//
+//		}
 
 		// operators
 

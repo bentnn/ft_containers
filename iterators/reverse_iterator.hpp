@@ -1,17 +1,19 @@
 #ifndef REVERSE_ITERATOR_HPP
 #define REVERSE_ITERATOR_HPP
 
+#include "../utils/iterator_traits.hpp"
+
 namespace ft {
 
 	template<typename It>
 	class reverse_iterator {
 	public:
 		typedef It iterator_type;
-		typedef typename iterator_type::value_type value_type;
-		typedef typename iterator_type::pointer pointer;
-		typedef typename iterator_type::reference reference;
-		typedef typename iterator_type::difference_type difference_type;
-		typedef typename iterator_type::iterator_category iterator_category;
+		typedef typename ft::iterator_traits<It>::value_type		value_type;
+		typedef typename ft::iterator_traits<It>::pointer			pointer;
+		typedef typename ft::iterator_traits<It>::reference			reference;
+		typedef typename ft::iterator_traits<It>::difference_type	difference_type;
+		typedef typename ft::iterator_traits<It>::iterator_category	iterator_category;
 
 	private:
 		iterator_type _it;
@@ -37,13 +39,11 @@ namespace ft {
 		reference operator*() const {
 			iterator_type temp = _it;
 			return *--temp;
-//			return *(_it - 1);
 		}
 
 		pointer operator->() const {
 			iterator_type temp = _it;
 			return &(*(--temp));
-//			return _it.operator->();
 		}
 
 		reference operator[]( difference_type n ) const {
