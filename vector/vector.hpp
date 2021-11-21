@@ -617,56 +617,56 @@ namespace ft
 		lhs.swap(rhs);
 	}
 
-//	template<typename A, typename B>
-//	bool operator==(const typename vector<A>::template RanIt<A> &lhs, const typename vector<B>::template RanIt<B> &rhs) {
-//		return &(*lhs) == &(*rhs);
-//	}
+	template<typename A, typename B>
+	bool operator==(const typename vector<A>::template RanIt<A> &lhs, const typename vector<B>::template RanIt<B> &rhs) {
+		return &(*lhs) == &(*rhs);
+	}
 
-//	template<typename A, typename B>
-//	bool operator!=(const typename vector<A>::template RanIt<A> &lhs, const typename vector<B>::template RanIt<B> &rhs) {
-//		return !(lhs == rhs);
-//	}
+	template<typename A, typename B>
+	bool operator!=(const typename vector<A>::template RanIt<A> &lhs, const typename vector<B>::template RanIt<B> &rhs) {
+		return !(lhs == rhs);
+	}
 
 
-//	template<typename A, typename B>
-//	bool operator>(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
-//		return &(*lhs) > &(*rhs);
-//	}
-//
-//	template<typename A, typename B>
-//	bool operator<(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
-//		return &(*lhs) < &(*rhs);
-//	}
-//
-//	template<typename A, typename B>
-//	bool operator<=(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
-//		return &(*lhs) <= &(*rhs);
-//	}
-//
-//
-//	template<typename A, typename B>
-//	bool operator>=(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
-//		return &(*lhs) >= &(*rhs);
-//	}
-//
-//	template<typename A, typename B>
-//	typename ft::vector<A>::iterator::difference_type operator-(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs){
-//		return &(*lhs) - &(*rhs);
-//	}
-//
-//	template<typename A, typename B>
-//	typename ft::vector<A>::iterator::difference_type operator+(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs){
-//		return &(*lhs) + &(*rhs);
-//	}
-//
-//	template<typename L>
-//	typename ft::vector<L>::iterator operator +(const typename ft::vector<L>::iterator::difference_type & a, const typename ft::vector<L>::iterator & iter){
-//		return	(iter + a);
-//	}
-//
-//	template<typename L>
-//	typename ft::vector<L>::iterator operator -(const typename ft::vector<L>::iterator::difference_type & a, const typename ft::vector<L>::iterator & iter){
-//		return	(iter - a);
-//	}
+	template<typename A, typename B>
+	bool operator>(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
+		return &(*lhs) > &(*rhs);
+	}
+
+	template<typename A, typename B>
+	bool operator<(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
+		return &(*lhs) < &(*rhs);
+	}
+
+	template<typename A, typename B>
+	bool operator<=(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
+		return &(*lhs) <= &(*rhs);
+	}
+
+
+	template<typename A, typename B>
+	bool operator>=(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
+		return &(*lhs) >= &(*rhs);
+	}
+
+	template<typename A, typename B>
+	typename ft::vector<A>::iterator::difference_type operator-(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs){
+		return &(*lhs) - &(*rhs);
+	}
+
+	template<typename A, typename B>
+	typename ft::vector<A>::iterator::difference_type operator+(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs){
+		return &(*lhs) + &(*rhs);
+	}
+
+	template<typename L>
+	typename ft::vector<L>::iterator operator +(const typename ft::vector<L>::iterator::difference_type & a, const typename ft::vector<L>::iterator & iter){
+		return	(iter + a);
+	}
+
+	template<typename L>
+	typename ft::vector<L>::iterator operator -(const typename ft::vector<L>::iterator::difference_type & a, const typename ft::vector<L>::iterator & iter){
+		return	(iter - a);
+	}
 }
 #endif

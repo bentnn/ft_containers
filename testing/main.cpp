@@ -111,21 +111,28 @@ int main() {
 //	for (int i=0; i < 5; i++) {
 //		tree.insert(tree.begin(), i);
 //	}
-	std::srand(std::time(NULL));
-	ft::map<int, int> m;
-	for (int i=0; i < 5; i++) {
-		m[i] = i;
-//		m.insert(m.begin(), ft::pair<int, int> (i, i));
-	}
-	std::cout << m.count(11) << " aaa" << std::endl;
-	for (ft::map<int, int>::iterator it = m.begin(); it != m.end(); ++it) {
-		std::cout << it->first << std::endl;
-	}
-//	for (int i=0; i < 2; i++) {
-//		m.erase(m.begin());
+//	std::srand(std::time(NULL));
+//	ft::map<int, int> m;
+//	for (int i=0; i < 5; i++) {
+//		m[i] = i;
+////		m.insert(m.begin(), ft::pair<int, int> (i, i));
 //	}
-	std::cout << "end!" << std::endl;
+//	std::cout << m.count(11) << " aaa" << std::endl;
+//	for (ft::map<int, int>::iterator it = m.begin(); it != m.end(); ++it) {
+//		std::cout << it->first << std::endl;
+//	}
+////	for (int i=0; i < 2; i++) {
+////		m.erase(m.begin());
+////	}
+//	std::cout << "end!" << std::endl;
 
+	std::map<int, int> m;
+	for (int i = 0; i < 5; ++i)
+		m[i] = i;
+//	m.erase(m.begin(), m.end());
+	for (int i = 0; i < m.size(); ++i)
+		std::cout << m[i] << std::endl;
+	std::cout << "end!" << std::endl;
 //	ft::vector<int> v(5, 100);
 //	ft::vector<int>::const_iterator it;
 //	it = v.begin();
