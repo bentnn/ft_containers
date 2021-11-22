@@ -349,7 +349,7 @@ namespace ft
 			std::copy(pos + 1, end(), pos);
 			_size--;
 			_allocator.destroy(_array + _size - 1);
-			return d == _size ? end() : iterator(_array + d);
+			return d == static_cast<difference_type>(_size) ? end() : iterator(_array + d);
 		}
 
 		iterator erase(iterator first, iterator last) {
@@ -396,7 +396,7 @@ namespace ft
 				_array = new_arr;
 			}
 			else {
-				for (size_type i = _size; i > start; i--) {
+				for (size_type i = _size; i > static_cast<size_type>(start); i--) {
 					_allocator.destroy(_array + i + count - 1);
 					_allocator.construct(_array + i + count - 1, *(_array + i - 1));
 				}
@@ -425,7 +425,7 @@ namespace ft
 				_array = new_arr;
 			}
 			else {
-				for (size_type i = _size; i > start; i--) {
+				for (size_type i = _size; i > static_cast<size_type>(start); i--) {
 					_allocator.destroy(_array + i);
 					_allocator.construct(_array + i, *(_array + i - 1));
 				}
@@ -448,7 +448,7 @@ namespace ft
 				size_type new_cap = _capacity * 2 >= _size + count ? _capacity * 2 : _size + count;
 				pointer new_arr = _allocator.allocate(new_cap);
 				std::uninitialized_copy(begin(), pos, iterator(new_arr));
-				for (size_type i = 0; i < count; i++, first++)
+				for (size_type i = 0; i < static_cast<size_type>(count); i++, first++)
 					_allocator.construct(new_arr + start + i, *first);
 				std::uninitialized_copy(pos, end(), iterator(new_arr + start + count));
 				for (size_type i = 0; i < _size; i++)
@@ -459,11 +459,11 @@ namespace ft
 				_array = new_arr;
 			}
 			else {
-				for (size_type i = _size; i > start; i--) {
+				for (size_type i = _size; i > static_cast<size_type>(start); i--) {
 					_allocator.destroy(_array + i + count - 1);
 					_allocator.construct(_array + i + count - 1, *(_array + i - 1));
 				}
-				for (size_type i = 0; i < count; i++, first++) {
+				for (size_type i = 0; i < static_cast<size_type>(count); i++, first++) {
 					_allocator.destroy(_array + i + count);
 					_allocator.construct(_array + start + i, *first);
 				}

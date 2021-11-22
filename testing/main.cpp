@@ -126,13 +126,6 @@ int main() {
 ////	}
 //	std::cout << "end!" << std::endl;
 
-    ft::set<int> s;
-    for (int i = 0; i < 7; i++)
-        s.insert(i);
-    s.erase(4);
-    ft::set<int>::iterator it = s.begin();
-    for (; it != s.end(); it++)
-        std::cout << *it << std::endl;
 //	ft::map<int, int> m;
 //	for (int i = 0; i < 5; ++i)
 //		m[i] = i;

@@ -460,10 +460,10 @@ public:
 	RBTree(typename ft::enable_if< !ft::is_integral<InputIt>::value, InputIt >::type first, InputIt last,
 		   const value_compare& comp, const allocator_type& alloc = allocator_type()):	_con_alloc(alloc),
 		   																				_node_alloc(node_allocator()),
-																						_cmp(comp) {
+																						_cmp(comp), _size(0) {
 		create_nil_and_header();
 		_root = _header;
-		for (first; first != last; ++first)
+		for ( ; first != last; ++first)
 			insert(*first);
 	}
 
