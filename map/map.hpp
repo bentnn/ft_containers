@@ -69,6 +69,7 @@ namespace ft {
 		map& operator=(const map& other) {
 			this->_tree = other._tree;
 			this->_cmp = other._cmp;
+			return *this;
 		}
 
 		mapped_type& operator[]( const key_type& key ) {

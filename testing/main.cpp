@@ -126,17 +126,24 @@ int main() {
 ////	}
 //	std::cout << "end!" << std::endl;
 
-	ft::map<int, int> m;
-	for (int i = 0; i < 5; ++i)
-		m[i] = i;
+    ft::set<int> s;
+    for (int i = 0; i < 7; i++)
+        s.insert(i);
+    s.erase(4);
+    ft::set<int>::iterator it = s.begin();
+    for (; it != s.end(); it++)
+        std::cout << *it << std::endl;
+//	ft::map<int, int> m;
+//	for (int i = 0; i < 5; ++i)
+//		m[i] = i;
 
 //    m2.insert(m.begin(), m.end());
 
-    ft::map<int, int> m2(m);
+//    ft::map<int, int> m2(m);
 //    m.erase(m.begin());
 //    ft::map<int, int>::iterator it = m.lower_bound(3);
 //    for (; it != m.end(); ++it)
-        std::cout << (m > m2) << std::endl;
+//        std::cout << (m > m2) << std::endl;
 //	m.erase(m.begin(), m.end());
 //	for (int i = 0; i < m.size(); ++i)
 //		std::cout << m[i] << std::endl;

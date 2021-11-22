@@ -125,17 +125,17 @@ namespace ft
 		allocator_type _allocator;	// allocator for allocating and deallocating memory
 
 //		template<class InputIt>
-		void uninitialized_copy_from_end(iterator first, iterator last, iterator dist) {
-			last--;
-			dist += last - first;
-
-			while (last >= first) {
-				//_allocator.destroy(dist.base());
-				_allocator.construct(dist.base(), *last);
-				last--;
-				dist--;
-			}
-		}
+//		void uninitialized_copy_from_end(iterator first, iterator last, iterator dist) {
+//			last--;
+//			dist += last - first;
+//
+//			while (last >= first) {
+//				//_allocator.destroy(dist.base());
+//				_allocator.construct(dist.base(), *last);
+//				last--;
+//				dist--;
+//			}
+//		}
 
 	public:
 		// constructors
@@ -357,7 +357,7 @@ namespace ft
 			difference_type need_to_copy = std::distance(last, end());
 			bool last_is_end = (last == end());
 			while (first != last) {
-				_allocator.destroy(first.base());
+				_allocator.destroy(&(*first));
 				first++;
 			}
 			size_type i = start;
@@ -429,8 +429,8 @@ namespace ft
 					_allocator.destroy(_array + i);
 					_allocator.construct(_array + i, *(_array + i - 1));
 				}
-				_allocator.destroy(pos.base());
-				_allocator.construct(pos.base(), value);
+				_allocator.destroy(&(*pos));
+				_allocator.construct(&(*pos), value);
 				_size++;
 			}
 			return begin() + start;
@@ -512,7 +512,7 @@ namespace ft
 			iterator pos = begin();
 			while (first < last)
 			{
-				_allocator.construct(pos.base(), *first);
+				_allocator.construct(&(*pos), *first);
 				pos++;
 				first++;
 			}

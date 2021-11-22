@@ -3,6 +3,7 @@
 
 CMakeFiles/ft_containers.dir/testing/main.cpp.o: ../iterators/reverse_iterator.hpp
 CMakeFiles/ft_containers.dir/testing/main.cpp.o: ../map/map.hpp
+CMakeFiles/ft_containers.dir/testing/main.cpp.o: ../set/set.hpp
 CMakeFiles/ft_containers.dir/testing/main.cpp.o: ../stack/stack.hpp
 CMakeFiles/ft_containers.dir/testing/main.cpp.o: ../testing/main.cpp
 CMakeFiles/ft_containers.dir/testing/main.cpp.o: ../testing/testing.hpp

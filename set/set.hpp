@@ -9,7 +9,7 @@ namespace ft {
 	template<
 			class Key,
 			class Compare = std::less<Key>,
-			class Allocator = std::allocator<ft::pair<const Key, T> > >
+			class Allocator = std::allocator<Key> >
 
 	class set {
 
@@ -18,6 +18,7 @@ namespace ft {
 		typedef std::size_t size_type;
 		typedef std::ptrdiff_t difference_type;
 		typedef Compare key_compare;
+        typedef key_compare value_compare;
 		typedef key_type value_type;
 		typedef Allocator allocator_type;
 		typedef value_type& reference;
@@ -47,8 +48,9 @@ namespace ft {
 
 		// operators
 
-		set& operator= (const map& other) {
+		set& operator= (const set& other) {
 			this->_tree = other._tree;
+			return *this;
 		}
 
 		// getters
@@ -117,7 +119,7 @@ namespace ft {
 			_tree.clear();
 		}
 
-		void swap(map& other) {
+		void swap(set& other) {
 			_tree.swap(other._tree);
 		}
 

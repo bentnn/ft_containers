@@ -18,6 +18,14 @@ iostream
 ../iterators/reverse_iterator.hpp
 /Users/kirill/Desktop/ft_containers/iterators/reverse_iterator.hpp
 
+/Users/kirill/Desktop/ft_containers/set/set.hpp
+iostream
+-
+../tree/RBTree.hpp
+/Users/kirill/Desktop/ft_containers/tree/RBTree.hpp
+../iterators/reverse_iterator.hpp
+/Users/kirill/Desktop/ft_containers/iterators/reverse_iterator.hpp
+
 /Users/kirill/Desktop/ft_containers/stack/stack.hpp
 ../vector/vector.hpp
 /Users/kirill/Desktop/ft_containers/vector/vector.hpp
@@ -47,6 +55,8 @@ cstdlib
 /Users/kirill/Desktop/ft_containers/tree/RBTree.hpp
 ../map/map.hpp
 /Users/kirill/Desktop/ft_containers/map/map.hpp
+../set/set.hpp
+/Users/kirill/Desktop/ft_containers/set/set.hpp
 
 /Users/kirill/Desktop/ft_containers/tree/RBTree.hpp
 ../utils/pair.hpp

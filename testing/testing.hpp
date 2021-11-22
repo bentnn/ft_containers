@@ -10,6 +10,7 @@
 #include "../stack/stack.hpp"
 #include "../tree/RBTree.hpp"
 #include "../map/map.hpp"
+#include "../set/set.hpp"
 
 
 void test_stack_comparison();
