@@ -6,31 +6,31 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/iterators/reverse_iterator.hpp
+/Users/kirill/Desktop/ft_containers/iterators/reverse_iterator.hpp
 ../utils/iterator_traits.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/iterator_traits.hpp
+/Users/kirill/Desktop/ft_containers/utils/iterator_traits.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/map/map.hpp
+/Users/kirill/Desktop/ft_containers/map/map.hpp
 iostream
 -
 ../tree/RBTree.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/tree/RBTree.hpp
+/Users/kirill/Desktop/ft_containers/tree/RBTree.hpp
 ../iterators/reverse_iterator.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/iterators/reverse_iterator.hpp
+/Users/kirill/Desktop/ft_containers/iterators/reverse_iterator.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/stack/stack.hpp
+/Users/kirill/Desktop/ft_containers/stack/stack.hpp
 ../vector/vector.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/vector/vector.hpp
+/Users/kirill/Desktop/ft_containers/vector/vector.hpp
 iostream
 -
 vector
 -
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/main.cpp
+/Users/kirill/Desktop/ft_containers/testing/main.cpp
 testing.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/testing.hpp
+/Users/kirill/Desktop/ft_containers/testing/testing.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/testing.hpp
+/Users/kirill/Desktop/ft_containers/testing/testing.hpp
 iostream
 -
 vector
@@ -42,51 +42,53 @@ stack
 cstdlib
 -
 ../stack/stack.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/stack/stack.hpp
+/Users/kirill/Desktop/ft_containers/stack/stack.hpp
 ../tree/RBTree.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/tree/RBTree.hpp
+/Users/kirill/Desktop/ft_containers/tree/RBTree.hpp
 ../map/map.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/map/map.hpp
+/Users/kirill/Desktop/ft_containers/map/map.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/tree/RBTree.hpp
+/Users/kirill/Desktop/ft_containers/tree/RBTree.hpp
 ../utils/pair.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/pair.hpp
+/Users/kirill/Desktop/ft_containers/utils/pair.hpp
 ../utils/iterator_traits.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/iterator_traits.hpp
+/Users/kirill/Desktop/ft_containers/utils/iterator_traits.hpp
 ../utils/remove_const.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/remove_const.hpp
+/Users/kirill/Desktop/ft_containers/utils/remove_const.hpp
 ../iterators/reverse_iterator.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/iterators/reverse_iterator.hpp
+/Users/kirill/Desktop/ft_containers/iterators/reverse_iterator.hpp
+../utils/lexicographical_compare.hpp
+/Users/kirill/Desktop/ft_containers/utils/lexicographical_compare.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/enable_if.hpp
+/Users/kirill/Desktop/ft_containers/utils/enable_if.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/is_integral.hpp
+/Users/kirill/Desktop/ft_containers/utils/is_integral.hpp
 remove_const.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/remove_const.hpp
+/Users/kirill/Desktop/ft_containers/utils/remove_const.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/iterator_traits.hpp
+/Users/kirill/Desktop/ft_containers/utils/iterator_traits.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/lexicographical_compare.hpp
+/Users/kirill/Desktop/ft_containers/utils/lexicographical_compare.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/pair.hpp
+/Users/kirill/Desktop/ft_containers/utils/pair.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/remove_const.hpp
+/Users/kirill/Desktop/ft_containers/utils/remove_const.hpp
 
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/vector/vector.hpp
+/Users/kirill/Desktop/ft_containers/vector/vector.hpp
 iostream
 -
 ../iterators/reverse_iterator.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/iterators/reverse_iterator.hpp
+/Users/kirill/Desktop/ft_containers/iterators/reverse_iterator.hpp
 ../utils/enable_if.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/enable_if.hpp
+/Users/kirill/Desktop/ft_containers/utils/enable_if.hpp
 ../utils/iterator_traits.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/iterator_traits.hpp
+/Users/kirill/Desktop/ft_containers/utils/iterator_traits.hpp
 ../utils/remove_const.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/remove_const.hpp
+/Users/kirill/Desktop/ft_containers/utils/remove_const.hpp
 ../utils/is_integral.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/is_integral.hpp
+/Users/kirill/Desktop/ft_containers/utils/is_integral.hpp
 ../utils/lexicographical_compare.hpp
-/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/lexicographical_compare.hpp
+/Users/kirill/Desktop/ft_containers/utils/lexicographical_compare.hpp
 cstring
 -
 

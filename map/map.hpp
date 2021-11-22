@@ -66,7 +66,7 @@ namespace ft {
 
 		// operators
 
-		map& operator= (const map& other) {
+		map& operator=(const map& other) {
 			this->_tree = other._tree;
 			this->_cmp = other._cmp;
 		}
@@ -221,20 +221,19 @@ namespace ft {
 			_tree.erase(first, last);
 		}
 
+        template<class _Key, class _T, class _Compare, class _Alloc>
+        friend bool operator==(const map<_Key, _T, _Compare, _Alloc>& lhs,
+                        const map<_Key, _T, _Compare, _Alloc>& rhs);
+
+        template<class _Key, class _T, class _Compare, class _Alloc>
+        friend bool operator<(const map<_Key, _T, _Compare, _Alloc>& lhs,
+                       const map<_Key, _T, _Compare, _Alloc>& rhs);
 	};
 
 	template<class Key, class T, class Compare, class Alloc>
 	bool operator==(const map<Key, T, Compare, Alloc>& lhs,
 					const map<Key, T, Compare, Alloc>& rhs) {
-		if (lhs.size() != rhs.size())
-			return false;
-		typename map<Key, T, Compare, Alloc>::const_iterator first1 = lhs.begin();
-		typename map<Key, T, Compare, Alloc>::const_iterator first2 = rhs.begin();
-		for ( ; first1 != lhs.end(); ++first1, ++first2) {
-			if (*first1 != *first2)
-				return false;
-		}
-		return true;
+		return lhs._tree == rhs._tree;
 	}
 
 	template<class Key, class T, class Compare, class Alloc>
@@ -246,7 +245,7 @@ namespace ft {
 	template<class Key, class T, class Compare, class Alloc>
 	bool operator<(const map<Key, T, Compare, Alloc>& lhs,
 					const map<Key, T, Compare, Alloc>& rhs) {
-		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		return lhs._tree < rhs._tree;
 	}
 
 	template<class Key, class T, class Compare, class Alloc>

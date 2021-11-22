@@ -189,20 +189,20 @@ namespace ft {
 			_tree.erase(first, last);
 		}
 
+        template<class K, class Com, class Al>
+        friend bool operator==(const set<K, Com, Al>& lhs,
+                               const set<K, Com, Al>& rhs);
+
+        template<class K, class Com, class Al>
+        friend bool operator<(const set<K, Com, Al>& lhs,
+                              const set<K, Com, Al>& rhs);
+
 	};
 
 	template<class Key,class Compare, class Alloc>
 	bool operator==(const set<Key, Compare, Alloc>& lhs,
 					const set<Key, Compare, Alloc>& rhs) {
-		if (lhs.size() != rhs.size())
-			return false;
-		typename set<Key, Compare, Alloc>::const_iterator first1 = lhs.begin();
-		typename set<Key, Compare, Alloc>::const_iterator first2 = rhs.begin();
-		for ( ; first1 != lhs.end(); ++first1, ++first2) {
-			if (*first1 != *first2)
-				return false;
-		}
-		return true;
+		return lhs._tree == rhs._tree;
 	}
 
 	template<class Key,class Compare, class Alloc>
@@ -214,7 +214,7 @@ namespace ft {
 	template<class Key,class Compare, class Alloc>
 	bool operator<(const set<Key, Compare, Alloc>& lhs,
 					const set<Key, Compare, Alloc>& rhs) {
-		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+		return lhs._tree < rhs._tree;
 	}
 
 	template<class Key,class Compare, class Alloc>

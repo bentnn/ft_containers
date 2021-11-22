@@ -90,7 +90,7 @@ private:
 		}
 
 		TreeIter& operator++() {
-			if (!_node->right->is_nil) {
+			if (_node->right && !_node->right->is_nil) {
 				_node = tree_min(_node->right);
 			}
 			else {
@@ -106,7 +106,7 @@ private:
 
 		TreeIter operator++(int) {
 			TreeIter<value_type> temp = *this;
-			if (!_node->right->is_nil) {
+			if (_node->right && !_node->right->is_nil) {
 				_node = tree_min(_node->right);
 			}
 			else {
@@ -137,7 +137,7 @@ private:
 
 		TreeIter operator--(int) {
 			TreeIter<value_type> temp = *this;
-			if (!_node->left->is_nil) {
+			if (_node->left && !_node->left->is_nil) {
 				_node = tree_max(_node->left);
 			}
 			else {
@@ -185,13 +185,13 @@ private:
 		return node == _nil || node == _header;
 	}
 
-	node_pointer tree_min(node_pointer n) {
+	node_pointer tree_min(node_pointer n) const {
 		while (n->left != _nil)
 			n = n->left;
 		return n;
 	}
 
-	node_pointer tree_max(node_pointer n) {
+	node_pointer tree_max(node_pointer n) const {
 		while (!is_nil(n->right))
 			n = n->right;
 		return n;
@@ -467,7 +467,7 @@ public:
 			insert(*first);
 	}
 
-	RBTree( const RBTree& other ): _cmp(other._cmp) {
+	RBTree( const RBTree& other ): _root(0), _cmp(other._cmp) {
 		*this = other;
 	}
 
@@ -485,9 +485,10 @@ public:
 		this->_node_alloc = other._node_alloc;
 		this->_con_alloc = other._con_alloc;
 		this->_cmp = other._cmp;
-		clear_node(_root);
-		if (this->_nil == NULL)
+		if (this->_root == NULL)
 			create_nil_and_header();
+		else
+            clear_node(_root);
 		if (other._size == 0)
 			this->_root = this->_header;
 		else {
@@ -637,11 +638,11 @@ public:
 	//iterators
 
 	iterator begin() {
-		return (iterator(_size == 0 ? _header : tree_min(_root)));
+		return (iterator(_size == 0 ? _header : iterator(tree_min(_root))));
 	}
 
 	const_iterator begin() const {
-		return (const_iterator(_size == 0 ? _header : tree_min(_root)));
+		return (const_iterator(_size == 0 ? _header : const_iterator(tree_min(_root))));
 	}
 
 	iterator end() {
@@ -705,7 +706,7 @@ public:
 
 	iterator lower_bound(const value_type& value) {
 		iterator last = end();
-		for (iterator first = begin(); first < last; ++first) {
+		for (iterator first = begin(); first != last; ++first) {
 			if (!_cmp(*first, value))
 				return first;
 		}
@@ -714,7 +715,7 @@ public:
 
 	const_iterator lower_bound(const value_type& value) const {
 		const_iterator last = end();
-		for (const_iterator first = begin(); first < last; ++first) {
+		for (const_iterator first = begin(); first != last; ++first) {
 			if (!_cmp(*first, value))
 				return first;
 		}
@@ -723,7 +724,7 @@ public:
 
 	iterator upper_bound(const value_type& value) {
 		iterator last = end();
-		for (iterator first = begin(); first < last; ++first) {
+		for (iterator first = begin(); first != last; ++first) {
 			if (_cmp(value, *first))
 				return first;
 		}
@@ -732,7 +733,7 @@ public:
 
 	const_iterator upper_bound(const value_type& value) const {
 		const_iterator last = end();
-		for (const_iterator first = begin(); first < last; ++first) {
+		for (const_iterator first = begin(); first != last; ++first) {
 			if (_cmp(value, *first))
 				return first;
 		}

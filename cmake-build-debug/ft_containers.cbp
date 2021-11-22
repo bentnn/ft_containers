@@ -8,109 +8,107 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug"/>
+				<Option working_dir="/Users/kirill/Desktop/ft_containers/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug"/>
+				<Option working_dir="/Users/kirill/Desktop/ft_containers/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="ft_containers">
-				<Option output="/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/ft_containers.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++/x86_64-pc-cygwin"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include"/>
-					<Add directory="/usr/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../lib/../include/w32api"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 ft_containers"/>
-					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="ft_containers/fast">
-				<Option output="/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/ft_containers.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++/x86_64-pc-cygwin"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include/c++/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/include"/>
-					<Add directory="/usr/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-pc-cygwin/7.4.0/../../../../lib/../include/w32api"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 ft_containers/fast"/>
-					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug"/>
+				<Option working_dir="/Users/kirill/Desktop/ft_containers/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make.exe -j8 -f &quot;/cygdrive/c/Users/Kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ft_containers">
+				<Option output="/Users/kirill/Desktop/ft_containers/cmake-build-debug/ft_containers" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kirill/Desktop/ft_containers/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 ft_containers"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ft_containers/fast">
+				<Option output="/Users/kirill/Desktop/ft_containers/cmake-build-debug/ft_containers" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/kirill/Desktop/ft_containers/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 ft_containers/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/kirill/Desktop/ft_containers/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/cygdrive/c/Users/Kirill/Desktop/ft_containers/map/map.hpp">
+		<Unit filename="/Users/kirill/Desktop/ft_containers/map/map.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Kirill/Desktop/ft_containers/set/set.hpp">
+		<Unit filename="/Users/kirill/Desktop/ft_containers/set/set.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Kirill/Desktop/ft_containers/stack/stack.hpp">
+		<Unit filename="/Users/kirill/Desktop/ft_containers/stack/stack.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/main.cpp">
+		<Unit filename="/Users/kirill/Desktop/ft_containers/testing/main.cpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/stack_testing.cpp">
+		<Unit filename="/Users/kirill/Desktop/ft_containers/testing/stack_testing.cpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/testing.hpp">
+		<Unit filename="/Users/kirill/Desktop/ft_containers/testing/testing.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Kirill/Desktop/ft_containers/testing/vector_testing.cpp">
+		<Unit filename="/Users/kirill/Desktop/ft_containers/testing/vector_testing.cpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Kirill/Desktop/ft_containers/tree/RBTree.hpp">
+		<Unit filename="/Users/kirill/Desktop/ft_containers/tree/RBTree.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Kirill/Desktop/ft_containers/utils/pair.hpp">
+		<Unit filename="/Users/kirill/Desktop/ft_containers/utils/pair.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Kirill/Desktop/ft_containers/vector/vector.hpp">
+		<Unit filename="/Users/kirill/Desktop/ft_containers/vector/vector.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
-		<Unit filename="/cygdrive/c/Users/Kirill/Desktop/ft_containers/CMakeLists.txt">
+		<Unit filename="/Users/kirill/Desktop/ft_containers/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
