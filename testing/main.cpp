@@ -1,5 +1,13 @@
 #include "testing.hpp"
 
+template<class T>
+class myb : public ft::vector<T> {
+public:
+	myb(int a, int b) : ft::vector<T>(a, b){}
+
+};
+
+
 //class A {
 //private:
 //	int n;
@@ -107,6 +115,9 @@ bool operator<( const OnHeap& lhs, const OnHeap& rhs ) {
 
 
 int main() {
+	std::map<int,int> m;
+	m[0] = 0;
+
 //	RBTree<int> tree;
 //	for (int i=0; i < 5; i++) {
 //		tree.insert(tree.begin(), i);

@@ -28,8 +28,13 @@ private:
 									  right(0),
 									  left(0) {}
 
+		node (node const & src):	is_black(src.is_black), is_nil(src.is_nil), content(src.content), father(src.father), right(src.right), left(src.left) {}
+//		node (node const & src) {
+//			*this = src;
+//		}
 		node& operator=(const node& other) {
 			this->is_black = other.is_black;
+			this->is_nil = other.is_nil;
 			this->content = other.content;
 			this->father = other.father;
 			this->right = other.right;
@@ -52,7 +57,7 @@ private:
 
 //		template <class _Cont, class _Comp, class _Alloc> friend class  RBTree;
 
-		typedef node<T>* node_pointer;
+		typedef node<typename ft::remove_const<value_type>::type >* node_pointer;
 
 	private:
 		node_pointer _node;
@@ -74,10 +79,12 @@ private:
 
 		TreeIter(void *node): _node(static_cast<node_pointer>(node)) {}
 
-		TreeIter(const TreeIter<typename ft::remove_const<value_type>::type > & other): _node(other.node()) {}
+		TreeIter(const TreeIter<typename ft::remove_const<value_type>::type > & other) {
+			*this = other;
+		}
 
 		TreeIter& operator=(const TreeIter<typename ft::remove_const<value_type>::type>& other) {
-			this->_node = other._node;
+			this->_node = other.node();
 			return *this;
 		}
 
@@ -482,6 +489,8 @@ public:
 	// operators
 
 	RBTree& operator=( const RBTree& other ) {
+		if (this == &other)
+			return *this;
 		this->_node_alloc = other._node_alloc;
 		this->_con_alloc = other._con_alloc;
 		this->_cmp = other._cmp;
@@ -693,13 +702,14 @@ public:
 	}
 
 	void swap(RBTree &other) {
-		std::swap(this->_root, other._root);
-		std::swap(this->_nil, other._nil);
-		std::swap(this->_header, other._header);
-		std::swap(this->_size, other._size);
-		std::swap(this->_node_alloc, other._node_alloc);
-		std::swap(this->_con_alloc, other._con_alloc);
-		std::swap(this->_cmp, other._cmp);
+//		std::swap(this->_root, other._root);
+//		std::swap(this->_nil, other._nil);
+//		std::swap(this->_header, other._header);
+//		std::swap(this->_size, other._size);
+//		std::swap(this->_node_alloc, other._node_alloc);
+//		std::swap(this->_con_alloc, other._con_alloc);
+//		std::swap(this->_cmp, other._cmp);
+		std::swap(other, *this);
 	}
 
 	// bounds
