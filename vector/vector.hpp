@@ -448,8 +448,16 @@ namespace ft
 				size_type new_cap = _capacity * 2 >= _size + count ? _capacity * 2 : _size + count;
 				pointer new_arr = _allocator.allocate(new_cap);
 				std::uninitialized_copy(begin(), pos, iterator(new_arr));
-				for (size_type i = 0; i < static_cast<size_type>(count); i++, first++)
-					_allocator.construct(new_arr + start + i, *first);
+				try {
+					for (size_type i = 0; i < static_cast<size_type>(count); i++, first++)
+						_allocator.construct(new_arr + start + i, *first);
+				}
+				catch (...){
+					for (size_type i = 0; i < static_cast<size_type>(count + start); ++i)
+						_allocator.destroy(new_arr + i);
+					_allocator.deallocate(new_arr, new_cap);
+					throw ;
+				}
 				std::uninitialized_copy(pos, end(), iterator(new_arr + start + count));
 				for (size_type i = 0; i < _size; i++)
 					_allocator.destroy(_array + i);

@@ -79,11 +79,11 @@ private:
 
 		TreeIter(void *node): _node(static_cast<node_pointer>(node)) {}
 
-		TreeIter(const TreeIter<typename ft::remove_const<value_type>::type > & other) {
+		TreeIter(const TreeIter<typename ft::remove_const<value_type>::type> & other) {
 			*this = other;
 		}
 
-		TreeIter& operator=(const TreeIter<typename ft::remove_const<value_type>::type>& other) {
+		TreeIter& operator=(const TreeIter<typename ft::remove_const<value_type>::type> & other) {
 			this->_node = other.node();
 			return *this;
 		}
