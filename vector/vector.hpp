@@ -161,7 +161,7 @@ namespace ft
 				_allocator.construct(_array + i, *(first + i));
 		}
 
-		vector(const vector& other): _capacity(0) {
+		vector(const vector& other): _size(0), _capacity(0) {
 			*this = other;
 		}
 
@@ -176,15 +176,15 @@ namespace ft
 		vector& operator=(const vector& x) {
 			if (this == &x)
 				return *this;
-			if (this->_capacity != 0) {
-				for (size_type i = 0; i < _size; i++)
-					_allocator.destroy(_array + i);
-				this->_allocator.deallocate(this->_array, this->_capacity);
-			}
-			this->_capacity = x._capacity;
+			for (size_type i = 0; i < _size; i++)
+				_allocator.destroy(_array + i);
 			this->_size = x._size;
-			this->_allocator = x._allocator;
-			this->_array = this->_allocator.allocate(this->_capacity);
+			if (this->_capacity < this->_size) {
+				if (this->_capacity != 0)
+					this->_allocator.deallocate(this->_array, this->_capacity);
+				this->_capacity = this->_size;
+				this->_array = this->_allocator.allocate(this->_capacity);
+			}
 			for (size_type i = 0; i < this->_size; i++)
 				this->_allocator.construct(this->_array + i, x[i]);
 			return *this;
