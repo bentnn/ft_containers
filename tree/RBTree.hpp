@@ -792,7 +792,7 @@ bool operator!=(const RBTree<Content, Compare, Alloc>& lhs,
 template<class Content, class Compare, class Alloc>
 bool operator<(const RBTree<Content, Compare, Alloc>& lhs,
 				const RBTree<Content, Compare, Alloc>& rhs) {
-	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end(), lhs.value_comp());
 }
 
 template<class Content, class Compare, class Alloc>
