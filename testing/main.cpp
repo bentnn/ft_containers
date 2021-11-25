@@ -112,60 +112,164 @@ bool operator<( const OnHeap& lhs, const OnHeap& rhs ) {
 	return lhs.get_val() < rhs.get_val();
 }
 
-class B {
+template <class T, class C>
+void fillSet(std::set<T, C> &mp) {
+	mp.insert(16);
+	mp.insert(8);
+	mp.insert(23);
+	mp.insert(7);
+	mp.insert(19);
+	mp.insert(29);
+	mp.insert(41);
+	mp.insert(4);
+	mp.insert(11);
+}
+
+template <class T, class C>
+void fillSet(ft::set<T, C> &mp) {
+	mp.insert(16);
+	mp.insert(8);
+	mp.insert(23);
+	mp.insert(7);
+	mp.insert(19);
+	mp.insert(29);
+	mp.insert(41);
+	mp.insert(4);
+	mp.insert(11);
+}
+
+class SetBoolTest {
 public:
-	char *l;
-	int i;
-	B():l(nullptr), i(1) {};
-	B(const int &ex) {
-		this->i = ex;
-		this->l = new char('a');
-	};
-	virtual ~B() {
-		delete this->l;
-		this->l = nullptr;
-	};
+	std::set<int> s1, s2, s3, s4;
+	std::set<std::string> s5, s6, s7, s8, s9;
+	ft::set<int> st1, st2, st3, st4;
+	ft::set<std::string> st5, st6, st7, st8, st9;
+
+	SetBoolTest() {
+		s1.insert(2); st1.insert(2);
+		s2.insert(3); st2.insert(3);
+		s3.insert(3); st3.insert(3);
+		s4.insert(4); st4.insert(4);
+		s4.insert(4); st4.insert(4);
+		s5.insert("122"); st5.insert("122");
+		s6.insert("123"); st6.insert("123");
+		s7.insert("124"); st7.insert("124");
+		s8.insert("12"); st8.insert("12");
+		s9.insert("123"); st9.insert("123");
+	}
 };
 
-class A : public B {
-public:
-	A():B(){};
-	A(const B* ex){
-		this->l = new char(*(ex->l));
-		this->i = ex->i;
-		if (ex->i == -1) throw "n";
-	}
-	~A() {
-		delete this->l;
-		this->l = nullptr;
-	};
-};
+template <class T>
+std::vector<int> comparator_test1() {
+	std::set<int> st;
+	std::vector<int> v;
+	fillSet(st);
+	for (typename std::set<T>::iterator it = st.begin(); it != st.end(); it++) { v.push_back(*it); }
+	for (typename std::set<T>::iterator it = --st.end(); it != st.begin(); it--) { v.push_back(*it); }
+	std::set<int, std::greater<int> > st1;
+	fillSet(st1);
+	v.push_back(*(st1.begin()));
+	st1.erase(41);
+	v.push_back(*(st1.begin()));
+	st1.erase(29);
+	v.push_back(*(st1.begin()));
+	std::set<int, std::greater<int> > st2;
+	st2.insert(3);
+	v.push_back(*(st2.begin()));
+	st2.erase(3);
+	if (st2.begin() == st2.end())
+		v.push_back(1);
+	std::set<int, std::plus<int> > st3;
+	fillSet(st3);
+	for (typename std::set<T>::iterator it = st3.begin(); it != st3.end(); it++) { v.push_back(*it); }
+	for (typename std::set<T>::iterator it = --st3.end(); it != st3.begin(); it--) { v.push_back(*it); }
+	std::set<int, std::minus<int> > st4;
+	fillSet(st4);
+	for (typename std::set<T>::iterator it = st4.begin(); it != st4.end(); it++) { v.push_back(*it); }
+	for (typename std::set<T>::iterator it = --st4.end(); it != st4.begin(); it--) { v.push_back(*it); }
+	std::set<int, std::greater_equal<int> > st5;
+	fillSet(st5);
+	for (typename std::set<T>::iterator it = st5.begin(); it != st5.end(); it++) { v.push_back(*it); }
+	for (typename std::set<T>::iterator it = --st5.end(); it != st5.begin(); it--) { v.push_back(*it); }
+	std::set<int, std::multiplies<int> > st6;
+	fillSet(st6);
+	for (typename std::set<T>::iterator it = st6.begin(); it != st6.end(); it++) { v.push_back(*it); }
+	for (typename std::set<T>::iterator it = --st6.end(); it != st6.begin(); it--) { v.push_back(*it); }
+	std::set<int, std::bit_xor<int> > st7;
+	fillSet(st7);
+	for (typename std::set<T>::iterator it = st7.begin(); it != st7.end(); it++) { v.push_back(*it); }
+	for (typename std::set<T>::iterator it = --st7.end(); it != st7.begin(); it--) { v.push_back(*it); }
+	std::set<int, std::logical_and<int> > st8;
+	fillSet(st8);
+	for (typename std::set<T>::iterator it = st8.begin(); it != st8.end(); it++) { v.push_back(*it); }
+	for (typename std::set<T>::iterator it = --st8.end(); it != st8.begin(); it--) { v.push_back(*it); }
+	v.push_back(st1.size());
+	return v;
+}
+
+template <class T>
+std::vector<int> comparator_test2() {
+	ft::set<int> st;
+	std::vector<int> v;
+	fillSet(st);
+	for (typename ft::set<T>::iterator it = st.begin(); it != st.end(); it++) { v.push_back(*it); }
+	for (typename ft::set<T>::iterator it = --st.end(); it != st.begin(); it--) { v.push_back(*it); }
+	ft::set<int, std::greater<int> > st1;
+	fillSet(st1);
+	v.push_back(*(st1.begin()));
+	st1.erase(41);
+	v.push_back(*(st1.begin()));
+	st1.erase(29);
+	v.push_back(*(st1.begin()));
+	ft::set<int, std::greater<int> > st2;
+	st2.insert(3);
+	v.push_back(*(st2.begin()));
+	st2.erase(3);
+	if (st2.begin() == st2.end())
+		v.push_back(1);
+	ft::set<int, std::plus<int> > st3;
+	fillSet(st3);
+	for (typename ft::set<T>::iterator it = st3.begin(); it != st3.end(); it++) { v.push_back(*it); }
+	for (typename ft::set<T>::iterator it = --st3.end(); it != st3.begin(); it--) { v.push_back(*it); }
+	ft::set<int, std::minus<int> > st4;
+	fillSet(st4);
+	for (typename ft::set<T>::iterator it = st4.begin(); it != st4.end(); it++) { v.push_back(*it); }
+	for (typename ft::set<T>::iterator it = --st4.end(); it != st4.begin(); it--) { v.push_back(*it); }
+	ft::set<int, std::greater_equal<int> > st5;
+	fillSet(st5);
+	for (typename ft::set<T>::iterator it = st5.begin(); it != st5.end(); it++) { v.push_back(*it); }
+	for (typename ft::set<T>::iterator it = --st5.end(); it != st5.begin(); it--) { v.push_back(*it); }
+	ft::set<int, std::multiplies<int> > st6;
+	fillSet(st6);
+	for (typename ft::set<T>::iterator it = st6.begin(); it != st6.end(); it++) { v.push_back(*it); }
+	for (typename ft::set<T>::iterator it = --st6.end(); it != st6.begin(); it--) { v.push_back(*it); }
+	ft::set<int, std::bit_xor<int> > st7;
+	fillSet(st7);
+	for (typename ft::set<T>::iterator it = st7.begin(); it != st7.end(); it++) { v.push_back(*it); }
+	for (typename ft::set<T>::iterator it = --st7.end(); it != st7.begin(); it--) { v.push_back(*it); }
+	std::set<int, std::logical_and<int> > st8;
+	fillSet(st8);
+	for (typename std::set<T>::iterator it = st8.begin(); it != st8.end(); it++) { v.push_back(*it); }
+	for (typename std::set<T>::iterator it = --st8.end(); it != st8.begin(); it--) { v.push_back(*it); }
+	v.push_back(st1.size());
+
+	return v;
+}
 
 int main() {
-//	ft::vector<int> vector;
-//
-	std::vector<int> v;
-//	vector.assign(26000000, 1);
-//	v.push_back(*(vector.insert(vector.end() - 8000000, 44)));
-//	v.push_back(vector.size());
-//	v.push_back(vector.capacity());
-	std::unique_ptr <B> k2(new B(3));
-	std::unique_ptr <B> k3(new B(4));
-	std::unique_ptr <B> k4(new B(-1));
-	ft::vector<A> vv;
-	ft::vector<B *> v1;
+//	std::vector<int> v1(1, 100);
+//	std::vector<int> v2(5, 200);
+//	v1.swap(v2);
+//	std::cout << v2.size();
+	std::vector<int> v1 =  comparator_test1<int>();
+	std::vector<int> v2 =  comparator_test2<int>();
+	for (size_t i = 0; i < v1.size(); ++i)
+		std::cout << v1[i] << " ";
+	std::cout << std::endl;
 
-	v1.push_back(&(*k2));
-	v1.push_back(&(*k3));
-	v1.push_back(&(*k4));
-	try {
-		vv.insert(vv.begin(), v1.begin(), v1.end());
-	}
-	catch (...) {
-		std::cout << "e.what() " << std::endl;
-		v.push_back(vv.size());
-		v.push_back(vv.capacity());
-	}
+	for (size_t i = 0; i < v2.size(); ++i)
+		std::cout << v2[i] << " ";
+	std::cout << std::endl;
 }
 
 //	RBTree<int> tree;

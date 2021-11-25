@@ -490,7 +490,11 @@ namespace ft
 //			this->_capacity = other._capacity;
 //			other._capacity = tmp;
 //			allocator_type tmp_alloc = this->_allocator;
-			std::swap(other, *this);
+//			std::swap(other, *this);
+			std::swap(this->_array, other._array);
+			std::swap(this->_size, other._size);
+			std::swap(this->_capacity, other._capacity);
+			std::swap(this->_allocator, other._allocator);
 		}
 
 		void assign(size_type count, const T& value) {
@@ -518,8 +522,7 @@ namespace ft
 				_capacity = count;
 			}
 			iterator pos = begin();
-			while (first < last)
-			{
+			while (first < last) {
 				_allocator.construct(&(*pos), *first);
 				pos++;
 				first++;
@@ -620,11 +623,6 @@ namespace ft
 		return !(lhs < rhs);
 	}
 
-	template< class T, class Alloc >
-	void swap(std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs) {
-		lhs.swap(rhs);
-	}
-
 	template<typename A, typename B>
 	bool operator==(const typename vector<A>::template RanIt<A> &lhs, const typename vector<B>::template RanIt<B> &rhs) {
 		return &(*lhs) == &(*rhs);
@@ -675,6 +673,13 @@ namespace ft
 	template<typename L>
 	typename ft::vector<L>::iterator operator -(const typename ft::vector<L>::iterator::difference_type & a, const typename ft::vector<L>::iterator & iter){
 		return	(iter - a);
+	}
+}
+
+namespace std {
+	template< class T, class Alloc >
+	inline void swap(ft::vector<T, Alloc>& lhs, ft::vector<T, Alloc>& rhs) {
+		lhs.swap(rhs);
 	}
 }
 #endif
