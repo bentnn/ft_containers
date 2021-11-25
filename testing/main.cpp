@@ -245,9 +245,8 @@ bool iterator_traits_test() {
 }
 
 int main() {
-	std::cout << std::is_integral<std::string>::value;
-	//std::vector<int> v1(1, 100);
-	std::stack<int> s;
+	ft::vector<int> a;
+	a.push_back(2);
 	//std::vector<int> v2(5, 200);
 //	v1.swap(v2);
 

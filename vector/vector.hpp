@@ -36,19 +36,6 @@ namespace ft
 		size_type _capacity;		// how much allocated memory vector has
 		allocator_type _allocator;	// allocator for allocating and deallocating memory
 
-//		template<class InputIt>
-//		void uninitialized_copy_from_end(iterator first, iterator last, iterator dist) {
-//			last--;
-//			dist += last - first;
-//
-//			while (last >= first) {
-//				//_allocator.destroy(dist.base());
-//				_allocator.construct(dist.base(), *last);
-//				last--;
-//				dist--;
-//			}
-//		}
-
 	public:
 		// constructors
 		explicit vector(const allocator_type& alloc = allocator_type()): _array(0), _size(0),
@@ -226,13 +213,13 @@ namespace ft
 			return _allocator;
 		}
 
-		pointer data() {
-			return _array;
-		}
-
-		const_pointer data() const {
-			return _array;
-		}
+//		pointer data() {
+//			return _array;
+//		}
+//
+//		const_pointer data() const {
+//			return _array;
+//		}
 
 		size_type max_size() const {
 			return _allocator.max_size();
@@ -257,34 +244,28 @@ namespace ft
 		}
 
 		iterator erase(iterator pos) {
-			difference_type d = std::distance(begin(), pos);
-			std::copy(pos + 1, end(), pos);
+			size_type d = static_cast<size_type>(std::distance(begin(), pos));
+			for (size_type i = d; i < _size - 1; ++i) {
+				_allocator.destroy(_array + i);
+				_allocator.construct(_array + i, *(_array + i + 1));
+			}
 			_size--;
 			_allocator.destroy(_array + _size - 1);
-			return d == static_cast<difference_type>(_size) ? end() : iterator(_array + d);
+			return  iterator(_array + d);
 		}
 
 		iterator erase(iterator first, iterator last) {
 			difference_type start = std::distance(begin(), first);
-			difference_type need_to_copy = std::distance(last, end());
-			bool last_is_end = (last == end());
-			while (first != last) {
-				_allocator.destroy(&(*first));
-				first++;
-			}
-			size_type i = start;
-			while (last < end()) {
-				if (this->_array + start)
-					_allocator.destroy(this->_array + i);
-				_allocator.construct(this->_array + i, *last);
-				i++;
-				last++;
-			}
-			//std::uninitialized_copy(last.base(), end().base(), _array + start);
-			for (size_type i = start + need_to_copy; i < _size; i++)
+			difference_type count = std::distance(first, last);
+			size_type i;
+			for (i = start; i < _size - count; ++i) {
 				_allocator.destroy(_array + i);
-			_size = start + need_to_copy;
-			return last_is_end ? end() : iterator(_array + start);
+				_allocator.construct(_array + i, *(_array + i + count));
+			}
+			for (; i < _size; ++i)
+				_allocator.destroy(_array + i);
+			_size -= count;
+			return iterator(_array + start);
 		}
 
 		void insert(iterator pos, size_type count, const T& value) {
