@@ -4,104 +4,16 @@
 #include <iostream>
 #include "../iterators/reverse_iterator.hpp"
 #include "../utils/enable_if.hpp"
-#include "../utils/iterator_traits.hpp"
-#include "../utils/remove_const.hpp"
+#include "../iterators/vector_iterator.hpp"
 #include "../utils/is_integral.hpp"
 #include "../utils/lexicographical_compare.hpp"
+#include "../utils/equal.hpp"
 #include <cstring>
 
 namespace ft
 {
 	template <class T, class Allocator = std::allocator<T> >
 	class vector {
-
-	private:
-
-	template< typename L>class RanIt
-	{
-	public:
-		typedef	typename ft::iterator_traits<L*>::value_type 	value_type;
-		typedef	typename ft::iterator_traits<L*>::pointer	pointer;
-		typedef	typename ft::iterator_traits<L*>::reference	reference;
-		typedef	typename ft::iterator_traits<L*>::difference_type	difference_type;
-		//this is for std::functions
-		typedef	std::random_access_iterator_tag iterator_category;
-
-		//maybe protected???
-	private:
-		pointer _ptr;
-
-	public:
-
-		// CONSTRUCTORS
-		RanIt() : _ptr() {}
-
-		RanIt(pointer a) : _ptr(a) {}
-
-		RanIt(const RanIt<typename ft::remove_const<value_type>::type > & src) : _ptr(&(*src)) {}
-
-		virtual ~RanIt() {}
-
-		RanIt<value_type> & operator=(RanIt<typename ft::remove_const<value_type>::type > const & src) {
-			_ptr = &(*src);
-			return *this;
-		}
-
-		//OPERATORS
-		RanIt & operator++() {
-			++_ptr;
-			return *this;
-		}
-
-		RanIt operator++(int) {
-			RanIt tmp(*this);
-			++_ptr;
-			return tmp;
-		}
-
-		RanIt & operator--() {
-			--_ptr;
-			return *this;
-		}
-
-		RanIt  operator--(int) {
-			RanIt tmp = *this;
-			--_ptr;
-			return tmp;
-		}
-		RanIt operator+(const difference_type & a) const {
-			return _ptr + a;
-		}
-
-		RanIt operator-(const difference_type & a) const {
-			return _ptr - a;
-		}
-
-		RanIt & operator+=(const difference_type & a) {
-			_ptr += a;
-			return (*this);
-		}
-
-		RanIt & operator-=(const difference_type & a) {
-			_ptr -= a;
-			return (*this);
-		}
-
-		pointer operator->() const {
-			return _ptr;
-		}
-
-		reference operator*() const {
-			return *_ptr;
-		}
-
-		reference operator[](difference_type n) const {
-			return *(_ptr + n);
-		}
-	};
-
-
-
 	public:
 		// def
 		typedef T value_type;
@@ -480,17 +392,6 @@ namespace ft
 		}
 
 		void swap(vector& other) {
-//			pointer tmp = this->_array;
-//			this->_array = other._array;
-//			other._array = tmp;
-//			size_t tmp = this->_size;
-//			this->_size = other.size();
-//			other._size = tmp;
-//			tmp = this->_capacity;
-//			this->_capacity = other._capacity;
-//			other._capacity = tmp;
-//			allocator_type tmp_alloc = this->_allocator;
-//			std::swap(other, *this);
 			std::swap(this->_array, other._array);
 			std::swap(this->_size, other._size);
 			std::swap(this->_capacity, other._capacity);
@@ -529,68 +430,18 @@ namespace ft
 			}
 			_size = count;
 		}
-
-		template<typename A, typename B>
-		friend bool operator==(const vector::template RanIt<A> & lhs, const vector::template RanIt<B> & rhs){
-			return &(*lhs) == &(*rhs);
-		}
-
-		template<typename A, typename B>
-		friend bool operator!=(const vector::template RanIt<A> & lhs, const vector::template RanIt<B> & rhs) {
-			return &(*lhs) != &(*rhs);
-		}
-
-		template<typename A, typename B>
-		friend bool operator>(const vector::template RanIt<A> & lhs, const vector::template RanIt<B> & rhs) {
-			return &(*lhs) > &(*rhs);
-		}
-
-		template<typename A, typename B>
-		friend bool operator<(const vector::template RanIt<A> & lhs, const vector::template RanIt<B> & rhs) {
-			return &(*lhs) < &(*rhs);
-		}
-
-		template<typename A, typename B>
-		friend bool operator<=(const vector::template RanIt<A> & lhs, const vector::template RanIt<B> & rhs) {
-			return &(*lhs) <= &(*rhs);
-		}
-
-
-		template<typename A, typename B>
-		friend bool operator>=(const vector::template RanIt<A> & lhs, const vector::template RanIt<B> & rhs) {
-			return &(*lhs) >= &(*rhs);
-		}
-
-		template<typename A, typename B>
-		friend typename vector::template RanIt<A>::difference_type operator-(const vector::template RanIt<A> & lhs, const vector::template RanIt<B> & rhs){
-			return &(*lhs) - &(*rhs);
-		}
-
-		template<typename A, typename B>
-		friend typename vector::template RanIt<A>::difference_type operator+(const vector::template RanIt<A> & lhs, const vector::template RanIt<B> & rhs){
-			return &(*lhs) + &(*rhs);
-		}
-
-		template<typename L>
-		friend vector::template RanIt<L> operator +(const typename vector::template RanIt<L>::difference_type & a, const vector::template RanIt<L> & iter){
-			return	(iter + a);
-		}
-
-		template<typename L>
-		friend vector::template RanIt<L> operator -(const typename vector::template RanIt<L>::difference_type & a, const vector::template RanIt<L> & iter){
-			return	(iter - a);
-		}
 	};
 
 	template< class A, class Alloc>
 	bool operator==(const ft::vector<A, Alloc> &lhs,
 					const ft::vector<A, Alloc> &rhs) {
-		if (lhs.size() != rhs.size())
-			return false;
-		for (size_t i = 0; i < rhs.size(); i++)
-			if (lhs[i] != rhs[i])
-				return false;
-		return true;
+		return lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+//		if (lhs.size() != rhs.size())
+//			return false;
+//		for (size_t i = 0; i < rhs.size(); i++)
+//			if (lhs[i] != rhs[i])
+//				return false;
+//		return true;
 	}
 
 	template< class A, class Alloc>
@@ -621,58 +472,6 @@ namespace ft
 	bool operator>=(const ft::vector<A, Alloc> &lhs,
 					const ft::vector<A, Alloc> &rhs) {
 		return !(lhs < rhs);
-	}
-
-	template<typename A, typename B>
-	bool operator==(const typename vector<A>::template RanIt<A> &lhs, const typename vector<B>::template RanIt<B> &rhs) {
-		return &(*lhs) == &(*rhs);
-	}
-
-	template<typename A, typename B>
-	bool operator!=(const typename vector<A>::template RanIt<A> &lhs, const typename vector<B>::template RanIt<B> &rhs) {
-		return !(lhs == rhs);
-	}
-
-
-	template<typename A, typename B>
-	bool operator>(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
-		return &(*lhs) > &(*rhs);
-	}
-
-	template<typename A, typename B>
-	bool operator<(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
-		return &(*lhs) < &(*rhs);
-	}
-
-	template<typename A, typename B>
-	bool operator<=(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
-		return &(*lhs) <= &(*rhs);
-	}
-
-
-	template<typename A, typename B>
-	bool operator>=(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs) {
-		return &(*lhs) >= &(*rhs);
-	}
-
-	template<typename A, typename B>
-	typename ft::vector<A>::iterator::difference_type operator-(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs){
-		return &(*lhs) - &(*rhs);
-	}
-
-	template<typename A, typename B>
-	typename ft::vector<A>::iterator::difference_type operator+(const typename ft::vector<A>::iterator  & lhs, const typename ft::vector<B>::iterator  & rhs){
-		return &(*lhs) + &(*rhs);
-	}
-
-	template<typename L>
-	typename ft::vector<L>::iterator operator +(const typename ft::vector<L>::iterator::difference_type & a, const typename ft::vector<L>::iterator & iter){
-		return	(iter + a);
-	}
-
-	template<typename L>
-	typename ft::vector<L>::iterator operator -(const typename ft::vector<L>::iterator::difference_type & a, const typename ft::vector<L>::iterator & iter){
-		return	(iter - a);
 	}
 }
 

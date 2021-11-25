@@ -10,6 +10,20 @@
 ../utils/iterator_traits.hpp
 /Users/aabet/projects/ft_containers/ft_containers/utils/iterator_traits.hpp
 
+/Users/aabet/projects/ft_containers/ft_containers/iterators/tree_iterator.hpp
+../utils/remove_const.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/remove_const.hpp
+../utils/iterator_traits.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/iterator_traits.hpp
+../utils/node.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/node.hpp
+
+/Users/aabet/projects/ft_containers/ft_containers/iterators/vector_iterator.hpp
+../utils/iterator_traits.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/iterator_traits.hpp
+../utils/remove_const.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/remove_const.hpp
+
 /Users/aabet/projects/ft_containers/ft_containers/map/map.hpp
 iostream
 -
@@ -67,8 +81,16 @@ cstdlib
 /Users/aabet/projects/ft_containers/ft_containers/iterators/reverse_iterator.hpp
 ../utils/lexicographical_compare.hpp
 /Users/aabet/projects/ft_containers/ft_containers/utils/lexicographical_compare.hpp
+../iterators/tree_iterator.hpp
+/Users/aabet/projects/ft_containers/ft_containers/iterators/tree_iterator.hpp
+../utils/node.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/node.hpp
+../utils/equal.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/equal.hpp
 
 /Users/aabet/projects/ft_containers/ft_containers/utils/enable_if.hpp
+
+/Users/aabet/projects/ft_containers/ft_containers/utils/equal.hpp
 
 /Users/aabet/projects/ft_containers/ft_containers/utils/is_integral.hpp
 remove_const.hpp
@@ -82,6 +104,8 @@ is_integral.hpp
 enable_if.hpp
 /Users/aabet/projects/ft_containers/ft_containers/utils/enable_if.hpp
 
+/Users/aabet/projects/ft_containers/ft_containers/utils/node.hpp
+
 /Users/aabet/projects/ft_containers/ft_containers/utils/pair.hpp
 
 /Users/aabet/projects/ft_containers/ft_containers/utils/remove_const.hpp
@@ -93,14 +117,14 @@ iostream
 /Users/aabet/projects/ft_containers/ft_containers/iterators/reverse_iterator.hpp
 ../utils/enable_if.hpp
 /Users/aabet/projects/ft_containers/ft_containers/utils/enable_if.hpp
-../utils/iterator_traits.hpp
-/Users/aabet/projects/ft_containers/ft_containers/utils/iterator_traits.hpp
-../utils/remove_const.hpp
-/Users/aabet/projects/ft_containers/ft_containers/utils/remove_const.hpp
+../iterators/vector_iterator.hpp
+/Users/aabet/projects/ft_containers/ft_containers/iterators/vector_iterator.hpp
 ../utils/is_integral.hpp
 /Users/aabet/projects/ft_containers/ft_containers/utils/is_integral.hpp
 ../utils/lexicographical_compare.hpp
 /Users/aabet/projects/ft_containers/ft_containers/utils/lexicographical_compare.hpp
+../utils/equal.hpp
+/Users/aabet/projects/ft_containers/ft_containers/utils/equal.hpp
 cstring
 -
 

@@ -3,6 +3,8 @@
 
 CMakeFiles/ft_containers.dir/testing/main.cpp.o: \
  ../iterators/reverse_iterator.hpp \
+ ../iterators/tree_iterator.hpp \
+ ../iterators/vector_iterator.hpp \
  ../map/map.hpp \
  ../set/set.hpp \
  ../stack/stack.hpp \
@@ -10,9 +12,11 @@ CMakeFiles/ft_containers.dir/testing/main.cpp.o: \
  ../testing/testing.hpp \
  ../tree/RBTree.hpp \
  ../utils/enable_if.hpp \
+ ../utils/equal.hpp \
  ../utils/is_integral.hpp \
  ../utils/iterator_traits.hpp \
  ../utils/lexicographical_compare.hpp \
+ ../utils/node.hpp \
  ../utils/pair.hpp \
  ../utils/remove_const.hpp \
  ../vector/vector.hpp

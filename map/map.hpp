@@ -33,9 +33,9 @@ namespace ft {
 
 		public:
 			pair_compare(const key_compare & cmp) : _cmp(cmp) {}
-
 			bool operator()(const value_type& x, const value_type& y) const {
 				return _cmp(x.first, y.first);
+				//return _cmp(x.first, y.first) || (!_cmp(y.first, x.first) && x.second < y.second);
 			}
 		};
 
@@ -266,13 +266,14 @@ namespace ft {
 					const map<Key, T, Compare, Alloc>& rhs) {
 		return !(lhs < rhs);
 	}
+}
 
+namespace std {
 	template<class Key, class T, class Compare, class Alloc>
 	void swap(const map<Key, T, Compare, Alloc>& lhs,
-					const map<Key, T, Compare, Alloc>& rhs) {
+			  const map<Key, T, Compare, Alloc>& rhs) {
 		lhs.swap(rhs);
 	}
 }
-
 
 #endif

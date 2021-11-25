@@ -108,9 +108,9 @@ private:
 	int *values;
 };
 
-bool operator<( const OnHeap& lhs, const OnHeap& rhs ) {
-	return lhs.get_val() < rhs.get_val();
-}
+//bool operator<( const OnHeap& lhs, const OnHeap& rhs ) {
+//	return lhs.get_val() < rhs.get_val();
+//}
 
 template <class T, class C>
 void fillSet(std::set<T, C> &mp) {
@@ -159,117 +159,116 @@ public:
 	}
 };
 
-template <class T>
-std::vector<int> comparator_test1() {
-	std::set<int> st;
-	std::vector<int> v;
-	fillSet(st);
-	for (typename std::set<T>::iterator it = st.begin(); it != st.end(); it++) { v.push_back(*it); }
-	for (typename std::set<T>::iterator it = --st.end(); it != st.begin(); it--) { v.push_back(*it); }
-	std::set<int, std::greater<int> > st1;
-	fillSet(st1);
-	v.push_back(*(st1.begin()));
-	st1.erase(41);
-	v.push_back(*(st1.begin()));
-	st1.erase(29);
-	v.push_back(*(st1.begin()));
-	std::set<int, std::greater<int> > st2;
-	st2.insert(3);
-	v.push_back(*(st2.begin()));
-	st2.erase(3);
-	if (st2.begin() == st2.end())
-		v.push_back(1);
-	std::set<int, std::plus<int> > st3;
-	fillSet(st3);
-	for (typename std::set<T>::iterator it = st3.begin(); it != st3.end(); it++) { v.push_back(*it); }
-	for (typename std::set<T>::iterator it = --st3.end(); it != st3.begin(); it--) { v.push_back(*it); }
-	std::set<int, std::minus<int> > st4;
-	fillSet(st4);
-	for (typename std::set<T>::iterator it = st4.begin(); it != st4.end(); it++) { v.push_back(*it); }
-	for (typename std::set<T>::iterator it = --st4.end(); it != st4.begin(); it--) { v.push_back(*it); }
-	std::set<int, std::greater_equal<int> > st5;
-	fillSet(st5);
-	for (typename std::set<T>::iterator it = st5.begin(); it != st5.end(); it++) { v.push_back(*it); }
-	for (typename std::set<T>::iterator it = --st5.end(); it != st5.begin(); it--) { v.push_back(*it); }
-	std::set<int, std::multiplies<int> > st6;
-	fillSet(st6);
-	for (typename std::set<T>::iterator it = st6.begin(); it != st6.end(); it++) { v.push_back(*it); }
-	for (typename std::set<T>::iterator it = --st6.end(); it != st6.begin(); it--) { v.push_back(*it); }
-	std::set<int, std::bit_xor<int> > st7;
-	fillSet(st7);
-	for (typename std::set<T>::iterator it = st7.begin(); it != st7.end(); it++) { v.push_back(*it); }
-	for (typename std::set<T>::iterator it = --st7.end(); it != st7.begin(); it--) { v.push_back(*it); }
-	std::set<int, std::logical_and<int> > st8;
-	fillSet(st8);
-	for (typename std::set<T>::iterator it = st8.begin(); it != st8.end(); it++) { v.push_back(*it); }
-	for (typename std::set<T>::iterator it = --st8.end(); it != st8.begin(); it--) { v.push_back(*it); }
-	v.push_back(st1.size());
-	return v;
+class MapBoolTest {
+public:
+	std::map<int, int> m1, m2, m3, m4;
+	std::map<std::string, std::string> m5, m6, m7, m8, m9;
+	ft::map<int, int> mp1, mp2, mp3, mp4;
+	ft::map<std::string, std::string> mp5, mp6, mp7, mp8, mp9;
+
+	MapBoolTest() {
+		m1.insert(std::make_pair(2, 3)); mp1.insert(ft::make_pair(2, 3));
+		m2.insert(std::make_pair(3, 3)); mp2.insert(ft::make_pair(3, 3));
+		m3.insert(std::make_pair(3, 4)); mp3.insert(ft::make_pair(3, 4));
+		m4.insert(std::make_pair(4, 4)); mp4.insert(ft::make_pair(4, 4));
+		m4.insert(std::make_pair(4, 5)); mp4.insert(ft::make_pair(4, 5));
+		m5.insert(std::make_pair("123", "123")); mp5.insert(ft::make_pair("123", "123"));
+		m6.insert(std::make_pair("123", "124")); mp6.insert(ft::make_pair("123", "124"));
+		m7.insert(std::make_pair("124", "123")); mp7.insert(ft::make_pair("124", "123"));
+		m8.insert(std::make_pair("12", "123")); mp8.insert(ft::make_pair("12", "123"));
+		m9.insert(std::make_pair("123", "12")); mp9.insert(ft::make_pair("123", "12"));
+	}
+};
+
+
+bool map_less_than_test() {
+	std::vector<int> result, result2;
+	MapBoolTest mt;
+
+	result.push_back(mt.m1 < mt.m1); result.push_back(mt.m3 < mt.m3); result.push_back(mt.m5 < mt.m9);
+	result.push_back(mt.m1 < mt.m2); result.push_back(mt.m3 < mt.m4); result.push_back(mt.m6 < mt.m6);
+	result.push_back(mt.m1 < mt.m3); result.push_back(mt.m4 < mt.m4); result.push_back(mt.m6 < mt.m7);
+	result.push_back(mt.m1 < mt.m4); result.push_back(mt.m5 < mt.m5); result.push_back(mt.m6 < mt.m8);
+	result.push_back(mt.m2 < mt.m2); result.push_back(mt.m5 < mt.m6); result.push_back(mt.m6 < mt.m9);
+	result.push_back(mt.m2 < mt.m3); result.push_back(mt.m5 < mt.m7); result.push_back(mt.m7 < mt.m7);
+	result.push_back(mt.m2 < mt.m4); result.push_back(mt.m5 < mt.m8); result.push_back(mt.m7 < mt.m8);
+	result.push_back(mt.m7 < mt.m9); result.push_back(mt.m8 < mt.m8); result.push_back(mt.m8 < mt.m9);
+	result.push_back(mt.m9 < mt.m9);
+
+
+	result2.push_back(mt.mp1 < mt.mp1); result2.push_back(mt.mp3 < mt.mp3); result2.push_back(mt.mp5 < mt.mp9);
+	result2.push_back(mt.mp1 < mt.mp2); result2.push_back(mt.mp3 < mt.mp4); result2.push_back(mt.mp6 < mt.mp6);
+	result2.push_back(mt.mp1 < mt.mp3); result2.push_back(mt.mp4 < mt.mp4); result2.push_back(mt.mp6 < mt.mp7);
+	result2.push_back(mt.mp1 < mt.mp4); result2.push_back(mt.mp5 < mt.mp5); result2.push_back(mt.mp6 < mt.mp8);
+	result2.push_back(mt.mp2 < mt.mp2); result2.push_back(mt.mp5 < mt.mp6); result2.push_back(mt.mp6 < mt.mp9);
+	result2.push_back(mt.mp2 < mt.mp3); result2.push_back(mt.mp5 < mt.mp7); result2.push_back(mt.mp7 < mt.mp7);
+	result2.push_back(mt.mp2 < mt.mp4); result2.push_back(mt.mp5 < mt.mp8); result2.push_back(mt.mp7 < mt.mp8);
+	result2.push_back(mt.mp7 < mt.mp9); result2.push_back(mt.mp8 < mt.mp8); result2.push_back(mt.mp8 < mt.mp9);
+	result2.push_back(mt.mp9 < mt.mp9);
+
+	return result == result2;
 }
 
-template <class T>
-std::vector<int> comparator_test2() {
-	ft::set<int> st;
-	std::vector<int> v;
-	fillSet(st);
-	for (typename ft::set<T>::iterator it = st.begin(); it != st.end(); it++) { v.push_back(*it); }
-	for (typename ft::set<T>::iterator it = --st.end(); it != st.begin(); it--) { v.push_back(*it); }
-	ft::set<int, std::greater<int> > st1;
-	fillSet(st1);
-	v.push_back(*(st1.begin()));
-	st1.erase(41);
-	v.push_back(*(st1.begin()));
-	st1.erase(29);
-	v.push_back(*(st1.begin()));
-	ft::set<int, std::greater<int> > st2;
-	st2.insert(3);
-	v.push_back(*(st2.begin()));
-	st2.erase(3);
-	if (st2.begin() == st2.end())
-		v.push_back(1);
-	ft::set<int, std::plus<int> > st3;
-	fillSet(st3);
-	for (typename ft::set<T>::iterator it = st3.begin(); it != st3.end(); it++) { v.push_back(*it); }
-	for (typename ft::set<T>::iterator it = --st3.end(); it != st3.begin(); it--) { v.push_back(*it); }
-	ft::set<int, std::minus<int> > st4;
-	fillSet(st4);
-	for (typename ft::set<T>::iterator it = st4.begin(); it != st4.end(); it++) { v.push_back(*it); }
-	for (typename ft::set<T>::iterator it = --st4.end(); it != st4.begin(); it--) { v.push_back(*it); }
-	ft::set<int, std::greater_equal<int> > st5;
-	fillSet(st5);
-	for (typename ft::set<T>::iterator it = st5.begin(); it != st5.end(); it++) { v.push_back(*it); }
-	for (typename ft::set<T>::iterator it = --st5.end(); it != st5.begin(); it--) { v.push_back(*it); }
-	ft::set<int, std::multiplies<int> > st6;
-	fillSet(st6);
-	for (typename ft::set<T>::iterator it = st6.begin(); it != st6.end(); it++) { v.push_back(*it); }
-	for (typename ft::set<T>::iterator it = --st6.end(); it != st6.begin(); it--) { v.push_back(*it); }
-	ft::set<int, std::bit_xor<int> > st7;
-	fillSet(st7);
-	for (typename ft::set<T>::iterator it = st7.begin(); it != st7.end(); it++) { v.push_back(*it); }
-	for (typename ft::set<T>::iterator it = --st7.end(); it != st7.begin(); it--) { v.push_back(*it); }
-	std::set<int, std::logical_and<int> > st8;
-	fillSet(st8);
-	for (typename std::set<T>::iterator it = st8.begin(); it != st8.end(); it++) { v.push_back(*it); }
-	for (typename std::set<T>::iterator it = --st8.end(); it != st8.begin(); it--) { v.push_back(*it); }
-	v.push_back(st1.size());
+#define _vector ft::vector
 
-	return v;
+bool iterator_traits_test() {
+	std::vector<std::string> res;
+	std::vector<std::string> res2;
+
+	res.push_back(typeid(std::vector<int>::iterator::iterator_category).name());
+	res.push_back(typeid(std::vector<int>::iterator::value_type).name());
+	res.push_back(typeid(std::vector<int>::iterator::difference_type).name());
+	res.push_back(typeid(std::vector<int>::iterator::iterator_type).name());
+	res.push_back(typeid(std::vector<int>::iterator::pointer).name());
+	res.push_back(typeid(std::vector<int>::iterator::reference).name());
+	res.push_back(typeid(std::vector<int>::reverse_iterator::iterator_category).name());
+	res.push_back(typeid(std::vector<int>::reverse_iterator::value_type).name());
+	res.push_back(typeid(std::vector<int>::reverse_iterator::difference_type).name());
+	res.push_back(typeid(std::vector<int>::reverse_iterator::pointer).name());
+	res.push_back(typeid(std::vector<int>::reverse_iterator::reference).name());
+
+	res2.push_back(typeid(_vector<int>::iterator::iterator_category).name());
+	res2.push_back(typeid(_vector<int>::iterator::value_type).name());
+	res2.push_back(typeid(_vector<int>::iterator::difference_type).name());
+	res2.push_back(typeid(_vector<int>::iterator::iterator_type).name());
+	res2.push_back(typeid(_vector<int>::iterator::pointer).name());
+	res2.push_back(typeid(_vector<int>::iterator::reference).name());
+	res2.push_back(typeid(_vector<int>::reverse_iterator::iterator_category).name());
+	res2.push_back(typeid(_vector<int>::reverse_iterator::value_type).name());
+	res2.push_back(typeid(_vector<int>::reverse_iterator::difference_type).name());
+	res2.push_back(typeid(_vector<int>::reverse_iterator::pointer).name());
+	res2.push_back(typeid(_vector<int>::reverse_iterator::reference).name());
+
+	for (size_t i = 0; i < res.size(); i++)
+		std::cout << res[i] << "\t\t" << res2[i] << std::endl;
+	return res == res2;
 }
 
 int main() {
-//	std::vector<int> v1(1, 100);
-//	std::vector<int> v2(5, 200);
+	std::cout << std::is_integral<std::string>::value;
+	//std::vector<int> v1(1, 100);
+	std::stack<int> s;
+	//std::vector<int> v2(5, 200);
 //	v1.swap(v2);
-//	std::cout << v2.size();
-	std::vector<int> v1 =  comparator_test1<int>();
-	std::vector<int> v2 =  comparator_test2<int>();
-	for (size_t i = 0; i < v1.size(); ++i)
-		std::cout << v1[i] << " ";
-	std::cout << std::endl;
 
-	for (size_t i = 0; i < v2.size(); ++i)
-		std::cout << v2[i] << " ";
-	std::cout << std::endl;
+//	std::map<int, OnHeap> m1;
+//	std::map<int, OnHeap> m2;
+//	m1.insert(std::make_pair(3, OnHeap()));
+//	m2.insert(std::make_pair(3, OnHeap()));
+//	std::cout << (m1 == m2);
+//	std::cout << map_less_than_test();
+//	std::cout << map_less_than_test();
+//	std::__wrap_iter<int *> a;
+//	std::vector<int> v1 =  erase_test_2<int>();
+//	std::vector<int> v2 =  erase_test<int>();
+//	for (size_t i = 0; i < v1.size(); ++i)
+//		std::cout << v1[i] << " ";
+//	std::cout << std::endl;
+//
+//	for (size_t i = 0; i < v2.size(); ++i)
+//		std::cout << v2[i] << " ";
+//	std::cout << std::endl;
+//	std::cout << (v1 == v2) << " \n";
 }
 
 //	RBTree<int> tree;

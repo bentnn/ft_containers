@@ -83,6 +83,9 @@
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/iterators/reverse_iterator.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
+		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/iterators/tree_iterator.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/map/map.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
@@ -105,6 +108,9 @@
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/tree/RBTree.hpp">
+			<Option target="ft_containers"/>
+		</Unit>
+		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/utils/node.hpp">
 			<Option target="ft_containers"/>
 		</Unit>
 		<Unit filename="/Users/aabet/projects/ft_containers/ft_containers/utils/pair.hpp">

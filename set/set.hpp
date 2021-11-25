@@ -235,7 +235,9 @@ namespace ft {
 					const set<Key, Compare, Alloc>& rhs) {
 		return !(lhs < rhs);
 	}
+}
 
+namespace std {
 	template<class Key,class Compare, class Alloc>
 	void swap(const set<Key, Compare, Alloc>& lhs,
 			  const set<Key, Compare, Alloc>& rhs) {
