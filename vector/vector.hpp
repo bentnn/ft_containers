@@ -79,7 +79,7 @@ namespace ft
 				_allocator.destroy(_array + i);
 			this->_size = x._size;
 			if (this->_capacity < this->_size) {
-				if (this->_capacity != 0)
+				if (this->_capacity)
 					this->_allocator.deallocate(this->_array, this->_capacity);
 				this->_capacity = this->_size;
 				this->_array = this->_allocator.allocate(this->_capacity);
@@ -176,8 +176,8 @@ namespace ft
 					this->reserve(_capacity * 2 > count ? _capacity * 2 : count);
 				for (size_type i = _size; i < count; i++) {
 					_allocator.construct(this->_array + i, value);
-					_size++;
 				}
+				_size = count;
 			}
 		}
 
@@ -232,8 +232,7 @@ namespace ft
 		}
 
 		void pop_back() {
-			_allocator.destroy(_array + _size - 1);
-			_size--;
+			_allocator.destroy(_array + (--_size));
 		}
 
 		void push_back(const T& value) {
@@ -283,7 +282,8 @@ namespace ft
 				std::uninitialized_copy(pos, end(), iterator(new_arr + start + count));
 				for (size_type i = 0; i < _size; i++)
 					_allocator.destroy(_array + i);
-				_allocator.deallocate(_array, _capacity);
+				if (_capacity)
+					_allocator.deallocate(_array, _capacity);
 				_size += count;
 				_capacity = new_cap;
 				_array = new_arr;
@@ -313,7 +313,8 @@ namespace ft
 				std::uninitialized_copy(pos, end(), iterator(new_arr + start + 1));
 				for (size_t i = 0; i < _size; i++)
 					_allocator.destroy(_array + i);
-				_allocator.deallocate(_array, _size);
+				if (_size)
+					_allocator.deallocate(_array, _size);
 				_size++;
 				_array = new_arr;
 			}
@@ -335,18 +336,18 @@ namespace ft
 					InputIt last) {
 			if (pos < begin() || pos > end() || first > last)
 				throw std::logic_error("vector");
-			difference_type start = pos - begin();
-			difference_type count = last - first;
+			size_type start = static_cast<size_type>(pos - begin());
+			size_type count = static_cast<size_type>(last - first);
 			if (_size + count > _capacity) {
 				size_type new_cap = _capacity * 2 >= _size + count ? _capacity * 2 : _size + count;
 				pointer new_arr = _allocator.allocate(new_cap);
 				std::uninitialized_copy(begin(), pos, iterator(new_arr));
 				try {
-					for (size_type i = 0; i < static_cast<size_type>(count); i++, first++)
+					for (size_type i = 0; i < count; i++, first++)
 						_allocator.construct(new_arr + start + i, *first);
 				}
 				catch (...){
-					for (size_type i = 0; i < static_cast<size_type>(count + start); ++i)
+					for (size_type i = 0; i < count + start; ++i)
 						_allocator.destroy(new_arr + i);
 					_allocator.deallocate(new_arr, new_cap);
 					throw ;
@@ -354,17 +355,18 @@ namespace ft
 				std::uninitialized_copy(pos, end(), iterator(new_arr + start + count));
 				for (size_type i = 0; i < _size; i++)
 					_allocator.destroy(_array + i);
-				_allocator.deallocate(_array, _capacity);
+				if (_capacity)
+					_allocator.deallocate(_array, _capacity);
 				_size += count;
 				_capacity = new_cap;
 				_array = new_arr;
 			}
 			else {
-				for (size_type i = _size; i > static_cast<size_type>(start); i--) {
+				for (size_type i = _size; i > start; i--) {
 					_allocator.destroy(_array + i + count - 1);
 					_allocator.construct(_array + i + count - 1, *(_array + i - 1));
 				}
-				for (size_type i = 0; i < static_cast<size_type>(count); i++, first++) {
+				for (size_type i = 0; i < count; i++, first++) {
 					_allocator.destroy(_array + i + count);
 					_allocator.construct(_array + start + i, *first);
 				}
@@ -396,18 +398,18 @@ namespace ft
 					InputIt last) {
 			if (first > last)
 				throw std::logic_error("vector");
-			difference_type count = last - first;
+			size_type count = static_cast<size_type>(last - first);
 			clear();
-			if (count > static_cast<difference_type>(capacity())) {
+			if (count > capacity()) {
 				_allocator.deallocate(_array, _capacity);
 				_array = _allocator.allocate(count);
 				_capacity = count;
 			}
-			iterator pos = begin();
+			size_type i = 0;
 			while (first < last) {
-				_allocator.construct(&(*pos), *first);
-				pos++;
-				first++;
+				_allocator.construct(_array + i, *first);
+				++i;
+				++first;
 			}
 			_size = count;
 		}

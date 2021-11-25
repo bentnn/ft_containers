@@ -198,7 +198,7 @@ namespace ft {
 			return _tree.insert(value);
 		}
 
-		iterator insert( iterator hint, const value_type& value ) {
+		iterator insert(iterator hint, const value_type& value) {
 			return _tree.insert(hint, value);
 		}
 
