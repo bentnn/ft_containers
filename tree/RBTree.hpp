@@ -553,14 +553,13 @@ public:
 	}
 
 	void swap(RBTree &other) {
-//		std::swap(this->_root, other._root);
-//		std::swap(this->_nil, other._nil);
-//		std::swap(this->_header, other._header);
-//		std::swap(this->_size, other._size);
-//		std::swap(this->_node_alloc, other._node_alloc);
-//		std::swap(this->_con_alloc, other._con_alloc);
-//		std::swap(this->_cmp, other._cmp);
-		std::swap(other, *this);
+		std::swap(this->_root, other._root);
+		std::swap(this->_nil, other._nil);
+		std::swap(this->_header, other._header);
+		std::swap(this->_size, other._size);
+		std::swap(this->_node_alloc, other._node_alloc);
+		std::swap(this->_con_alloc, other._con_alloc);
+		std::swap(this->_cmp, other._cmp);
 	}
 
 	// bounds
